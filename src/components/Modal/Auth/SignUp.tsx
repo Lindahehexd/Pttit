@@ -15,7 +15,7 @@ const SignUp = () => {
   });
 
   const [error, setError] = useState("");
-  const [createUserWithEmailAndPassword, user, loading, authError]: any = useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword, user, loading, authError] = useCreateUserWithEmailAndPassword(auth);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -90,12 +90,9 @@ const SignUp = () => {
         bg="gray.50"
       />
 
-      {error && (
-        <Text textAlign="center" fontWeight="bold" color="red.500">
-          {error}
-        </Text>
-      )}
-
+      <Text textAlign="center" mt={2} fontSize="sm" color="red.500">
+        {error || customErrors[authError?.message as keyof typeof customErrors]}
+      </Text>
 
       <Button w="100%" h="36px" my={2} type="submit" isLoading={loading}>
         Signup

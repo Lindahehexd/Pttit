@@ -8,12 +8,13 @@ import {
 } from "@chakra-ui/react";
 
 import { SearchIcon } from "@chakra-ui/icons";
-
 import React from "react";
 
 type Props = {};
 
 const SearchInput: React.FC<Props> = () => {
+
+
   return (
     <Flex flexGrow={1} mx={2} align="center">
       <InputGroup>

@@ -17,7 +17,7 @@ import {
   Flex,
   Icon,
 } from "@chakra-ui/react";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, getDoc, runTransaction, serverTimestamp, setDoc, Transaction } from "firebase/firestore";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BsFillEyeFill, BsPersonFill } from "react-icons/bs";
@@ -49,7 +49,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
   };
 
   const handleCommunity = async () => {
-    if(error) setError("")
+    if (error) setError("");
     const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     if (format.test(communities) || communities.length < 3) {
       setError(
@@ -60,17 +60,29 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
     setLoading(true);
 
     try {
-        //firestor = db  中間是名稱, 名子對應input裡的value
+      //firestor = db  中間是名稱, 名子對應input裡的value
       const communityDocRef = doc(firestore, "communities", communities);
-      const communityDoc = await getDoc(communityDocRef);
-      if (communityDoc.exists()) {
-        throw new Error(`Sorry, r/${communities} is taken . Try another.`);
-      }
-      await setDoc(communityDocRef, {
-        creatorId: user?.uid,
-        createAt: serverTimestamp(),
-        numberOfMember: 1,
-        privacyType: communities,
+      //transaction goal: if one fail , all fail
+      await runTransaction(firestore, async (transaction) => {
+        // check if exist
+        const communityDoc = await transaction.get(communityDocRef);
+        if (communityDoc.exists()) {
+          throw new Error(`Sorry, r/${communities} is taken . Try another.`);
+        }
+        //create the community
+        transaction.set(communityDocRef, {
+          creatorId: user?.uid,
+          createAt: serverTimestamp(),
+          numberOfMember: 1,
+          privacyType: communities,
+        });
+        // create to user interface
+        // add to > users collection > userid (document) >  add commnuitysnippet collection > add document as communities ( at sub collection )
+        transaction.set(doc(firestore, `users/${user?.uid}/communitySnippets`, communities), {
+          communityId: communities,
+          isModerator: true,
+        });
+
       });
     } catch (error: any) {
       console.log(" handleCommunity error, error ");

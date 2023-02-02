@@ -1,6 +1,10 @@
 import Navbar from "../Navbar/Navbar";
 
-const Layout = ({ children }: any) => {
+interface LayoutProps {
+  children: React.ReactElement;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Navbar />

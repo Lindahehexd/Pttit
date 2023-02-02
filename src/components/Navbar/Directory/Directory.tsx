@@ -3,6 +3,7 @@ import { Flex, Icon, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } f
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
 import { TiHome } from "react-icons/ti";
+import Communities from "./Communities";
 
 const Directory = () => {
   return (
@@ -25,12 +26,12 @@ const Directory = () => {
         </Flex>
       </MenuButton>
       <MenuList>
-        <MenuItem _hover={{ bg: "blue.500", color: "white" }}>
+        {/* <MenuItem _hover={{ bg: "blue.500", color: "white" }}>
           <Flex align="center" fontWeight="bold">
             <Icon as={CgProfile} fontSize={20} mr={2} />
           </Flex>
-          comomumity
-        </MenuItem>
+        </MenuItem> */}
+          <Communities/>
         <MenuDivider />
       </MenuList>
     </Menu>

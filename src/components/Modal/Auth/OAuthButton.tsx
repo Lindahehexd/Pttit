@@ -1,10 +1,22 @@
 import { Flex, Button, Image, Text } from "@chakra-ui/react";
+import { User } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { useEffect } from "react";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
-import { auth } from "../../../firebase/clientApp";
-
+import { auth, firestore } from "../../../firebase/clientApp";
 
 const OAuthButton = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, userCred, loading, error] = useSignInWithGoogle(auth);
+
+  const createUserDoc = async (user: User) => {
+    const userDocRef = doc(firestore, "users", user.uid);
+    await setDoc(userDocRef, JSON.parse(JSON.stringify(user)));
+  };
+
+  useEffect(() => {
+    if (userCred) createUserDoc(userCred.user);
+  }, [userCred]);
+
   return (
     <Flex direction="column" w="100%" mb={4}>
       <Button variant="oauth" mb={2} isLoading={loading} onClick={() => signInWithGoogle()}>

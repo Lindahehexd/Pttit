@@ -4,26 +4,29 @@ import { FaReddit } from "react-icons/fa";
 import { Community, communityState } from "../../atoms/communitiesAtom";
 // import useCommunityData from "../../hooks/useCommunityData";
 import { useSetRecoilState } from "recoil";
+import useCommunityData from "@/hooks/useCommunityData";
 
 type HeaderProps = {
   communityData: Community;
 };
 
 const Header: React.FC<HeaderProps> = ({ communityData }) => {
+  const { communityStateValue, onJoinLeaveCommunity, loading } = useCommunityData();
   /**
    * !!!Don't pass communityData boolean until the end
    * It's a small optimization!!!
    */
   //   const { communityStateValue, loading, error, onJoinLeaveCommunity } = useCommunityData(!!communityData);
   //   const isJoined = !!communityStateValue.mySnippets.find((item) => item.communityId === communityData.id);
-  const isJoined = false;
+  //  snippet is array , find if theres the id 
+  const isJoined = !!communityStateValue.mySnippets.find((item) => item.communityId === communityData.id);
 
   return (
     <Flex direction="column" width="100%" height="146px">
       <Box height="50%" bg="blue.400" />
       <Flex justifyContent="center" bg="white" height="50%">
         {/* maxW important  */}
-        <Flex width="95%" maxW="860px" border='1px solid red'>
+        <Flex width="95%" maxW="860px" border="1px solid red">
           {/* IMAGE URL IS ADDED AT THE VERY END BEFORE DUMMY DATA - USE ICON AT FIRST */}
           {/* {communityStateValue.currentCommunity.imageURL ? ( */}
           {/* <Image
@@ -64,7 +67,8 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
                 height="30px"
                 pr={6}
                 pl={6}
-                // onClick={() => onJoinLeaveCommunity(communityData, isJoined)}
+                isLoading={loading}
+                onClick={() => onJoinLeaveCommunity(communityData, isJoined)}
                 // isLoading={loading}
               >
                 {isJoined ? "Joined" : "Join"}

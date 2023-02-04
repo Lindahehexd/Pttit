@@ -34,9 +34,14 @@ const AuthModal = () => {
 
   // when logged in , close the modal
   useEffect(() => {
-    if (user) handleClose();
+    if (user) {
+      setModalState((prev) => ({
+        ...prev,
+        open: false,
+      }));
+    }
     console.log(user);
-  }, [user]);
+  }, [user, setModalState]);
 
   return (
     <div>

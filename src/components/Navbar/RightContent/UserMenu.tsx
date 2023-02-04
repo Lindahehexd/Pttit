@@ -7,16 +7,20 @@ import { VscAccount } from "react-icons/vsc";
 import { IoSparkles } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
+import { useResetRecoilState } from "recoil";
+import { communityState } from "@/atoms/communitiesAtom";
 
 type MenuProps = {
   user: User | null | undefined;
 };
 
 const UserMenu = ({ user }: MenuProps) => {
+  //after finish joined components parts
+  const resetCommunity = useResetRecoilState(communityState);
+
   const logout = async () => {
-    await signOut(auth).then(() => {
-      console.log("logout");
-    });
+    await signOut(auth);
+    resetCommunity();
   };
 
   return (

@@ -3,6 +3,7 @@ import CommunityNotFound from "@/components/Community/CommunityNotFound";
 import CreatePostLink from "@/components/Community/CreatePostLink";
 import Header from "@/components/Community/Header";
 import PageContent from "@/components/Layout/PageContent";
+import Posts from "@/components/Posts/Posts";
 import { firestore } from "@/firebase/clientApp";
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext } from "next";
@@ -29,6 +30,7 @@ const CommunityPage = ({ communityData }: CommunityPageProps) => {
         <>
         <div>LEft</div>
         <CreatePostLink/>
+        <Posts communityData={communityData}/>
         </>
         {/* child 2  */}
         <>

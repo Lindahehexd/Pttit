@@ -77,6 +77,12 @@ const NewPostForm = ({ user }: NewPostFormProps) => {
           imageURL: downloadURL,
         });
       }
+
+      //redireact to the homepage and see the post .  4 21256
+
+      router.back();
+
+      
     } catch (error: any) {
       console.log("this is error", error.message);
       setError(true);

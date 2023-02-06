@@ -1,4 +1,5 @@
-import { Community } from "@/atoms/communitiesAtom";
+import { Community, communityState } from "@/atoms/communitiesAtom";
+import About from "@/components/Community/About";
 import CommunityNotFound from "@/components/Community/CommunityNotFound";
 import CreatePostLink from "@/components/Community/CreatePostLink";
 import Header from "@/components/Community/Header";
@@ -7,6 +8,8 @@ import Posts from "@/components/Posts/Posts";
 import { firestore } from "@/firebase/clientApp";
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext } from "next";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
 import safeJsonStringify from "safe-json-stringify";
 
 type CommunityPageProps = {
@@ -14,29 +17,41 @@ type CommunityPageProps = {
 };
 
 const CommunityPage = ({ communityData }: CommunityPageProps) => {
+
+ const setCommunityStateValue = useSetRecoilState(communityState)
+ // when render , pass the data to other pages 
+ useEffect(() => {
+    setCommunityStateValue((prev) => ({
+      ...prev,
+      currentCommunity: communityData,
+    }));
+  }, [communityData, setCommunityStateValue]);
+
   //check the data contents
   console.log(communityData);
   //check if the community data is exist
   if (!communityData) return <CommunityNotFound />;
   // communityData.id refer to the community namne
+
+
+
+
+
   return (
     <>
       <Header communityData={communityData} />
       <div>index{communityData.id}</div>;
       
       <PageContent>
-
-        {/* child 1  */}
+        {/* child 1  ps . left */}
         <>
-        <div>LEft</div>
         <CreatePostLink/>
         <Posts communityData={communityData}/>
         </>
-        {/* child 2  */}
+        {/* child 2  ps . right */}
         <>
-        <div>Right</div>
+        <About communityData={communityData}/>
         </>
-        
       </PageContent>
     </>
   );

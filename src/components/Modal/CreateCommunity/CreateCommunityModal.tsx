@@ -72,9 +72,9 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
         //create the community
         transaction.set(communityDocRef, {
           creatorId: user?.uid,
-          createAt: serverTimestamp(),
+          createdAt: serverTimestamp(),
           numberOfMember: 1,
-          privacyType: communities,
+          privacyType: 'public',
         });
         // create to user interface
         // add to > users collection > userid (document) >  add commnuitysnippet collection > add document as communities ( at sub collection )

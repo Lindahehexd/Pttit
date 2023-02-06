@@ -23,7 +23,6 @@ const OAuthButton = () => {
         <Image h="20px" mr={4} src="/images/googlelogo.png" alt="" />
         Continue with google
       </Button>
-      <Button variant="oauth">Use Other Providers</Button>
       {/* dom 無法顯示object {error}會報錯 要text{error.message}才可 */}
       {error && <Text>error.message</Text>}
     </Flex>

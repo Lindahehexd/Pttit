@@ -1,5 +1,5 @@
 import { Post } from "@/atoms/postAtom";
-import { Flex, HStack, Icon, Image, Skeleton, Stack, Text } from "@chakra-ui/react";
+import { Flex, HStack, Icon, Image, Skeleton, Spinner, Stack, Text } from "@chakra-ui/react";
 import moment from "moment";
 import { BsChat } from "react-icons/bs";
 import {
@@ -26,10 +26,12 @@ export type PostItemContentProps = {
 
 const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, userVoteValue }: PostItemContentProps) => {
   const [imgloading, setImgLoading] = useState(true);
+  const [deleteloading, setDeleteLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const handleDelete = async () => {
     try {
+      setDeleteLoading(true);
       const success = await onDeletePost(post);
       if (!success) {
         throw new Error("fail to delete the post");
@@ -39,6 +41,7 @@ const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, use
       console.log(error.message);
       setError(error.message);
     }
+    setDeleteLoading(false);
   };
 
   return (
@@ -123,8 +126,14 @@ const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, use
                 align="center"
                 onClick={handleDelete}
               >
-                <Icon mr={2} as={AiOutlineDelete} />
-                <Text fontSize="sm">Delete</Text>
+                {deleteloading ? (
+                  <Spinner size='sm' />
+                ) : (
+                  <>
+                    <Icon mr={2} as={AiOutlineDelete} />
+                    <Text fontSize="sm">Delete</Text>{" "}
+                  </>
+                )}
               </Flex>
             )}
           </Flex>

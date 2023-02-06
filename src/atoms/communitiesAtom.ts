@@ -6,7 +6,7 @@ import { FieldValue, Timestamp } from "firebase/firestore";
 export interface Community {
   id: string;
   creatorId: string;
-  numberOfMembers: number;
+  numberOfMember: number;
   privacyType: "public" | "restrictied" | "private";
   createdAt?: Timestamp;
   imageURL?: string;
@@ -21,6 +21,8 @@ export interface CommunitySnippet {
 
 interface CommunityState {
   mySnippets: CommunitySnippet[];
+  //current community user in
+  currentCommunity?: Community;
 
   //   [key: string]:
   //     | CommunitySnippet[]

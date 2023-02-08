@@ -13,21 +13,25 @@ import {
 
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export type PostItemContentProps = {
   post: Post;
   userIsCreator: boolean;
   userVoteValue?: number;
-  onVote: () => void;
+  onVote: (post: Post, vote: number, communityId: string) => void;
   //return promise bc its async , it will communicate with the db
   onDeletePost: (post: Post) => Promise<boolean>;
-  onSelectPost?: () => void;
+  onSelectPost?: (post: Post) => void;
 };
 
 const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, userVoteValue }: PostItemContentProps) => {
   const [imgloading, setImgLoading] = useState(true);
   const [deleteloading, setDeleteLoading] = useState(false);
   const [error, setError] = useState(false);
+  //p5 14051
+  const singlePostPage = !onSelectPost;
+  const router = useRouter();
 
   const handleDelete = async () => {
     try {
@@ -37,6 +41,9 @@ const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, use
         throw new Error("fail to delete the post");
       }
       console.log("delete the post successfully");
+      if (singlePostPage) {
+        router.push(`/r/${post.communityId}`);
+      }
     } catch (error: any) {
       console.log(error.message);
       setError(error.message);
@@ -51,23 +58,31 @@ const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, use
       bg="pink"
       borderColor="gray.300"
       borderRadius={4}
-      _hover={{ borderColor: "gray.500" }}
-      cursor="pointer"
-      onClick={onSelectPost}
+      _hover={{ borderColor: singlePostPage ? "none" : "gray.500" }}
+      cursor={singlePostPage ? "unset" : "pointer"}
+      // check if truthy
+      onClick={() => onSelectPost && onSelectPost(post)}
     >
       {/* left */}
-      <Flex direction="column" align="center" bg="gray.200" p={2} borderRadius={4} w="40px">
+      <Flex direction="column" align="center" bg={singlePostPage ? "none" : "gray.200"} p={2} borderRadius={4} w="40px">
         <Icon
           as={userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline}
           color={userVoteValue === 1 ? "brand.100" : "gray.400"}
           cursor="pointer"
+          onClick={(event) => {
+            event.stopPropagation();
+            onVote(post, 1, post.communityId);
+          }}
         />
         <Text fontSize="sm"> {post.voteStatus}</Text>
         <Icon
           as={userVoteValue === -1 ? IoArrowDownCircleSharp : IoArrowDownCircleOutline}
           color={userVoteValue === -1 ? "brand.100" : "gray.400"}
           cursor="pointer"
-          onClick={onVote}
+          onClick={(event) => {
+            event.stopPropagation();
+            onVote(post, -1, post.communityId);
+          }}
         />
       </Flex>
       {/* right */}
@@ -124,10 +139,13 @@ const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, use
                 _hover={{ bg: "gray.200" }}
                 cursor="pointer"
                 align="center"
-                onClick={handleDelete}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  handleDelete();
+                }}
               >
                 {deleteloading ? (
-                  <Spinner size='sm' />
+                  <Spinner size="sm" />
                 ) : (
                   <>
                     <Icon mr={2} as={AiOutlineDelete} />

@@ -59,6 +59,8 @@ const Posts = ({ communityData }: PostsProps) => {
               key={item.id}
               post={item}
               userIsCreator={user?.uid === item.creatorId}
+              // post the value to the post compoments
+              userVoteValue={postStateValue.postVotes.find((vote)=> vote.postId === item.id)?.voteValue}
               onVote={onVote}
               onDeletePost={onDeletePost}
               onSelectPost={onSelectPost}

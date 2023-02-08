@@ -51,7 +51,7 @@ const About = ({ communityData }: AboutProps) => {
 
   console.log("communityData", communityData);
   return (
-    <Box position="sticky">
+    <Box position="sticky" top="14px">
       {/* top */}
       <Flex bg="blue.400" color="white" p={3} borderRadius="4px 4px 0px 0px">
         <Text> About Community </Text>

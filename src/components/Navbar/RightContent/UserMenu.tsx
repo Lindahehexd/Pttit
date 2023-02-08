@@ -16,11 +16,11 @@ type MenuProps = {
 
 const UserMenu = ({ user }: MenuProps) => {
   //after finish joined components parts
-  const resetCommunity = useResetRecoilState(communityState);
+  //   const resetCommunity = useResetRecoilState(communityState);
 
   const logout = async () => {
     await signOut(auth);
-    resetCommunity();
+    // resetCommunity();
   };
 
   return (

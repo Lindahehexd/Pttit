@@ -44,8 +44,9 @@ const Posts = ({ communityData }: PostsProps) => {
   };
 
   useEffect(() => {
+    //每當切換社團時 都要更新文章
     getPosts();
-  }, []);
+  }, [communityData]);
 
   return (
     <>

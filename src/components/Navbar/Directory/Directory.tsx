@@ -1,25 +1,40 @@
+import useDirectory from "@/hooks/useDirectory";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Flex, Icon, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from "@chakra-ui/react";
+import { Flex, Icon, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
 import { TiHome } from "react-icons/ti";
 import Communities from "./Communities";
 
 const Directory = () => {
+  const { directoryState, toggleMenuOpen } = useDirectory();
+
   return (
-    <Menu>
+    <Menu isOpen={directoryState.isOpen}>
       <MenuButton
         cursor="pointer"
         padding="0px 6px"
         borderRadius={4}
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
         mx={2}
+        onClick={toggleMenuOpen}
       >
         <Flex align="center" justify="space-between" w={{ base: "auto", lg: "150px" }}>
           <Flex align="center">
-            <Icon fontSize="24" mr={{ base: 1, md: 2 }} as={TiHome} />
+            {directoryState.selectedMenuItem.imageURL ? (
+              <Image src={directoryState.selectedMenuItem.imageURL} borderRadius="full" boxSize="24px" mr={2} alt="" />
+            ) : (
+              <Icon
+                fontSize="24"
+                mr={{ base: 1, md: 2 }}
+                as={directoryState.selectedMenuItem.icon}
+                color={directoryState.selectedMenuItem.iconColor}
+              />
+            )}
+            {/* <Icon fontSize="24" mr={{ base: 1, md: 2 }} as={TiHome} /> */}
             <Text fontSize="sm" display={{ base: "none", lg: "flex" }} fontWeight="bold">
-              Home
+              {/* Home will be dynamic  */}
+              {directoryState.selectedMenuItem.displayText}
             </Text>
           </Flex>
           <ChevronDownIcon />
@@ -31,7 +46,7 @@ const Directory = () => {
             <Icon as={CgProfile} fontSize={20} mr={2} />
           </Flex>
         </MenuItem> */}
-          <Communities/>
+        <Communities />
         <MenuDivider />
       </MenuList>
     </Menu>

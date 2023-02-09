@@ -154,7 +154,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
                     comment={comment}
                     onDeleteComment={onDeleteComment}
                     loadingDelete={false}
-                    userId={user.uid}
+                    userId={user?.uid}
                   />
                 ))}
               </>

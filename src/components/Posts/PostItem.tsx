@@ -1,7 +1,7 @@
 import { Post } from "@/atoms/postAtom";
-import { Flex, HStack, Icon, Image, Skeleton, Spinner, Stack, Text } from "@chakra-ui/react";
+import { Flex, HStack, Icon, Image, Skeleton, Spinner, Stack, Text, useToast } from "@chakra-ui/react";
 import moment from "moment";
-import { BsChat } from "react-icons/bs";
+import { BsChat, BsDot } from "react-icons/bs";
 import {
   IoArrowDownCircleOutline,
   IoArrowDownCircleSharp,
@@ -14,6 +14,8 @@ import {
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { FaReddit } from "react-icons/fa";
+import Link from "next/link";
 
 export type PostItemContentProps = {
   post: Post;
@@ -23,15 +25,27 @@ export type PostItemContentProps = {
   //return promise bc its async , it will communicate with the db
   onDeletePost: (post: Post) => Promise<boolean>;
   onSelectPost?: (post: Post) => void;
+  //add on last (p6 1636)
+  homePage?: boolean;
 };
 
-const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, userVoteValue }: PostItemContentProps) => {
+const PostItem = ({
+  post,
+  userIsCreator,
+  onVote,
+  onDeletePost,
+  onSelectPost,
+  userVoteValue,
+  homePage,
+}: PostItemContentProps) => {
   const [imgloading, setImgLoading] = useState(true);
   const [deleteloading, setDeleteLoading] = useState(false);
   const [error, setError] = useState(false);
   //p5 14051
   const singlePostPage = !onSelectPost;
   const router = useRouter();
+  const toast = useToast();
+
 
   const handleDelete = async () => {
     try {
@@ -49,6 +63,20 @@ const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, use
       setError(error.message);
     }
     setDeleteLoading(false);
+  };
+
+
+  const handleCopy = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl);
+    toast({
+      title: "URL Copied!",
+      position: 'top',
+      description: "The URL has been successfully copied to your clipboard.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
   };
 
   return (
@@ -89,6 +117,26 @@ const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, use
       <Flex direction="column" w="100%">
         <Stack spacing={1} p="10px">
           <HStack align="center" fontSize="sm">
+            {/* 判斷是否在主頁  如果在主頁要顯示社團圖案跟名稱 */}
+            {homePage && (
+              <>
+                {post.communityImageURL ? (
+                  <Image src={post.communityImageURL} borderRadius="full" fontSize="18px" mr={2} alt="" />
+                ) : (
+                  <Icon as={FaReddit} fontSize="18px" mr={1} color="blue.500" />
+                )}
+                <Link href={`r/${post.communityId}`}>
+                  <Text
+                    fontWeight="bold"
+                    _hover={{ textDecoration: "underline" }}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                    }}
+                  >{`r/${post.communityId}`}</Text>
+                </Link>
+                <Icon as={BsDot} color="gray.500" />
+              </>
+            )}
             <Text>
               posted by u/{post.creatorDisplayName} {""}
               {moment(new Date(post.createdAt.seconds * 1000)).fromNow()}
@@ -122,7 +170,14 @@ const PostItem = ({ post, userIsCreator, onVote, onDeletePost, onSelectPost, use
               <Text fontSize="sm">{post.numberOfComment}</Text>
             </Flex>
             {/* bot item 2  */}
-            <Flex p="8px 10px" borderRadius={4} _hover={{ bg: "gray.200" }} cursor="pointer" align="center">
+            <Flex
+              p="8px 10px"
+              borderRadius={4}
+              _hover={{ bg: "gray.200" }}
+              cursor="pointer"
+              align="center"
+              onClick={handleCopy}
+            >
               <Icon mr={2} as={IoArrowRedoOutline} />
               <Text fontSize="sm">Share</Text>
             </Flex>

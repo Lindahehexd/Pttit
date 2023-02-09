@@ -61,6 +61,8 @@ const useCommunityData = () => {
       const newSnippet: CommunitySnippet = {
         communityId: communityData.id,
         imageURL: communityData.imageURL || "",
+        //when rejoin , show you still the creator at dropdown menu,p5 307
+        isModerator: user?.uid === communityData.creatorId
       };
 
       batch.set(

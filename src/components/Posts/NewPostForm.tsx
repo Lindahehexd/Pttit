@@ -15,6 +15,8 @@ import TabItems from "./TabItems";
 
 type NewPostFormProps = {
   user: User;
+  //   add on p6 2259
+  communityImageURL?: string;
 };
 
 export type TabItem = {
@@ -37,7 +39,7 @@ const formTab = [
   },
 ];
 
-const NewPostForm = ({ user }: NewPostFormProps) => {
+const NewPostForm = ({ user, communityImageURL }: NewPostFormProps) => {
   const router = useRouter();
   const [error, setError] = useState(false);
   const [selectedTab, setSelectedTab] = useState(formTab[0].title);
@@ -64,6 +66,8 @@ const NewPostForm = ({ user }: NewPostFormProps) => {
       numberOfComment: 0,
       voteStatus: 0,
       createdAt: serverTimestamp() as Timestamp,
+      //   add on p6 2229
+      communityImageURL: communityImageURL || "",
     };
 
     try {
@@ -81,8 +85,6 @@ const NewPostForm = ({ user }: NewPostFormProps) => {
       //redireact to the homepage and see the post .  4 21256
 
       router.back();
-
-      
     } catch (error: any) {
       console.log("this is error", error.message);
       setError(true);

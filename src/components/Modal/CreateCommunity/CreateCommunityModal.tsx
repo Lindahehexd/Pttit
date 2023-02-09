@@ -22,6 +22,7 @@ import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BsFillEyeFill, BsPersonFill } from "react-icons/bs";
 import { HiLockClosed } from "react-icons/hi";
+import { useRouter } from "next/router";
 
 type CreateCommunityProps = {
   open: boolean;
@@ -37,6 +38,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
   const [type, setType] = useState("public");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 21) return;
@@ -74,7 +76,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
           creatorId: user?.uid,
           createdAt: serverTimestamp(),
           numberOfMember: 1,
-          privacyType: 'public',
+          privacyType: "public",
         });
         // create to user interface
         // add to > users collection > userid (document) >  add commnuitysnippet collection > add document as communities ( at sub collection )
@@ -82,8 +84,9 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
           communityId: communities,
           isModerator: true,
         });
-
       });
+      handleClose()
+      router.push(`/r/${communities}`);
     } catch (error: any) {
       console.log(" handleCommunity error, error ");
       setError(error.message);
@@ -96,7 +99,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader display="flex" flexDirection="column" fontSize="lg" p={3}>
-          Create a Community
+          建立看板
         </ModalHeader>
         <Box px={3}>
           <ModalCloseButton />
@@ -130,7 +133,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
                 </Flex>
               </Checkbox>
 
-              <Checkbox name="restricted" isChecked={type === "restricted"} onChange={typeChange}>
+              {/* <Checkbox name="restricted" isChecked={type === "restricted"} onChange={typeChange}>
                 <Flex align="center">
                   <Icon as={BsFillEyeFill} color="gray.500" mr={2} />
                   <Text fontSize="sm" mr={1}>
@@ -152,7 +155,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
                     Only approved users can view and submit to this community
                   </Text>
                 </Flex>
-              </Checkbox>
+              </Checkbox> */}
             </Stack>
           </Box>
         </Box>

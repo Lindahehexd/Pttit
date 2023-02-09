@@ -1,6 +1,7 @@
 import { authModalState } from "@/atoms/authModalAtom";
 import { Button } from "@chakra-ui/react";
 import { useSetRecoilState } from "recoil";
+import SwitchThemeButton from "./SwitchThemeButton";
 
 const AuthButtons = () => {
   // only when writing the states
@@ -26,6 +27,7 @@ const AuthButtons = () => {
       >
         Sign Up
       </Button>
+      <SwitchThemeButton />
     </>
   );
 };

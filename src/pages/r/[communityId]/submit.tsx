@@ -10,17 +10,23 @@ type Props = {};
 
 const SubmitPostPage: React.FC<Props> = (props: Props) => {
   const [user] = useAuthState(auth);
-  const communityStateValue = useRecoilValue(communityState)
-  console.log('123456',communityStateValue)
+  const communityStateValue = useRecoilValue(communityState);
+  console.log("123456", communityStateValue);
   return (
     <PageContentLayout>
       {/* left */}
       <>
         <Box p="14px 0px" borderBottom="1px solid" borderColor="white">
-          <Text>Createff a Post</Text>
+          <Text>Create a Post</Text>
         </Box>
         {/* form */}
-        {user && <NewPostForm  user={user}/>}
+        {user && (
+          <NewPostForm
+            user={user}
+            // for showing the imgurl on the post  p6 2242
+            communityImageURL={communityStateValue.currentCommunity?.imageURL}
+          />
+        )}
       </>
       {/* right */}
       <></>

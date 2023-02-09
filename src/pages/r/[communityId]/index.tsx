@@ -40,7 +40,6 @@ const CommunityPage = ({ communityData }: CommunityPageProps) => {
   return (
     <>
       <Header communityData={communityData} />
-      <div>index{communityData.id}</div>;
       
       <PageContent>
         {/* child 1  ps . left */}

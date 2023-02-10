@@ -23,10 +23,12 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
 
   return (
     <Flex direction="column" width="100%" height="146px">
-      <Box height="50%" bg="blue.400" />
-      <Flex justifyContent="center" bg="white" height="50%">
+      <Box height="50%" bg="yellow.400" />
+      <Flex justifyContent="center" bg="gray.300" height="50%">
         {/* maxW important  */}
-        <Flex width="95%" maxW="860px" border="1px solid red">
+        <Flex width="95%" maxW="860px" 
+        border="1px solid red"
+        >
           {communityStateValue.currentCommunity?.imageURL ? (
             <Image
               borderRadius="full"

@@ -6,22 +6,21 @@ const Premium: React.FC = () => {
   return (
     <Flex
       direction="column"
-      bg="white"
       borderRadius={4}
       cursor="pointer"
       p="12px"
       border="1px solid"
-      borderColor="gray.300"
+      borderColor="gray.600"
     >
       <Flex mb={2}>
-        <Icon as={GiCheckedShield} fontSize={26} color="brand.100" mt={2} />
+        <Icon as={GiCheckedShield} fontSize={26} color="yellow.300" mt={2} />
         <Stack spacing={1} fontSize="9pt" pl={2}>
-          <Text fontWeight={600}>Reddit Premium</Text>
-          <Text>The best Reddit experience, with monthly Coins</Text>
+          <Text fontWeight={600}>123</Text>
+          <Text>還沒想到塞啥</Text>
         </Stack>
       </Flex>
-      <Button height="30px" bg="brand.100">
-        Try Now
+      <Button height="30px">
+        TEST
       </Button>
     </Flex>
   );

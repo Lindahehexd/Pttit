@@ -53,16 +53,25 @@ const About = ({ communityData }: AboutProps) => {
   return (
     <Box position="sticky" top="14px">
       {/* top */}
-      <Flex bg="blue.400" color="white" p={3} borderRadius="4px 4px 0px 0px">
-        <Text> About Community </Text>
+      <Flex bg="blue.900" color="white" p={3} borderRadius="4px 4px 0px 0px">
+        <Text> 關於看板 </Text>
       </Flex>
       {/* remain */}
       <Flex direction="column" p={3} bg={"whiteAlpha.200"} borderRadius="0px 0px 4px 4px">
         <Stack>
           <Flex w="100%" p={2}>
-            <Flex direction="column" flexGrow={1}>
-              <Text>{communityData.numberOfMember}</Text>
-              <Text>Members</Text>
+            <Flex flexGrow={1}>
+              <Text>
+                看板簡介: {""} {communityData.numberOfMember}
+              </Text>
+            </Flex>
+          </Flex>
+          <Divider />
+          <Flex w="100%" p={2}>
+            <Flex flexGrow={1}>
+              <Text>
+                人數: {""} {communityData.numberOfMember}
+              </Text>
             </Flex>
           </Flex>
           <Divider />
@@ -70,16 +79,17 @@ const About = ({ communityData }: AboutProps) => {
           <Flex align="center" flexGrow={1} w="100%" p={2}>
             <Icon as={RiCakeLine} mr={2} />
             <Text>
-              Created At : {""}
+              於 {""}
               {communityData.createdAt
-                ? moment(new Date(communityData.createdAt.seconds * 1000)).format("MMM DD YYYY")
-                : ""}
+                ? moment(new Date(communityData.createdAt.seconds * 1000)).format("YYYY/MM/DD")
+                : ""}{" "}
+              建立
             </Text>
           </Flex>
           {/* link button */}
-          <Link href={`r/${router.query.communityId}/submit`}>
+          <Link href={`/r/${router.query.communityId}/submit`}>
             <Button mt={2} h="38px" w="100%">
-              Create Post
+              發帖
             </Button>
           </Link>
           {/* if you are admin */}
@@ -98,7 +108,7 @@ const About = ({ communityData }: AboutProps) => {
                       _hover={{ textDecoration: "underline" }}
                       onClick={() => selectedFileRef.current?.click()}
                     >
-                      Change Image
+                      更換圖片
                     </Text>
                   )}
 
@@ -112,8 +122,13 @@ const About = ({ communityData }: AboutProps) => {
                 </Flex>
                 {/* check if the img is uplaoded or not  */}
                 {selectedFile && (
-                  <Text color="blue.500" cursor="pointer" onClick={onUploadImg}>
-                    Save Change
+                  <Text
+                    color="blue.500"
+                    cursor="pointer"
+                    onClick={onUploadImg}
+                    _hover={{ textDecoration: "underline" }}
+                  >
+                    儲存變更
                   </Text>
                 )}
                 <Input

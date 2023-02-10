@@ -1,5 +1,6 @@
 import { communityState } from "@/atoms/communitiesAtom";
 import { Post } from "@/atoms/postAtom";
+import AllCommunities from "@/components/Community/AllCommunities";
 import CreatePostLink from "@/components/Community/CreatePostLink";
 import PersonalHome from "@/components/Community/PersonalHome";
 import Premium from "@/components/Community/Premium";
@@ -21,33 +22,33 @@ export default function Home() {
   const { postStateValue, setPostStateValue, onVote, onSelectPost, onDeletePost } = usePosts();
   const communityStateValue = useRecoilValue(communityState);
 
-  const buildUserHomeFeed = () => {};
-  const buildNoUserHomeFeed = async () => {
-    setLoading(true);
-    try {
-      const postQuery = query(collection(firestore, "posts"), orderBy("voteStatus", "desc"), limit(10));
-      const postDocs = await getDocs(postQuery);
-      const posts = postDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setPostStateValue((prev) => ({
-        ...prev,
-        posts: posts as Post[],
-      }));
-    } catch (error) {
-      console.log("buildNoUserHomeFeed", error);
-    }
-    setLoading(false);
-  };
-  const getUserPostVotes = () => {};
+  //   const buildNoUserHomeFeed = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const postQuery = query(collection(firestore, "posts"), orderBy("voteStatus", "desc"), limit(10));
+  //       const postDocs = await getDocs(postQuery);
+  //       const posts = postDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  //       setPostStateValue((prev) => ({
+  //         ...prev,
+  //         posts: posts as Post[],
+  //       }));
+  //     } catch (error) {
+  //       console.log("buildNoUserHomeFeed", error);
+  //     }
+  //     setLoading(false);
+  //   };
+  //   const getUserPostVotes = () => {};
 
-  useEffect(() => {
-    if (!user && !loadingUser) buildNoUserHomeFeed();
-  }, [user, loadingUser]);
+  //   useEffect(() => {
+  //     if (!user && !loadingUser) buildNoUserHomeFeed();
+  //   }, [user, loadingUser]);
 
   return (
     <PageContentLayout>
       <>
-        <CreatePostLink />
-        {/* left */}
+        <AllCommunities />
+        {/* <CreatePostLink /> */}
+        {/* left
         {loading ? (
           <PostLoader />
         ) : (
@@ -65,7 +66,7 @@ export default function Home() {
               />
             ))}
           </Stack>
-        )}
+        )} */}
       </>
       {/* right */}
       <>

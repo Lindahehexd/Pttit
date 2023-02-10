@@ -22,7 +22,7 @@ const MenuListItem = ({ displayText, link, icon, iconColor, imageURL }: MenuList
     >
       <Flex align="center">
         {imageURL ? (
-          <Image src={imageURL} borderRadius="full" boxSize="18px" mr={2} alt="" />
+          <Image src={imageURL} borderRadius="full" boxSize="28px" mr={2} alt="" />
         ) : (
           <Icon as={icon} fontSize={28} mr={2} color={iconColor} />
         )}

@@ -9,7 +9,7 @@ import useCommunityData from "../../hooks/useCommunityData";
 
 type RecommendationsProps = {};
 
-const TopCommunities: React.FC<RecommendationsProps> = () => {
+const AllCommunities: React.FC<RecommendationsProps> = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
   const [loading, setLoading] = useState(false);
   const { communityStateValue, onJoinLeaveCommunity } = useCommunityData();
@@ -17,7 +17,7 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
   const getCommunityRecommendations = async () => {
     setLoading(true);
     try {
-      const communityQuery = query(collection(firestore, "communities"), orderBy("numberOfMember", "desc"), limit(5));
+      const communityQuery = query(collection(firestore, "communities"), orderBy("numberOfMember", "desc"));
       const communityDocs = await getDocs(communityQuery);
       const communities = communityDocs.docs.map((doc) => ({
         id: doc.id,
@@ -35,7 +35,7 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
   }, []);
 
   return (
-    <Flex direction="column" bg="gray.800" borderRadius={4} cursor="pointer" border="1px solid" borderColor="gray.600">
+    <Flex direction="column" bg="gray.800" borderRadius={4} border="1px solid" borderColor="gray.600">
       <Flex
         align="flex-end"
         color="white"
@@ -44,12 +44,12 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
         height="70px"
         borderRadius="4px 4px 0px 0px"
         fontWeight={600}
-        bgImage="url(/images/recCommsArt.png)"
+        bgImage="url(/images/proffesor.jpg)"
         backgroundSize="cover"
         bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)),
           url('images/proffesor.jpg')"
       >
-        熱門看板
+        <Text>所有看板</Text>
       </Flex>
       <Flex direction="column">
         {loading ? (
@@ -72,50 +72,49 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
             {communities.map((item, index) => {
               const isJoined = !!communityStateValue.mySnippets.find((snippet) => snippet.communityId === item.id);
               return (
-                <Link key={item.id} href={`/r/${item.id}`}>
-                  <Flex
-                    position="relative"
-                    align="center"
-                    fontSize="10pt"
-                    borderBottom="1px solid"
-                    borderColor="gray.600"
-                    p="10px 12px"
-                    fontWeight={600}
-                  >
-                    <Flex width="80%" align="center">
-                      <Flex width="15%">
-                        <Text mr={2}>{index + 1}</Text>
-                      </Flex>
-                      <Flex align="center" width="80%">
-                        {item.imageURL ? (
-                          <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} />
-                        ) : (
-                          <Icon as={FaReddit} fontSize={30} color="yellow.300" mr={2} />
-                        )}
-                        <span
-                          style={{
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                          }}
-                        >{`r/${item.id}`}</span>
-                      </Flex>
+                <Flex
+                  key={item.id}
+                  align="center"
+                  fontSize="10pt"
+                  borderBottom="1px solid"
+                  borderColor="gray.600"
+                  p={3}
+                  fontWeight={600}
+                  justifyContent="space-between"
+                >
+                  <Flex width="80%" align="center">
+                    {/* <Flex mr={3}>
+                      <Text mr={2}>{index + 1}</Text>
+                    </Flex> */}
+                    <Flex align="center" width="80%">
+                      {item.imageURL ? (
+                        <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} alt="" />
+                      ) : (
+                        <Icon as={FaReddit} fontSize={30} color="yellow.300" mr={2} />
+                      )}
+                      <Box w='30%'>
+                      <Link href={`/r/${item.id}`}>
+                        <Box _hover={{ textDecoration: "underline" }}>{`${item.id}`}</Box>
+                      </Link>
+                      </Box>
+                 
+
+                      <Text ml={7}> 還在想能加啥</Text>
                     </Flex>
-                    <Box position="absolute" right="10px">
-                      <Button
-                        height="22px"
-                        fontSize="8pt"
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          onJoinLeaveCommunity(item, isJoined);
-                        }}
-                        variant={isJoined ? "outline" : "solid"}
-                      >
-                        {isJoined ? "Joined" : "Join"}
-                      </Button>
-                    </Box>
                   </Flex>
-                </Link>
+                  <Flex right="10px">
+                    <Button
+                      height="22px"
+                      fontSize="8pt"
+                      onClick={() => {
+                        onJoinLeaveCommunity(item, isJoined);
+                      }}
+                      variant={isJoined ? "outline" : "solid"}
+                    >
+                      {isJoined ? "Joined" : "Join"}
+                    </Button>
+                  </Flex>
+                </Flex>
               );
             })}
           </>
@@ -124,4 +123,4 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
     </Flex>
   );
 };
-export default TopCommunities;
+export default AllCommunities;

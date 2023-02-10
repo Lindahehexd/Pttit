@@ -1,6 +1,7 @@
 import useDirectory from "@/hooks/useDirectory";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Flex, Icon, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
 import { TiHome } from "react-icons/ti";
@@ -8,16 +9,19 @@ import Communities from "./Communities";
 
 const Directory = () => {
   const { directoryState, toggleMenuOpen } = useDirectory();
+  
+  useEffect(()=>{
+    
+  })
 
   return (
-    <Menu isOpen={directoryState.isOpen}>
+    <Menu>
       <MenuButton
         cursor="pointer"
         padding="0px 6px"
         borderRadius={4}
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
         mx={2}
-        onClick={toggleMenuOpen}
       >
         <Flex align="center" justify="space-between" w={{ base: "auto", lg: "150px" }}>
           <Flex align="center">

@@ -1,5 +1,5 @@
 import { Post } from "@/atoms/postAtom";
-import { Flex, HStack, Icon, Image, Skeleton, Spinner, Stack, Text, useToast } from "@chakra-ui/react";
+import { Button, Flex, HStack, Icon, Image, Skeleton, Spinner, Stack, Text, useToast } from "@chakra-ui/react";
 import moment from "moment";
 import { BsChat, BsDot } from "react-icons/bs";
 import {
@@ -46,7 +46,6 @@ const PostItem = ({
   const router = useRouter();
   const toast = useToast();
 
-
   const handleDelete = async () => {
     try {
       setDeleteLoading(true);
@@ -65,13 +64,12 @@ const PostItem = ({
     setDeleteLoading(false);
   };
 
-
   const handleCopy = () => {
     const currentUrl = window.location.href;
     navigator.clipboard.writeText(currentUrl);
     toast({
       title: "URL Copied!",
-      position: 'top',
+      position: "top",
       description: "The URL has been successfully copied to your clipboard.",
       status: "success",
       duration: 9000,
@@ -83,35 +81,66 @@ const PostItem = ({
     //outer
     <Flex
       border="1px solid"
-      bg="pink"
-      borderColor="gray.300"
+      bg="gray.700"
+      borderColor="gray.700"
       borderRadius={4}
-      _hover={{ borderColor: singlePostPage ? "none" : "gray.500" }}
+      _hover={{ borderColor: singlePostPage ? "none" : "gray.700" }}
       cursor={singlePostPage ? "unset" : "pointer"}
       // check if truthy
       onClick={() => onSelectPost && onSelectPost(post)}
     >
       {/* left */}
-      <Flex direction="column" align="center" bg={singlePostPage ? "none" : "gray.200"} p={2} borderRadius={4} w="40px">
-        <Icon
+      <Flex direction="column" align="center" bg={singlePostPage ? "none" : "blue.900"} p={2} borderRadius={4} w="40px">
+        {/* <Icon
           as={userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline}
-          color={userVoteValue === 1 ? "brand.100" : "gray.400"}
+          color={userVoteValue === 1 ? "green.500" : "gray.400"}
           cursor="pointer"
           onClick={(event) => {
             event.stopPropagation();
             onVote(post, 1, post.communityId);
           }}
-        />
-        <Text fontSize="sm"> {post.voteStatus}</Text>
-        <Icon
-          as={userVoteValue === -1 ? IoArrowDownCircleSharp : IoArrowDownCircleOutline}
+        /> */}
+        <Button
+          size="xs"
+          variant="ghost"
+          bg={userVoteValue === 1 ? "green.500" : "none"}
+          _hover={{ bg: userVoteValue === 1 ? "green.600" : "none" }}
+          rounded="full"
+          onClick={(event) => {
+            event.stopPropagation();
+            onVote(post, 1, post.communityId);
+          }}
+        >
+          推
+        </Button>
+
+        <Text fontSize="lg" color={post.voteStatus > 0 ? "yellow.300" : "gray.400"}>
+          {post.voteStatus}
+        </Text>
+
+        <Button
+          size="xs"
+          variant="ghost"
+          bg={userVoteValue === -1 ? "red.500" : "none"}
+          _hover={{ bg: userVoteValue === -1 ? "red.600" : "none" }}
+          rounded="full"
+          onClick={(event) => {
+            event.stopPropagation();
+            onVote(post, -1, post.communityId);
+          }}
+        >
+          噓
+        </Button>
+
+        {/* <Icon
+            as={userVoteValue === -1 ? IoArrowDownCircleSharp : IoArrowDownCircleOutline}
           color={userVoteValue === -1 ? "brand.100" : "gray.400"}
           cursor="pointer"
           onClick={(event) => {
             event.stopPropagation();
             onVote(post, -1, post.communityId);
           }}
-        />
+        /> */}
       </Flex>
       {/* right */}
       <Flex direction="column" w="100%">
@@ -137,10 +166,13 @@ const PostItem = ({
                 <Icon as={BsDot} color="gray.500" />
               </>
             )}
-            <Text>
-              posted by u/{post.creatorDisplayName} {""}
-              {moment(new Date(post.createdAt.seconds * 1000)).fromNow()}
-            </Text>
+            <Flex justify="space-between" color="gray.500" w="100%">
+              <Text fontSize="xs">
+                作者: {""}
+                {post.creatorDisplayName} {""}
+              </Text>
+              <Text>{moment(new Date(post.createdAt.seconds * 1000)).format("MM/DD")}</Text>
+            </Flex>
           </HStack>
           <Text fontSize="lg" fontWeight="bold">
             {post.title}
@@ -158,22 +190,22 @@ const PostItem = ({
               />
             </Flex>
           )}
+          
+
+          {/* 留言按鈕區 */}
           <Flex
-            bg="teal.500"
-            ml={1}
-            mb={0.5}
-            //    color='gray.500'
+            // bg="teal.500"
           >
             {/* bot item 1  */}
-            <Flex p="8px 10px" borderRadius={4} _hover={{ bg: "gray.200" }} cursor="pointer" align="center">
+            <Flex p="8px 10px" borderRadius={4} _hover={{ bg: "gray.600" }} cursor="pointer" align="center"  mt={2}>
               <Icon mr={2} as={BsChat} />
               <Text fontSize="sm">{post.numberOfComment}</Text>
             </Flex>
             {/* bot item 2  */}
-            <Flex
+            <Flex mt={2}
               p="8px 10px"
               borderRadius={4}
-              _hover={{ bg: "gray.200" }}
+              _hover={{ bg: "gray.600" }}
               cursor="pointer"
               align="center"
               onClick={handleCopy}
@@ -181,17 +213,12 @@ const PostItem = ({
               <Icon mr={2} as={IoArrowRedoOutline} />
               <Text fontSize="sm">Share</Text>
             </Flex>
-            {/* bot item 3  */}
-            <Flex p="8px 10px" borderRadius={4} _hover={{ bg: "gray.200" }} cursor="pointer" align="center">
-              <Icon mr={2} as={IoBookmarkOutline} />
-              <Text fontSize="sm">Save</Text>
-            </Flex>
             {/* bot item 4 when you are post author  */}
             {userIsCreator && (
-              <Flex
+              <Flex mt={2}
                 p="8px 10px"
                 borderRadius={4}
-                _hover={{ bg: "gray.200" }}
+                _hover={{ bg: "gray.600" }}
                 cursor="pointer"
                 align="center"
                 onClick={(event) => {

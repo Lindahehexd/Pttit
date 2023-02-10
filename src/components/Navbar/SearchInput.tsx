@@ -17,10 +17,10 @@ const SearchInput: React.FC<Props> = () => {
   };
 
   return (
-    <Flex flexGrow={1} mx={2} align="center">
+    <Flex flexGrow={1} mx={5} align="center">
       <InputGroup>
         <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" mb={1} />} />
-        <Input type="tel" placeholder="Search the Community!" h="34px" onKeyDown={handleKeyDown} />
+        <Input type="tel" placeholder="前往看板" h="34px" onKeyDown={handleKeyDown} />
       </InputGroup>
     </Flex>
   );

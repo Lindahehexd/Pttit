@@ -30,7 +30,7 @@ const formTab = [
     icon: IoDocumentText,
   },
   {
-    title: "Images & Vedios",
+    title: "Images & Videos",
     icon: IoImageOutline,
   },
   {
@@ -142,7 +142,7 @@ const NewPostForm = ({ user, communityImageURL }: NewPostFormProps) => {
               handleCreatePost={handleCreatePost}
             />
           )}
-          {selectedTab === "Images & Vedios" && (
+          {selectedTab === "Images & Videos" && (
             <ImageUpload
               setSelectedFile={setSelectedFile}
               onSelectImadge={onSelectImadge}

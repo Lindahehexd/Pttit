@@ -104,7 +104,7 @@ const Login = () => {
             }))
           }
         >
-          SIGN UP
+          註冊
         </Text>
       </Flex>
     </form>

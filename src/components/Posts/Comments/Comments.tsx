@@ -124,7 +124,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   }, []);
 
   return (
-    <Box bg="orange" borderRadius="0px 0px 4px 4px" p={2}>
+    <Box bg="gray.700" borderRadius="0px 0px 4px 4px" p={2}>
       <Flex direction="column" pl={10} pr={4} mb={6} fontSize="10pt" w="100%">
         <CommentInput
           commentText={commentText}
@@ -168,7 +168,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
                 p={20}
               >
                 <Text fontWeight={700} opacity={0.3}>
-                  No Comments Yet
+                  尚未有人留言
                 </Text>
               </Flex>
             )}

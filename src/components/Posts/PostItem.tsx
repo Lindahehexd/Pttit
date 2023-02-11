@@ -211,7 +211,7 @@ const PostItem = ({
               onClick={handleCopy}
             >
               <Icon mr={2} as={IoArrowRedoOutline} />
-              <Text fontSize="sm">Share</Text>
+              <Text fontSize="sm">分享</Text>
             </Flex>
             {/* bot item 4 when you are post author  */}
             {userIsCreator && (
@@ -231,7 +231,7 @@ const PostItem = ({
                 ) : (
                   <>
                     <Icon mr={2} as={AiOutlineDelete} />
-                    <Text fontSize="sm">Delete</Text>{" "}
+                    <Text fontSize="sm">刪除文章</Text>{" "}
                   </>
                 )}
               </Flex>

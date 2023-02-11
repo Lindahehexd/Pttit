@@ -17,12 +17,12 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
       {user ? (
         <>
           <Text mb={1}>
-            Comment as <span style={{ color: "#3182CE" }}>{user?.email?.split("@")[0]}</span>
+            <span style={{ color: "#3182CE" }}>{user?.email?.split("@")[0]}</span> 發表你的看法
           </Text>
           <Textarea
             value={commentText}
             onChange={(event) => setCommentText(event.target.value)}
-            placeholder="What are your thoughts?"
+            // placeholder=""。
             fontSize="10pt"
             borderRadius={4}
             minHeight="160px"
@@ -30,7 +30,7 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
             _placeholder={{ color: "gray.500" }}
             _focus={{
               outline: "none",
-              bg: "white",
+            //   bg: "white",
               border: "1px solid black",
             }}
           />
@@ -40,7 +40,7 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
             right={0.1}
             bottom="1px"
             justify="flex-end"
-            bg="gray.100"
+            bg="gray.500"
             p="6px 8px"
             borderRadius="0px 0px 4px 4px"
           >
@@ -50,13 +50,13 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
               isLoading={createLoading}
               onClick={() => onCreateComment(commentText)}
             >
-              Comment
+              送出
             </Button>
           </Flex>
         </>
       ) : (
         <Flex align="center" justify="space-between" borderRadius={2} border="1px solid" borderColor="gray.100" p={4}>
-          <Text fontWeight={600}>Log in or sign up to leave a comment</Text>
+          <Text fontWeight={600}>推文前請先登入</Text>
           <AuthButtons />
         </Flex>
       )}

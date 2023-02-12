@@ -3,21 +3,11 @@ import { Post, postState } from "@/atoms/postAtom";
 import { User } from "firebase/auth";
 import { Box, Flex, SkeletonCircle, SkeletonText, Stack, Text } from "@chakra-ui/react";
 import CommentInput from "./CommentInput";
-import {
-  collection,
-  doc,
-  getDocs,
-  increment,
-  orderBy,
-  query,
-  serverTimestamp,
-  Timestamp,
-  where,
-  writeBatch,
-} from "firebase/firestore";
+import { collection, doc, getDocs, increment, orderBy, query, serverTimestamp, Timestamp, where, writeBatch } from "firebase/firestore";
 import { firestore } from "@/firebase/clientApp";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import CommentsItem from "./CommentsItem";
+import { atomindex } from "@/atoms/commentAtom";
 
 type CommnetsProps = {
   user: User;
@@ -34,9 +24,11 @@ export type Comment = {
   postTitle: string;
   text: string;
   createdAt: Timestamp;
+  commentTabIndex: number;
 };
 
 const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
+  const currentTabIndexValue = useRecoilValue(atomindex);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState<Comment[]>([]);
   const [fetchLoading, setFetchLoading] = useState(true);
@@ -59,6 +51,8 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
         postTitle: selectedPost?.title!,
         text: commentText,
         createdAt: serverTimestamp() as Timestamp,
+        // icon
+        commentTabIndex: currentTabIndexValue,
       };
       // set to db
       batch.set(commentDocRef, newComment);
@@ -93,15 +87,18 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   const onDeleteComment = async () => {};
 
   const getPostComments = async () => {
+    console.log("start get commnet");
     try {
       // 5 245 03 in order to perform the query on the collection, we need the index
-      const commentsQuery = query(
+      const commentsQuery =  query(
         //query the collection > seach the commments collection > use 'where' to find the specific document in this collection
         collection(firestore, "comments"),
-        where("postId", "==", selectedPost && selectedPost?.id),
-        // the latest will on the top
-        orderBy("createdAt", "desc")
+        where("postId", "==", selectedPost && selectedPost.id),
+        // // the latest will on the top
+        // orderBy("createdAt", "desc")
       );
+
+      console.log('selector id',  selectedPost?.id )
 
       //fetch the data from the db
 
@@ -113,6 +110,8 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
         ...doc.data(),
       }));
       setComments(comments as Comment[]);
+      console.log("try get doc", commentDocs.docs);
+      console.log("try get commnet", comments);
     } catch (error: any) {
       console.log("getPostComments error", error.message);
     }
@@ -120,19 +119,14 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   };
 
   useEffect(() => {
+    console.log("comments");
     getPostComments();
   }, []);
 
   return (
     <Box bg="gray.700" borderRadius="0px 0px 4px 4px" p={2}>
       <Flex direction="column" pl={10} pr={4} mb={6} fontSize="10pt" w="100%">
-        <CommentInput
-          commentText={commentText}
-          setCommentText={setCommentText}
-          user={user}
-          createLoading={createLoading}
-          onCreateComment={onCreateComment}
-        />
+        <CommentInput commentText={commentText} setCommentText={setCommentText} user={user} createLoading={createLoading} onCreateComment={onCreateComment} />
       </Flex>
       <Stack spacing={6} p={2}>
         {fetchLoading ? (
@@ -149,24 +143,11 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
             {!!comments.length ? (
               <>
                 {comments.map((comment: Comment) => (
-                  <CommentsItem
-                    key={comment.id}
-                    comment={comment}
-                    onDeleteComment={onDeleteComment}
-                    loadingDelete={false}
-                    userId={user?.uid}
-                  />
+                  <CommentsItem key={comment.id} comment={comment} onDeleteComment={onDeleteComment} loadingDelete={false} userId={user?.uid} />
                 ))}
               </>
             ) : (
-              <Flex
-                direction="column"
-                justify="center"
-                align="center"
-                borderTop="1px solid"
-                borderColor="gray.100"
-                p={20}
-              >
+              <Flex direction="column" justify="center" align="center" borderTop="1px solid" borderColor="gray.100" p={20}>
                 <Text fontWeight={700} opacity={0.3}>
                   尚未有人留言
                 </Text>

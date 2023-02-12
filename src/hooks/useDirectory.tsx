@@ -1,5 +1,5 @@
 import { communityState } from "@/atoms/communitiesAtom";
-import { DirectoryMenuItem, directoryMenuState } from "@/atoms/directoryMenuAtom";
+import { defaultMenuItem, DirectoryMenuItem, directoryMenuState } from "@/atoms/directoryMenuAtom";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { FaReddit } from "react-icons/fa";
@@ -34,17 +34,31 @@ const useDirectory = () => {
 
   useEffect(() => {
     const { currentCommunity } = communityStateValue;
+    const { pathname } = router;
 
-    setDirectoryState((prev) => ({
-      ...prev,
-      selectedMenuItem: {
-        displayText: `r/${currentCommunity?.id}`,
-        link: `r/${currentCommunity?.id}`,
-        icon: FaReddit,
-        iconColor: "blue.500",
-        imageURL: currentCommunity?.imageURL,
-      },
-    }));
+    try {
+      if (currentCommunity) {
+        setDirectoryState((prev) => ({
+          ...prev,
+          selectedMenuItem: {
+            displayText: `r/${currentCommunity?.id}`,
+            link: `r/${currentCommunity?.id}`,
+            icon: FaReddit,
+            iconColor: "blue.500",
+            imageURL: currentCommunity?.imageURL,
+          },
+        }));
+      } else {
+        if (pathname === "/") {
+          setDirectoryState((prev) => ({
+            ...prev,
+            selectedMenuItem: defaultMenuItem,
+          }));
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }, [communityStateValue.currentCommunity]);
 
   return { directoryState, toggleMenuOpen, onSelectMenuItem };

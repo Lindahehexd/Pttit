@@ -5,9 +5,8 @@ import {useRecoilValue} from 'recoil'
 import Login from "./Login";
 import SignUp from "./SignUp";
 
-type Props = {};
 
-const AuthInput = (props: Props) => {
+const AuthInput = () => {
   const modalState = useRecoilValue(authModalState);
   return (
     <Flex direction="column" align="center" width="100%" mt={4}>

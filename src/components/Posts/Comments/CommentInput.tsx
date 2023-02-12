@@ -1,7 +1,10 @@
 import AuthButtons from "@/components/Navbar/RightContent/AuthButtons";
-import { Button, Flex, Text, Textarea } from "@chakra-ui/react";
+import { Button, Flex, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
 import { User } from "firebase/auth";
-import React from "react";
+import React, { useState } from "react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { useRecoilState } from "recoil";
+import { atomindex } from "@/atoms/commentAtom";
 
 type CommentInputProps = {
   commentText: string;
@@ -12,8 +15,31 @@ type CommentInputProps = {
 };
 
 const CommentInput = ({ commentText, setCommentText, createLoading, user, onCreateComment }: CommentInputProps) => {
+
+  const [tabIndex, setTabIndex] = useRecoilState<number>(atomindex)
+  
+  const colors = useColorModeValue(["gray.200", "green.500", "red.800"], ["gray.800", "green.500", "red.700"]);
+  const bg = colors[tabIndex];
+
   return (
-    <Flex direction="column" position="relative">
+    <Flex direction="column">
+      <Tabs onChange={(tabIndex) => setTabIndex(tabIndex)} bg={bg}>
+        <TabList>
+          <Tab color='white'>只加註解</Tab>
+          <Tab color='white'>值得推薦</Tab>
+          <Tab color='white'>給他噓聲</Tab>
+        </TabList>
+        <TabPanels p={1}>
+          <Textarea value={commentText} onChange={(event) => setCommentText(event.target.value)}></Textarea>
+        </TabPanels>
+      </Tabs>
+
+      <Flex bottom="1px" justify="flex-end" bg="blue.800" p="6px 8px" borderRadius="0px 0px 4px 4px">
+        <Button height="26px" disabled={!commentText.length} isLoading={createLoading} onClick={() => onCreateComment(commentText)}>
+          送出
+        </Button>
+      </Flex>
+
       {user ? (
         <>
           <Text mb={1}>
@@ -25,31 +51,17 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
             // placeholder=""。
             fontSize="10pt"
             borderRadius={4}
-            minHeight="160px"
-            pb={10}
+            minHeight="120px"
             _placeholder={{ color: "gray.500" }}
             _focus={{
               outline: "none",
-            //   bg: "white",
+              //   bg: "white",
               border: "1px solid black",
             }}
           />
-          <Flex
-            position="absolute"
-            left="1px"
-            right={0.1}
-            bottom="1px"
-            justify="flex-end"
-            bg="gray.500"
-            p="6px 8px"
-            borderRadius="0px 0px 4px 4px"
-          >
-            <Button
-              height="26px"
-              disabled={!commentText.length}
-              isLoading={createLoading}
-              onClick={() => onCreateComment(commentText)}
-            >
+
+          <Flex bottom="1px" justify="flex-end" bg="gray.500" p="6px 8px" borderRadius="0px 0px 4px 4px">
+            <Button height="26px" disabled={!commentText.length} isLoading={createLoading} onClick={() => onCreateComment(commentText)}>
               送出
             </Button>
           </Flex>

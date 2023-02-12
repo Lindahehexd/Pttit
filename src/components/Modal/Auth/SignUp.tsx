@@ -52,7 +52,7 @@ const SignUp = () => {
       <Input
         required
         name="email"
-        placeholder="email"
+        placeholder="電子信箱"
         type="email"
         mb={2}
         onChange={onChange}
@@ -64,13 +64,12 @@ const SignUp = () => {
           border: "1px solid",
           borderColor: "blue.500",
         }}
-        bg="gray.50"
       />
 
       <Input
         required
         name="password"
-        placeholder="password"
+        placeholder="密碼"
         type="password"
         mb={2}
         onChange={onChange}
@@ -82,12 +81,11 @@ const SignUp = () => {
           border: "1px solid",
           borderColor: "blue.500",
         }}
-        bg="gray.50"
       />
       <Input
         required
         name="confirmpassword"
-        placeholder="confirmpassword"
+        placeholder="確認密碼"
         type="password"
         mb={2}
         onChange={onChange}
@@ -99,7 +97,6 @@ const SignUp = () => {
           border: "1px solid",
           borderColor: "blue.500",
         }}
-        bg="gray.50"
       />
 
       <Text textAlign="center" mt={2} fontSize="sm" color="red.500">
@@ -107,10 +104,10 @@ const SignUp = () => {
       </Text>
 
       <Button w="100%" h="36px" my={2} type="submit" isLoading={loading}>
-        Signup
+        註冊
       </Button>
       <Flex fontSize="sm" justifyContent="center">
-        <Text mr={1}>Already a redditer?</Text>
+        <Text mr={1}>已經是鄉民?</Text>
         <Text
           color="blue.500"
           fontWeight="bold"
@@ -122,7 +119,7 @@ const SignUp = () => {
             }))
           }
         >
-          LOG IN
+          登入
         </Text>
       </Flex>
     </form>

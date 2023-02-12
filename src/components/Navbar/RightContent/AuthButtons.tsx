@@ -16,7 +16,7 @@ const AuthButtons = () => {
         mr={2}
         onClick={() => setAuthModalState({ open: true, view: "login" })}
       >
-        Log in
+        登入
       </Button>
       <Button
         h="28px"
@@ -25,7 +25,7 @@ const AuthButtons = () => {
         mr={2}
         onClick={() => setAuthModalState({ open: true, view: "signup" })}
       >
-        Sign Up
+        註冊
       </Button>
       <SwitchThemeButton />
     </>

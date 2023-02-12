@@ -18,10 +18,10 @@ const OAuthButton = () => {
   }, [userCred]);
 
   return (
-    <Flex direction="column" w="100%" mb={4}>
-      <Button variant="oauth" mb={2} isLoading={loading} onClick={() => signInWithGoogle()}>
+    <Flex direction="column" w="100%" mb={2}>
+      <Button bg='black' mb={2} isLoading={loading} onClick={() => signInWithGoogle()} fontWeight="sm">
         <Image h="20px" mr={4} src="/images/googlelogo.png" alt="" />
-        Continue with google
+        使用google帳號登入
       </Button>
       {/* dom 無法顯示object {error}會報錯 要text{error.message}才可 */}
       {error && <Text>error.message</Text>}

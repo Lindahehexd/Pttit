@@ -1,6 +1,6 @@
 import { authModalState } from "@/atoms/authModalAtom";
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/clientApp";
@@ -17,7 +17,7 @@ const Login = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signInWithEmailAndPassword(loginForm.email, loginForm.password)
+    signInWithEmailAndPassword(loginForm.email, loginForm.password);
     console.log(user);
   };
 
@@ -34,14 +34,13 @@ const Login = () => {
       <Input
         required
         name="email"
-        placeholder="email"
+        placeholder="電子信箱"
         type="email"
         mb={2}
         onChange={onChange}
         fontSize="sm"
         _placeholder={{ color: "gray.500" }}
         _hover={{
-          // bg:'white',
           bg: "gray.600",
           border: "1px solid",
           borderColor: "blue.500",
@@ -50,14 +49,13 @@ const Login = () => {
       <Input
         required
         name="password"
-        placeholder="password"
+        placeholder="密碼"
         type="password"
         mb={2}
         onChange={onChange}
         fontSize="sm"
         _placeholder={{ color: "gray.500" }}
         _hover={{
-          // bg:'white',
           bg: "gray.600",
           border: "1px solid",
           borderColor: "blue.500",
@@ -69,12 +67,12 @@ const Login = () => {
       </Text>
 
       <Button w="100%" h="36px" my={2} type="submit" isLoading={loading}>
-        Log in
+        登入
       </Button>
-      
+
       <Flex justifyContent="center" mb={2}>
         <Text fontSize="9pt" mr={1}>
-          Forgot your password?
+          忘記密碼?
         </Text>
         <Text
           fontSize="9pt"
@@ -83,19 +81,21 @@ const Login = () => {
           onClick={() =>
             setAuthModalState((prev) => ({
               ...prev,
-              view: 'resetPassword',
+              view: "resetPassword",
             }))
           }
         >
-          Reset
+          重設密碼
         </Text>
       </Flex>
 
-      <Flex fontSize="sm" justifyContent="center">
-        <Text mr={1}>New here?</Text>
+      <Flex justifyContent="center">
+        <Text mr={1} fontSize="xs">
+          新用戶?
+        </Text>
         <Text
           color="blue.500"
-          fontWeight="bold"
+          fontSize="xs"
           cursor="pointer"
           onClick={() =>
             setAuthModalState((prev) => ({

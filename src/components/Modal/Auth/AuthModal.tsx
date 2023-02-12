@@ -49,9 +49,9 @@ const AuthModal = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign="center">
-            {modalState.view === "signup" && "Sign up"}
-            {modalState.view === "login" && "Login"}
-            {modalState.view === "resetPassword" && "Reset Password"}
+            {modalState.view === "signup" && "註冊"}
+            {modalState.view === "login" && "登入"}
+            {modalState.view === "resetPassword" && "重設密碼"}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody display="flex" justifyContent="center" alignItems="center" flexDirection="column" mb={5}>
@@ -60,7 +60,7 @@ const AuthModal = () => {
                 <>
                   <OAuthButton />
                   <Text color="gray.300" fontWeight="bold">
-                    OR
+                    或是
                   </Text>
                   <AuthInput />
                 </>

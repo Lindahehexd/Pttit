@@ -22,14 +22,14 @@ const ResetPassword = () => {
     <Flex direction="column" alignItems="center" width="100%">
       <Icon as={BsReddit} color="brand.100" fontSize={40} mb={2} />
       <Text fontWeight={700} mb={2}>
-        Reset your password
+        重設你的密碼
       </Text>
       {success ? (
-        <Text mb={4}>Check your email :)</Text>
+        <Text mb={4}>請確認你的電子信箱</Text>
       ) : (
         <>
           <Text fontSize="sm" textAlign="center" mb={2}>
-            Enter the email associated with your account and we will send you a reset link
+            輸入電子信箱後我們將會寄一封信件給您
           </Text>
           <form onSubmit={onSubmit} style={{ width: "100%" }}>
             <Input
@@ -58,7 +58,7 @@ const ResetPassword = () => {
               {error?.message}
             </Text>
             <Button width="100%" height="36px" mb={2} mt={2} type="submit" isLoading={sending}>
-              Reset Password
+              重設密碼
             </Button>
           </form>
         </>
@@ -72,7 +72,7 @@ const ResetPassword = () => {
             }))
           }
         >
-          LOGIN
+          登入
         </Text>
         <Icon as={BsDot} />
         <Text
@@ -83,7 +83,7 @@ const ResetPassword = () => {
             }))
           }
         >
-          SIGN UP
+          註冊
         </Text>
       </Flex>
     </Flex>

@@ -34,6 +34,8 @@ type CreateCommunityProps = {
 const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
   const [user] = useAuthState(auth);
   const [communities, setCommunities] = useState("");
+  const [communitiesInfo, setCommunitiesInfo] = useState("");
+  const [aboutCommunity, setAboutCommunity] = useState("");
   const [remain, setRemain] = useState(21);
   const [type, setType] = useState("public");
   const [error, setError] = useState("");
@@ -46,6 +48,18 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
     setRemain(21 - e.target.value.length);
   };
 
+  const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 21) return;
+    setCommunitiesInfo(e.target.value);
+    setRemain(21 - e.target.value.length);
+  };
+
+  const handleChange3 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 21) return;
+    setAboutCommunity(e.target.value);
+    setRemain(21 - e.target.value.length);
+  };
+
   const typeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setType(e.target.name);
   };
@@ -54,9 +68,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
     if (error) setError("");
     const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     if (format.test(communities) || communities.length < 3) {
-      setError(
-        "Communities name must be between 3-21 characters, and can only contain letters, numbers, or underscored"
-      );
+      setError("看板名稱字數請介於3~21字，不得輸入任何符號，且只允許輸入字母、數字、及下劃線。");
       return;
     }
     setLoading(true);
@@ -77,6 +89,8 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
           createdAt: serverTimestamp(),
           numberOfMember: 1,
           privacyType: "public",
+          communityInfo: communitiesInfo,
+          aboutCommunity: aboutCommunity,
         });
         // create to user interface
         // add to > users collection > userid (document) >  add commnuitysnippet collection > add document as communities ( at sub collection )
@@ -85,7 +99,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
           isModerator: true,
         });
       });
-      handleClose()
+      handleClose();
       router.push(`/r/${communities}`);
     } catch (error: any) {
       console.log(" handleCommunity error, error ");
@@ -96,6 +110,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
 
   return (
     <Modal isOpen={open} onClose={handleClose} size="lg">
+      {/*  */}
       <ModalOverlay />
       <ModalContent>
         <ModalHeader display="flex" flexDirection="column" fontSize="lg" p={3}>
@@ -104,74 +119,52 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
         <Box px={3}>
           <ModalCloseButton />
           <ModalBody display="flex" flexDirection="column" p="10px 0px" border="1px solid red">
-            <Text fontWeight="bold">Name</Text>
-            <Text fontSize="sm">Communities names including capitalization can not be chnaged</Text>
+            <Text fontWeight="bold">看板名稱</Text>
+            <Text fontSize="sm">看板名稱請使用英文大小寫，設定完成後將無法修改</Text>
             <Text position="relative" top="28px" left="10px" w="20px" color="gray.400">
               r/
             </Text>
             <Input position="relative" value={communities} size="sm" pl="22px" onChange={handleChange} />
             <Text fontSize="sm" color={remain === 0 ? "red" : "gray.500"}>
-              {remain} Character remaining
+              剩餘 {remain} 個字符
             </Text>
-            <Text color="red" p={1} fontSize="sm">
+            <Text color="red.400" p={1} fontSize="sm">
               {error}
             </Text>
+            {/* 社團介紹 */}
+            <Text fontWeight="bold">社團介紹</Text>
+            <Input position="relative" value={communitiesInfo} size="sm" pl="22px" onChange={handleChange2} />
+            {/* 看板簡介 */}
+            <Text fontWeight="bold">看板簡介</Text>
+            <Input position="relative" value={aboutCommunity} size="sm" pl="22px" onChange={handleChange3} />
           </ModalBody>
+
+          {/* 社團類型 */}
           <Box my={4}>
-            <Text fontWeight="bold"> Community type</Text>
+            <Text fontWeight="bold"> 社團類型 </Text>
             {/* checkbox */}
             <Stack spacing={3}>
               <Checkbox name="public" isChecked={type === "public"} onChange={typeChange}>
                 <Flex align="center">
                   <Icon as={BsPersonFill} color="gray.500" mr={2} />
                   <Text fontSize="sm" mr={1}>
-                    Public
+                    公開
                   </Text>
                   <Text fontSize="8px" color="gray.500" pt={1}>
-                    Anyone can view the post, and comment to this community
+                    任何人都可以瀏覽此看板。
                   </Text>
                 </Flex>
               </Checkbox>
-
-              {/* <Checkbox name="restricted" isChecked={type === "restricted"} onChange={typeChange}>
-                <Flex align="center">
-                  <Icon as={BsFillEyeFill} color="gray.500" mr={2} />
-                  <Text fontSize="sm" mr={1}>
-                    Restricted
-                  </Text>
-                  <Text fontSize="8px" color="gray.500" pt={1}>
-                    Anyone can view the post, but only approved users can post
-                  </Text>
-                </Flex>
-              </Checkbox>
-
-              <Checkbox name="private" isChecked={type === "private"} onChange={typeChange}>
-                <Flex align="center">
-                  <Icon as={HiLockClosed} color="gray.500" mr={2} />
-                  <Text fontSize="sm" mr={1}>
-                    Private
-                  </Text>
-                  <Text fontSize="8px" color="gray.500" pt={1}>
-                    Only approved users can view and submit to this community
-                  </Text>
-                </Flex>
-              </Checkbox> */}
             </Stack>
           </Box>
         </Box>
 
         <ModalFooter bg="gray.500" borderRadius="0px 0px 10px 10px">
-          <Button
-            // variant="outline"
-            h="30px"
-            mr={3}
-            onClick={handleClose}
-            colorScheme="blue"
-          >
-            Close
+          <Button h="30px" mr={3} onClick={handleClose} colorScheme="blue">
+            離開
           </Button>
           <Button h="30px" onClick={handleCommunity} isLoading={loading}>
-            Create Community
+            建立看板
           </Button>
         </ModalFooter>
       </ModalContent>

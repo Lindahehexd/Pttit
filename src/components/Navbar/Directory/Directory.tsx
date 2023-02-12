@@ -10,10 +10,6 @@ import Communities from "./Communities";
 const Directory = () => {
   const { directoryState, toggleMenuOpen } = useDirectory();
   
-  useEffect(()=>{
-    
-  })
-
   return (
     <Menu>
       <MenuButton

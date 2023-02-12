@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Post, postState } from "@/atoms/postAtom";
 import { User } from "firebase/auth";
-import { Box, Flex, SkeletonCircle, SkeletonText, Stack, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, SkeletonCircle, SkeletonText, Spinner, Stack, Text } from "@chakra-ui/react";
 import CommentInput from "./CommentInput";
 import {
   collection,
@@ -131,7 +131,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   };
 
   useEffect(() => {
-    if(!selectedPost) return
+    if (!selectedPost) return;
     console.log("try run use effect when selectedPost is not undefined ");
     getPostComments();
   }, [selectedPost]);
@@ -150,9 +150,12 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
       <Stack spacing={6} p={2}>
         {fetchLoading ? (
           <>
-            {[0, 1, 2].map((item) => (
-              <Box key={item} padding="6" bg="white">
-                <SkeletonCircle size="10" />
+            {/* <Center>
+              <Spinner size="xl" />
+            </Center>
+             */}
+      {[0, 1, 2].map((item) => (
+              <Box key={item} padding="2" bg="gray.800">
                 <SkeletonText mt="4" noOfLines={2} spacing="4" />
               </Box>
             ))}

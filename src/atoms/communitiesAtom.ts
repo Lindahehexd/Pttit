@@ -10,6 +10,8 @@ export interface Community {
   privacyType: "public" | "restrictied" | "private";
   createdAt?: Timestamp;
   imageURL?: string;
+  aboutCommunity: string,
+  communityInfo: string,
 }
 
 export interface CommunitySnippet {

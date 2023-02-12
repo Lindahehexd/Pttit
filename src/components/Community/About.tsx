@@ -60,9 +60,13 @@ const About = ({ communityData }: AboutProps) => {
       <Flex direction="column" p={3} bg={"whiteAlpha.200"} borderRadius="0px 0px 4px 4px">
         <Stack>
           <Flex w="100%" p={2}>
-            <Flex flexGrow={1}>
+            <Flex flexGrow={1} maxWidth='300px'>
               <Text>
-                看板簡介: {""} {communityData.numberOfMember}
+               {` 看板簡介:
+               asdasdasdasd
+               Asdasdasdasd
+               ASdasdasdasda
+               ${communityData.aboutCommunity} `}  
               </Text>
             </Flex>
           </Flex>

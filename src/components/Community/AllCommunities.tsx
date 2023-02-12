@@ -99,7 +99,8 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
                       </Box>
                  
 
-                      <Text ml={7}> 還在想能加啥</Text>
+                      <Text ml={7}> {item.aboutCommunity}</Text>
+                      <Text ml={7}> @ {item.communityInfo}</Text>
                     </Flex>
                   </Flex>
                   <Flex right="10px">

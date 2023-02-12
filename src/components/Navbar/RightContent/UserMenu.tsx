@@ -46,13 +46,13 @@ const UserMenu = ({ user }: MenuProps) => {
         </Flex>
       </MenuButton>
       <MenuList>
-        <MenuItem _hover={{ bg: "blue.500", color: "white" }}>
+        {/* <MenuItem _hover={{ bg: "blue.500", color: "white" }}>
           <Flex align="center" fontWeight="bold">
             <Icon as={CgProfile} fontSize={20} mr={2} />
           </Flex>
           Profile
-        </MenuItem>
-        <MenuDivider />
+        </MenuItem> */}
+        {/* <MenuDivider /> */}
         <MenuItem _hover={{ bg: "blue.500", color: "white" }} onClick={logout}>
           <Flex align="center" fontWeight="bold">
             <Icon as={MdOutlineLogout} fontSize={20} mr={2} />

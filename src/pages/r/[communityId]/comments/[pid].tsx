@@ -43,6 +43,28 @@ const PostPage = (props: Props) => {
     }
   }, [router.query, postStateValue.selectedPost, setPostStateValue]);
 
+
+//   const fetchComment = async (commentId: string) => {
+//     try {
+//       const commentRef = doc(firestore, "comments", commentId);
+//       const commentDoc = await getDoc(commentRef);
+//       setPostStateValue((prev) => ({
+//         ...prev,
+//         selectedPost: { id: commentDoc.id, ...commentDoc.data() } as Post,
+//       }));
+//     } catch (error: any) {
+//       console.log("fetchPost error", error.message);
+//     }
+//   };
+
+// // Fetch post if not in already in state 如果在一個貼文的網址內 + 當前沒有post的value 則判定 用戶重新整理
+// useEffect(() => {
+//   const { pid } = router.query;
+//   if (pid && !postStateValue.selectedPost) {
+//     fetchComment(pid as string);
+//   }
+// }, [router.query]);
+
   return (
     <PageContentLayout>
       <>

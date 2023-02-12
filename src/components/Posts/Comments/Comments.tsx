@@ -3,7 +3,18 @@ import { Post, postState } from "@/atoms/postAtom";
 import { User } from "firebase/auth";
 import { Box, Flex, SkeletonCircle, SkeletonText, Stack, Text } from "@chakra-ui/react";
 import CommentInput from "./CommentInput";
-import { collection, doc, getDocs, increment, orderBy, query, serverTimestamp, Timestamp, where, writeBatch } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  increment,
+  orderBy,
+  query,
+  serverTimestamp,
+  Timestamp,
+  where,
+  writeBatch,
+} from "firebase/firestore";
 import { firestore } from "@/firebase/clientApp";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import CommentsItem from "./CommentsItem";
@@ -88,17 +99,18 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
 
   const getPostComments = async () => {
     console.log("start get commnet");
+
     try {
       // 5 245 03 in order to perform the query on the collection, we need the index
-      const commentsQuery =  query(
+      const commentsQuery = query(
         //query the collection > seach the commments collection > use 'where' to find the specific document in this collection
         collection(firestore, "comments"),
-        where("postId", "==", selectedPost && selectedPost.id),
+        where("postId", "==", selectedPost?.id),
         // // the latest will on the top
-        // orderBy("createdAt", "desc")
+        orderBy("createdAt", "desc")
       );
 
-      console.log('selector id',  selectedPost?.id )
+      console.log("selector id", selectedPost?.id);
 
       //fetch the data from the db
 
@@ -119,14 +131,21 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   };
 
   useEffect(() => {
-    console.log("comments");
+    if(!selectedPost) return
+    console.log("try run use effect when selectedPost is not undefined ");
     getPostComments();
-  }, []);
+  }, [selectedPost]);
 
   return (
     <Box bg="gray.700" borderRadius="0px 0px 4px 4px" p={2}>
       <Flex direction="column" pl={10} pr={4} mb={6} fontSize="10pt" w="100%">
-        <CommentInput commentText={commentText} setCommentText={setCommentText} user={user} createLoading={createLoading} onCreateComment={onCreateComment} />
+        <CommentInput
+          commentText={commentText}
+          setCommentText={setCommentText}
+          user={user}
+          createLoading={createLoading}
+          onCreateComment={onCreateComment}
+        />
       </Flex>
       <Stack spacing={6} p={2}>
         {fetchLoading ? (
@@ -143,11 +162,24 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
             {!!comments.length ? (
               <>
                 {comments.map((comment: Comment) => (
-                  <CommentsItem key={comment.id} comment={comment} onDeleteComment={onDeleteComment} loadingDelete={false} userId={user?.uid} />
+                  <CommentsItem
+                    key={comment.id}
+                    comment={comment}
+                    onDeleteComment={onDeleteComment}
+                    loadingDelete={false}
+                    userId={user?.uid}
+                  />
                 ))}
               </>
             ) : (
-              <Flex direction="column" justify="center" align="center" borderTop="1px solid" borderColor="gray.100" p={20}>
+              <Flex
+                direction="column"
+                justify="center"
+                align="center"
+                borderTop="1px solid"
+                borderColor="gray.100"
+                p={20}
+              >
                 <Text fontWeight={700} opacity={0.3}>
                   尚未有人留言
                 </Text>

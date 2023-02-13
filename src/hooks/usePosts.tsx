@@ -75,7 +75,7 @@ const usePosts = () => {
           voteValue: vote,
         };
 
-        console.log("NEW VOTE", newVote);
+        // console.log("NEW VOTE", newVote);
         //   the document we want to set, the data we want to add.
         batch.set(postVoteRef, newVote);
         // +1 -1 depend on the post.voteStatus, vote could be 1, -1

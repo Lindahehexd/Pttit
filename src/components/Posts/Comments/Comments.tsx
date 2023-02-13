@@ -98,7 +98,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   const onDeleteComment = async () => {};
 
   const getPostComments = async () => {
-    console.log("start get commnet");
+    // console.log("start get commnet");
 
     try {
       // 5 245 03 in order to perform the query on the collection, we need the index
@@ -110,7 +110,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
         orderBy("createdAt", "desc")
       );
 
-      console.log("selector id", selectedPost?.id);
+    //   console.log("selector id", selectedPost?.id);
 
       //fetch the data from the db
 
@@ -122,8 +122,8 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
         ...doc.data(),
       }));
       setComments(comments as Comment[]);
-      console.log("try get doc", commentDocs.docs);
-      console.log("try get commnet", comments);
+    //   console.log("try get doc", commentDocs.docs);
+    //   console.log("try get commnet", comments);
     } catch (error: any) {
       console.log("getPostComments error", error.message);
     }
@@ -132,7 +132,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
 
   useEffect(() => {
     if (!selectedPost) return;
-    console.log("try run use effect when selectedPost is not undefined ");
+    // console.log("try run use effect when selectedPost is not undefined ");
     getPostComments();
   }, [selectedPost]);
 

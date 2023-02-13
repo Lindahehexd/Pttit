@@ -79,28 +79,37 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
                   borderBottom="1px solid"
                   borderColor="gray.600"
                   p={3}
-                  fontWeight={600}
+                  fontWeight={400}
                   justifyContent="space-between"
+                  _hover={{bg:'gray.500'}}
                 >
-                  <Flex width="80%" align="center">
-                    {/* <Flex mr={3}>
+                
+                  <Flex width="85%" align="center">
+                    <Flex mr={3} w="20px">
                       <Text mr={2}>{index + 1}</Text>
-                    </Flex> */}
+                    </Flex>
                     <Flex align="center" width="80%">
                       {item.imageURL ? (
                         <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} alt="" />
                       ) : (
                         <Icon as={FaReddit} fontSize={30} color="yellow.300" mr={2} />
-                      )}
-                      <Box w='30%'>
-                      <Link href={`/r/${item.id}`}>
-                        <Box _hover={{ textDecoration: "underline" }}>{`${item.id}`}</Box>
-                      </Link>
-                      </Box>
-                 
 
-                      <Text ml={7}> {item.aboutCommunity}</Text>
-                      <Text ml={7}> @ {item.communityInfo}</Text>
+                    //     <Flex boxSize={8} bg="blue.800" mr={2} rounded="full" align='center'>
+                    //     <Image src= 'images/pttiticon.svg'></Image>
+                    //   </Flex>
+                      )}
+                      <Box w="30%">
+                        <Link href={`/r/${item.id}`}>
+                          <Box
+                            _hover={{ textDecoration: "underline"}}
+                            fontSize={{ base: "14px", md: "16px", lg: "20px" }}
+                          >{`${item.id}`}</Box>
+                        </Link>
+                      </Box>
+
+                      <Text ml={7} fontSize={{ base: "14px", md: "14px" }}>
+                        @ {item.communityInfo}
+                      </Text>
                     </Flex>
                   </Flex>
                   <Flex right="10px">
@@ -112,7 +121,7 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
                       }}
                       variant={isJoined ? "outline" : "solid"}
                     >
-                      {isJoined ? "Joined" : "Join"}
+                      {isJoined ? "已加入" : "加入"}
                     </Button>
                   </Flex>
                 </Flex>

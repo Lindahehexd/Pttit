@@ -6,12 +6,10 @@ import { auth } from "@/firebase/clientApp";
 import { useRecoilValue } from "recoil";
 import { communityState } from "@/atoms/communitiesAtom";
 
-type Props = {};
-
-const SubmitPostPage: React.FC<Props> = (props: Props) => {
+const SubmitPostPage = () => {
   const [user] = useAuthState(auth);
-  const communityStateValue = useRecoilValue(communityState);
-  console.log("123456", communityStateValue);
+  //   const communityStateValue = useRecoilValue(communityState);
+  //   console.log("123456", communityStateValue);
   return (
     <PageContentLayout>
       {/* left */}
@@ -24,7 +22,7 @@ const SubmitPostPage: React.FC<Props> = (props: Props) => {
           <NewPostForm
             user={user}
             // for showing the imgurl on the post  p6 2242
-            communityImageURL={communityStateValue.currentCommunity?.imageURL}
+            // communityImageURL={communityStateValue.currentCommunity?.imageURL}
           />
         )}
       </>

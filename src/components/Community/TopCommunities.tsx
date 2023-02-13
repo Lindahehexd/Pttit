@@ -2,7 +2,7 @@ import { Box, Button, Flex, Icon, Image, Skeleton, SkeletonCircle, Stack, Text }
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaReddit } from "react-icons/fa";
+import { RiEmotionFill } from "react-icons/ri";
 import { Community } from "../../atoms/communitiesAtom";
 import { firestore } from "../../firebase/clientApp";
 import useCommunityData from "../../hooks/useCommunityData";
@@ -90,7 +90,7 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
                         {item.imageURL ? (
                           <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} />
                         ) : (
-                          <Icon as={FaReddit} fontSize={30} color="yellow.300" mr={2} />
+                          <Icon as={RiEmotionFill} fontSize={25} color="gray.400" mr={2} />
                         )}
                         <span
                           style={{

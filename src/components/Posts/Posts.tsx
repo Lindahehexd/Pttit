@@ -36,7 +36,7 @@ const Posts = ({ communityData }: PostsProps) => {
         ...prev,
         posts: posts as Post[],
       }));
-      console.log("post123:", posts);
+    //   console.log("post123:", posts);
       setLoading(false);
     } catch (error: any) {
       console.log(error.message);

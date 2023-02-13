@@ -49,7 +49,7 @@ const About = ({ communityData }: AboutProps) => {
     setUploadingImage(false);
   };
 
-  console.log("communityData", communityData);
+//   console.log("communityData", communityData);
   return (
     <Box position="sticky" top="14px">
       {/* top */}
@@ -63,9 +63,6 @@ const About = ({ communityData }: AboutProps) => {
             <Flex flexGrow={1} maxWidth='300px'>
               <Text>
                {` 看板簡介:
-               asdasdasdasd
-               Asdasdasdasd
-               ASdasdasdasda
                ${communityData.aboutCommunity} `}  
               </Text>
             </Flex>

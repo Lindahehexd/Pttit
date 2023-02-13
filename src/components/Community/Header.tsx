@@ -1,10 +1,10 @@
-import React from "react";
 import { Box, Button, Flex, Icon, Text, Image } from "@chakra-ui/react";
 import { FaReddit } from "react-icons/fa";
 import { Community, communityState } from "../../atoms/communitiesAtom";
 // import useCommunityData from "../../hooks/useCommunityData";
 import { useSetRecoilState } from "recoil";
 import useCommunityData from "@/hooks/useCommunityData";
+import { RiEarthFill } from "react-icons/ri";
 
 type HeaderProps = {
   communityData: Community;
@@ -22,12 +22,12 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
   const isJoined = !!communityStateValue.mySnippets.find((item) => item.communityId === communityData.id);
 
   return (
-    <Flex direction="column" width="100%" height="146px">
-      <Box height="50%" bg="yellow.400" />
-      <Flex justifyContent="center" bg="gray.300" height="50%">
+    <Flex direction="column" width="100%" height="146px"  >
+      <Box height="50%" bg="black"/>
+      <Flex justifyContent="center" bg="gray.900" height="50%" >
         {/* maxW important  */}
         <Flex width="95%" maxW="860px" 
-        border="1px solid red"
+        // border="1px solid red"
         >
           {communityStateValue.currentCommunity?.imageURL ? (
             <Image
@@ -42,13 +42,13 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
             />
           ) : (
             <Icon
-              as={FaReddit}
+              as={RiEarthFill}
               fontSize={64}
               position="relative"
               top={-3}
               color="blue.500"
               border="5px solid white"
-              borderRadius="50%"
+              borderRadius="full"
               //look better with bg white
               bg="white"
             />
@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
 
           <Flex padding="10px 16px">
             <Flex direction="column" mr={6}>
-              <Text fontWeight={800} fontSize="16pt" color="blackAlpha.900">
+              <Text fontWeight={800} fontSize="16pt" color="gray.400">
                 {communityData.id} 
               </Text>
               <Text fontWeight={600} fontSize="10pt" color="gray.400">

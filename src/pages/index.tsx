@@ -3,10 +3,11 @@ import AllCommunities from "@/components/Community/AllCommunities";
 import PersonalHome from "@/components/Community/PersonalHome";
 import Premium from "@/components/Community/Premium";
 import TopCommunities from "@/components/Community/TopCommunities";
+import HomeLayout from "@/components/Layout/HomeLayout";
 import PageContentLayout from "@/components/Layout/PageContent";
 import { auth } from "@/firebase/clientApp";
 import useDirectory from "@/hooks/useDirectory";
-import { Stack } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -19,7 +20,8 @@ export default function Home() {
   }, []);
 
   return (
-    <PageContentLayout>
+    <HomeLayout>
+      {/* left */}
       <>
         <AllCommunities />
       </>
@@ -31,6 +33,6 @@ export default function Home() {
           <PersonalHome />
         </Stack>
       </>
-    </PageContentLayout>
+    </HomeLayout>
   );
 }

@@ -27,17 +27,9 @@ export const Button: ComponentStyleConfig = {
       },
     },
     outline: {
-      color: "blue.500",
+      color: "blue.200",
       border: "1px solid",
-      borderColor: "blue.500",
-    },
-    oauth: {
-      height: "34px",
-      border: "1px solid",
-      borderColor: "gray.300",
-      _hover: {
-        bg: "gray.50",
-      },
+      borderColor: "blue.600",
     },
   },
 };

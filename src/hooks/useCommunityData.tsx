@@ -25,6 +25,7 @@ const useCommunityData = () => {
 
     if (!user) {
       setAuthModalState({ open: true, view: "login" });
+      return
     }
 
     if (isJoined) {
@@ -124,7 +125,7 @@ const useCommunityData = () => {
           ...prev,
           mySnippets: snippets as CommunitySnippet[],
         }));
-        console.log("here is the data:", snippets);
+        // console.log("here is the data:", snippets);
         setLoading(false);
       } catch (error: any) {
         console.log(error);

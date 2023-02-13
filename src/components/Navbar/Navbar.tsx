@@ -6,6 +6,7 @@ import RightContent from "./RightContent/RightContent";
 import SearchInput from "./SearchInput";
 import Directory from "./Directory/Directory";
 import useDirectory from "@/hooks/useDirectory";
+import CurrentLocation from "./Directory/CurrentLocation";
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -20,6 +21,7 @@ const Navbar = () => {
         </Text>
       </Flex>
       {user && <Directory />}
+      <CurrentLocation/ >
       <SearchInput />
       <RightContent user={user} />
     </Flex>

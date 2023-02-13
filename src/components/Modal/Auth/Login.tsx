@@ -18,7 +18,7 @@ const Login = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     signInWithEmailAndPassword(loginForm.email, loginForm.password);
-    console.log(user);
+    // console.log(user);
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

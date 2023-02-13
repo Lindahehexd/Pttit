@@ -17,10 +17,9 @@ type CommunityPageProps = {
 };
 
 const CommunityPage = ({ communityData }: CommunityPageProps) => {
-
- const setCommunityStateValue = useSetRecoilState(communityState)
- // when render , pass the data to other pages 
- useEffect(() => {
+  const setCommunityStateValue = useSetRecoilState(communityState);
+  // when render , pass the data to other pages
+  useEffect(() => {
     setCommunityStateValue((prev) => ({
       ...prev,
       currentCommunity: communityData,
@@ -33,29 +32,23 @@ const CommunityPage = ({ communityData }: CommunityPageProps) => {
   if (!communityData) return <CommunityNotFound />;
   // communityData.id refer to the community namne
 
-
-
-
-
   return (
     <>
       <Header communityData={communityData} />
-      
       <PageContent>
         {/* child 1  ps . left */}
         <>
-        <CreatePostLink/>
-        <Posts communityData={communityData}/>
+          <CreatePostLink />
+          <Posts communityData={communityData} />
         </>
         {/* child 2  ps . right */}
         <>
-        <About communityData={communityData}/>
+          <About communityData={communityData} />
         </>
       </PageContent>
     </>
   );
 };
-
 
 // think of prebuilding the page
 // https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props

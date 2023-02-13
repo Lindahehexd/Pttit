@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
                 {communityData.id} 
               </Text>
               <Text fontWeight={600} fontSize="10pt" color="gray.400">
-                r/{communityData.id}
+                {communityData.communityInfo}
               </Text>
             </Flex>
             <Flex>
@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
                 onClick={() => onJoinLeaveCommunity(communityData, isJoined)}
                 // isLoading={loading}
               >
-                {isJoined ? "Joined" : "Join"}
+                {isJoined ? "已加入" : "加入"}
               </Button>
             </Flex>
           </Flex>

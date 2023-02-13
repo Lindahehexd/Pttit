@@ -2,7 +2,7 @@ import { signOut, User } from "firebase/auth";
 import { auth } from "@/firebase/clientApp";
 import { Menu, MenuButton, MenuList, MenuItem, Button, Box, Flex, Icon, Text, MenuDivider } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { FaRedditSquare } from "react-icons/fa";
+import { FaRedditSquare, FaSnowman } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
 import { IoSparkles } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
@@ -35,7 +35,7 @@ const UserMenu = ({ user }: MenuProps) => {
           <Flex align="center">
             {user ? (
               <>
-                <Icon fontSize={24} mr={1} color="gray.300" as={FaRedditSquare} />
+                <Icon fontSize={24} mr={1} color="gray.300" as={FaSnowman} />
                 <Text fontWeight={700}>{user?.displayName || user?.email?.split("@")[0]}</Text>
               </>
             ) : (
@@ -57,7 +57,7 @@ const UserMenu = ({ user }: MenuProps) => {
           <Flex align="center" fontWeight="bold">
             <Icon as={MdOutlineLogout} fontSize={20} mr={2} />
           </Flex>
-          Log out
+          登出
         </MenuItem>
       </MenuList>
     </Menu>

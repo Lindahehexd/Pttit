@@ -8,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { BsLink45Deg } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
 import { IoImageOutline } from "react-icons/io5";
+import { RiGhostSmileFill } from "react-icons/ri";
 
 const CreatePostLink: React.FC = () => {
   const router = useRouter();
@@ -40,7 +41,7 @@ const CreatePostLink: React.FC = () => {
         <Text>發文不會先登入嗎 費5</Text>
       ) : (
         <>
-          <Icon as={FaReddit} fontSize={36} color="yellow.300" mr={4} />
+          <Icon as={RiGhostSmileFill} fontSize={36} color="yellow.300" mr={4} />
           <Input
             placeholder="發表文章"
             fontSize="sm"

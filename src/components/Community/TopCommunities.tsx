@@ -2,7 +2,7 @@ import { Box, Button, Flex, Icon, Image, Skeleton, SkeletonCircle, Stack, Text }
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { RiEmotionFill } from "react-icons/ri";
+import { RiEarthFill, RiEmotionFill } from "react-icons/ri";
 import { Community } from "../../atoms/communitiesAtom";
 import { firestore } from "../../firebase/clientApp";
 import useCommunityData from "../../hooks/useCommunityData";
@@ -35,7 +35,7 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
   }, []);
 
   return (
-    <Flex direction="column" bg="gray.800" borderRadius={4} cursor="pointer" border="1px solid" borderColor="gray.600">
+    <Flex direction="column" bg="gray.900" borderRadius={4} border="1px solid" borderColor="gray.600">
       <Flex
         align="flex-end"
         color="white"
@@ -44,10 +44,10 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
         height="70px"
         borderRadius="4px 4px 0px 0px"
         fontWeight={600}
-        bgImage="url(/images/recCommsArt.png)"
+        bgImage="url(/images/8bitbg2.png)"
         backgroundSize="cover"
         bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)),
-          url('images/proffesor.jpg')"
+        url(/images/8bitbg2.png)"
       >
         熱門看板
       </Flex>
@@ -72,35 +72,39 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
             {communities.map((item, index) => {
               const isJoined = !!communityStateValue.mySnippets.find((snippet) => snippet.communityId === item.id);
               return (
-                <Link key={item.id} href={`/r/${item.id}`}>
-                  <Flex
-                    position="relative"
-                    align="center"
-                    fontSize="10pt"
-                    borderBottom="1px solid"
-                    borderColor="gray.600"
-                    p="10px 12px"
-                    fontWeight={600}
-                  >
-                    <Flex width="80%" align="center">
-                      <Flex width="15%">
-                        <Text mr={2}>{index + 1}</Text>
-                      </Flex>
+                <Flex
+                  bg="gray.900"
+                  position="relative"
+                  align="center"
+                  fontSize="10pt"
+                  borderBottom="1px solid"
+                  borderColor="gray.600"
+                  p="10px 12px"
+                  fontWeight={600}
+                  _hover={{ bg: "gray.600" }}
+                >
+                  <Flex width="80%" align="center">
+                    <Flex width="15%">
+                      <Text mr={2}>{index + 1}</Text>
+                    </Flex>
                       <Flex align="center" width="80%">
                         {item.imageURL ? (
                           <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} />
                         ) : (
-                          <Icon as={RiEmotionFill} fontSize={25} color="gray.400" mr={2} />
+                          <Icon as={RiEarthFill} fontSize={25} color="blue.400" mr={2} />
                         )}
-                        <span
-                          style={{
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                          }}
-                        >{`r/${item.id}`}</span>
+
+                    <Link key={item.id} href={`/r/${item.id}`}>
+
+                        <Text
+                           _hover={{ textDecoration: "underline"}}
+                        >
+                            
+                            {`r/${item.id}`}</Text>
+                    </Link>
+
                       </Flex>
-                    </Flex>
+
                     <Box position="absolute" right="10px">
                       <Button
                         height="22px"
@@ -111,11 +115,11 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
                         }}
                         variant={isJoined ? "outline" : "solid"}
                       >
-                        {isJoined ? "Joined" : "Join"}
+                        {isJoined ? "已加入" : "加入"}
                       </Button>
                     </Box>
                   </Flex>
-                </Link>
+                </Flex>
               );
             })}
           </>

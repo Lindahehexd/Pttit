@@ -15,14 +15,17 @@ const HomeLayout: React.FC<PageContentLayoutProps> = ({ children }) => {
       justify="center"
       p="16px 0px"
       mt={4}
+    //   bg='orange.800'
+      w='88%'
     >
       {/* Wrapper */}
       <Flex
         //   border="1px solid green"
-        w="100%"
-        maxW="1200px"
+        w='100%'
         justify="center"
         p="2"
+        // bg='teal'
+        opacity='0.9'
       >
         {/* L */}
         <Flex

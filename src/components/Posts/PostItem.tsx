@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { FaReddit } from "react-icons/fa";
 import Link from "next/link";
+import { RiEarthFill } from "react-icons/ri";
 
 export type PostItemContentProps = {
   post: Post;
@@ -152,7 +153,7 @@ const PostItem = ({
                 {post.communityImageURL ? (
                   <Image src={post.communityImageURL} borderRadius="full" fontSize="18px" mr={2} alt="" />
                 ) : (
-                  <Icon as={FaReddit} fontSize="18px" mr={1} color="blue.500" />
+                  <Icon as={RiEarthFill} fontSize="18px" mr={1} color="blue.500" />
                 )}
                 <Link href={`r/${post.communityId}`}>
                   <Text

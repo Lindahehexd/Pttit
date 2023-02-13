@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { FaReddit } from "react-icons/fa";
 import { GrAdd } from "react-icons/gr";
+import { RiEarthFill } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
 import { useRecoilValue } from "recoil";
 import MenuListItem from "./MenuListItem";
@@ -40,7 +41,7 @@ const Communities = () => {
           .map((snippet) => (
             <MenuListItem
               key={snippet.communityId}
-              icon={FaReddit}
+              icon={RiEarthFill}
               displayText={`r/${snippet.communityId}`}
               link={`/r/${snippet.communityId}`}
               iconColor={"blue.500"}
@@ -57,7 +58,7 @@ const Communities = () => {
         {mySnippets.map((snippet) => (
           <MenuListItem
             key={snippet.communityId}
-            icon={FaReddit}
+            icon={RiEarthFill}
             displayText={`r/${snippet.communityId}`}
             link={`/r/${snippet.communityId}`}
             iconColor={"blue.500"}

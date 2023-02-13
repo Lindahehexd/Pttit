@@ -25,21 +25,18 @@ const CurrentLocation = () => {
   }, [router.pathname]);
 
   return (
-    <Flex align="center" justify="space-between" w={{ base: "auto", lg: "150px" }}>
-      <Flex align="center">
+    <Flex align="center" justify="space-between"  bg='teal'>
+      <Flex align="center" >
         <Link href={`/r/${communityStateValue.currentCommunity?.id}/`}>
           {communityStateValue.currentCommunity?.id === "Home" ? (
-            ""
+            <Flex hidden></Flex>
           ) : (
-            <Text
-              fontSize="sm"
-              display={{ base: "none", lg: "flex" }}
-              fontWeight="bold"
-              _hover={{ textDecoration: "underline" }}
-              ml={1}
-            >
-              {`當前看板  > `} {communityStateValue.currentCommunity?.id}{" "}
-            </Text>
+            <Flex ml={3} align='center' >
+              <Text fontSize='sm'>{`看板 > `}</Text>
+              <Text display={{ base: "none", lg: "flex" }} _hover={{ textDecoration: "underline" }}>
+                {communityStateValue.currentCommunity?.id}{" "}
+              </Text>
+            </Flex>
           )}
         </Link>
       </Flex>

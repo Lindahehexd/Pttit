@@ -2,6 +2,7 @@ import useDirectory from "@/hooks/useDirectory";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Flex, Icon, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { AiFillHeart } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
 import { TiHome } from "react-icons/ti";
@@ -9,7 +10,7 @@ import Communities from "./Communities";
 
 const Directory = () => {
   const { directoryState, toggleMenuOpen } = useDirectory();
-  
+
   return (
     <Menu>
       <MenuButton
@@ -19,9 +20,9 @@ const Directory = () => {
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
         mx={2}
       >
-        <Flex align="center" justify="space-between" w={{ base: "auto", lg: "150px" }}>
+        <Flex align="center">
           <Flex align="center">
-            {directoryState.selectedMenuItem.imageURL ? (
+            {/* {directoryState.selectedMenuItem.imageURL ? (
               <Image src={directoryState.selectedMenuItem.imageURL} borderRadius="full" boxSize="24px" mr={2} alt="" />
             ) : (
               <Icon
@@ -30,22 +31,19 @@ const Directory = () => {
                 as={directoryState.selectedMenuItem.icon}
                 color={directoryState.selectedMenuItem.iconColor}
               />
-            )}
+            )} */}
             {/* <Icon fontSize="24" mr={{ base: 1, md: 2 }} as={TiHome} /> */}
+            <Icon as={AiFillHeart} fontSize="20" color="pink.500" mr={1} />
             <Text fontSize="sm" display={{ base: "none", lg: "flex" }} fontWeight="bold">
               {/* Home will be dynamic  */}
-              {directoryState.selectedMenuItem.displayText}
+              {/* {directoryState.selectedMenuItem.displayText} */}
+              建立/收藏
             </Text>
           </Flex>
-          <ChevronDownIcon />
+          <ChevronDownIcon ml={1} />
         </Flex>
       </MenuButton>
       <MenuList>
-        {/* <MenuItem _hover={{ bg: "blue.500", color: "white" }}>
-          <Flex align="center" fontWeight="bold">
-            <Icon as={CgProfile} fontSize={20} mr={2} />
-          </Flex>
-        </MenuItem> */}
         <Communities />
         <MenuDivider />
       </MenuList>

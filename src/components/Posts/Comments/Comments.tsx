@@ -110,7 +110,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
         orderBy("createdAt", "desc")
       );
 
-    //   console.log("selector id", selectedPost?.id);
+      //   console.log("selector id", selectedPost?.id);
 
       //fetch the data from the db
 
@@ -122,8 +122,8 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
         ...doc.data(),
       }));
       setComments(comments as Comment[]);
-    //   console.log("try get doc", commentDocs.docs);
-    //   console.log("try get commnet", comments);
+      //   console.log("try get doc", commentDocs.docs);
+      //   console.log("try get commnet", comments);
     } catch (error: any) {
       console.log("getPostComments error", error.message);
     }
@@ -154,7 +154,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
               <Spinner size="xl" />
             </Center>
              */}
-      {[0, 1, 2].map((item) => (
+            {[0, 1, 2].map((item) => (
               <Box key={item} padding="2" bg="gray.800">
                 <SkeletonText mt="4" noOfLines={2} spacing="4" />
               </Box>
@@ -162,19 +162,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
           </>
         ) : (
           <>
-            {!!comments.length ? (
-              <>
-                {comments.map((comment: Comment) => (
-                  <CommentsItem
-                    key={comment.id}
-                    comment={comment}
-                    onDeleteComment={onDeleteComment}
-                    loadingDelete={false}
-                    userId={user?.uid}
-                  />
-                ))}
-              </>
-            ) : (
+            {comments.length === 0 ? (
               <Flex
                 direction="column"
                 justify="center"
@@ -187,6 +175,18 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
                   尚未有人留言
                 </Text>
               </Flex>
+            ) : (
+              <>
+                {comments.map((comment: Comment) => (
+                  <CommentsItem
+                    key={comment.id}
+                    comment={comment}
+                    onDeleteComment={onDeleteComment}
+                    loadingDelete={false}
+                    userId={user?.uid}
+                  />
+                ))}
+              </>
             )}
           </>
         )}

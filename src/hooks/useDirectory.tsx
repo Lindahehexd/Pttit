@@ -3,6 +3,7 @@ import { defaultMenuItem, DirectoryMenuItem, directoryMenuState } from "@/atoms/
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { FaReddit } from "react-icons/fa";
+import { RiEarthFill } from "react-icons/ri";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 const useDirectory = () => {
@@ -43,7 +44,7 @@ const useDirectory = () => {
           selectedMenuItem: {
             displayText: `r/${currentCommunity?.id}`,
             link: `r/${currentCommunity?.id}`,
-            icon: FaReddit,
+            icon: RiEarthFill,
             iconColor: "blue.500",
             imageURL: currentCommunity?.imageURL,
           },

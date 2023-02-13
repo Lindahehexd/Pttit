@@ -20,19 +20,21 @@ export default function Home() {
   }, []);
 
   return (
-    <HomeLayout>
-      {/* left */}
-      <>
-        <AllCommunities />
-      </>
-      {/* right */}
-      <>
-        <Stack spacing={7}>
-          <TopCommunities />
-          <Premium />
-          <PersonalHome />
-        </Stack>
-      </>
-    </HomeLayout>
+    <Flex align='center' justify='center' bgImage="url(/images/8bitbg1.jpg)" backgroundSize='cover' >
+      <HomeLayout>
+        {/* left */}
+        <>
+          <AllCommunities />
+        </>
+        {/* right */}
+        <>
+          <Stack spacing={7}>
+            <TopCommunities />
+            <Premium />
+            <PersonalHome />
+          </Stack>
+        </>
+      </HomeLayout>
+    </Flex>
   );
 }

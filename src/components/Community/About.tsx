@@ -9,8 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { FaReddit } from "react-icons/fa";
-import { RiCakeLine } from "react-icons/ri";
+import { RiCakeLine, RiEarthFill } from "react-icons/ri";
 import { useSetRecoilState } from "recoil";
 
 type AboutProps = {
@@ -98,7 +97,7 @@ const About = ({ communityData }: AboutProps) => {
             <>
               <Divider />
               <Stack spacing={1} fontSize="10px">
-                <Text fontWeight={600}> Admin</Text>
+                <Text fontWeight={600}> 您是本版版主</Text>
                 <Flex align="center" justify="space-between">
                   {selectedFile && uploadingImage ? (
                     <Spinner />
@@ -118,7 +117,7 @@ const About = ({ communityData }: AboutProps) => {
                   {selectedFile ? (
                     <Image src={selectedFile} borderRadius="full" boxSize="40px" alt="" />
                   ) : (
-                    <Icon as={FaReddit} fontSize={40} color="brand.100" mr={2} />
+                    <Icon as={RiEarthFill} fontSize={40} color="brand.100" mr={2} />
                   )}
                 </Flex>
                 {/* check if the img is uplaoded or not  */}

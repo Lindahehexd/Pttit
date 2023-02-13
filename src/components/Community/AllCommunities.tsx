@@ -2,7 +2,7 @@ import { Box, Button, Flex, Icon, Image, Skeleton, SkeletonCircle, Stack, Text }
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaReddit } from "react-icons/fa";
+import { RiEarthFill } from "react-icons/ri";
 import { Community } from "../../atoms/communitiesAtom";
 import { firestore } from "../../firebase/clientApp";
 import useCommunityData from "../../hooks/useCommunityData";
@@ -35,7 +35,7 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
   }, []);
 
   return (
-    <Flex direction="column" bg="gray.800" borderRadius={4} border="1px solid" borderColor="gray.600">
+    <Flex direction="column" bg="gray.900" borderRadius={4} border="1px solid" borderColor="gray.600">
       <Flex
         align="flex-end"
         color="white"
@@ -44,10 +44,10 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
         height="70px"
         borderRadius="4px 4px 0px 0px"
         fontWeight={600}
-        bgImage="url(/images/proffesor.jpg)"
-        backgroundSize="cover"
+        bgImage="url(/images/8bithome.webp)"
+        backgroundSize="contain"
         bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)),
-          url('images/proffesor.jpg')"
+          url('images/8bitbg2.png')"
       >
         <Text>所有看板</Text>
       </Flex>
@@ -81,7 +81,7 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
                   p={3}
                   fontWeight={400}
                   justifyContent="space-between"
-                  _hover={{bg:'gray.500'}}
+                  _hover={{bg:'gray.600'}}
                 >
                 
                   <Flex width="85%" align="center">
@@ -92,7 +92,7 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
                       {item.imageURL ? (
                         <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} alt="" />
                       ) : (
-                        <Icon as={FaReddit} fontSize={30} color="yellow.300" mr={2} />
+                        <Icon as={RiEarthFill} fontSize={30} color="blue.400" mr={2} />
 
                     //     <Flex boxSize={8} bg="blue.800" mr={2} rounded="full" align='center'>
                     //     <Image src= 'images/pttiticon.svg'></Image>

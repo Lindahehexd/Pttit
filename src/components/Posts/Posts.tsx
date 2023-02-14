@@ -2,10 +2,11 @@ import { Community } from "@/atoms/communitiesAtom";
 import { Post } from "@/atoms/postAtom";
 import { auth, firestore } from "@/firebase/clientApp";
 import usePosts from "@/hooks/usePosts";
-import { Stack } from "@chakra-ui/react";
+import { Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { RiGhostFill } from "react-icons/ri";
 import PostItem from "./PostItem";
 import PostLoader from "./PostLoader";
 
@@ -17,7 +18,6 @@ type PostsProps = {
 const Posts = ({ communityData }: PostsProps) => {
   const [user] = useAuthState(auth);
   const [loading, setLoading] = useState(false);
-
   const { postStateValue, setPostStateValue, onVote, onSelectPost, onDeletePost } = usePosts();
 
   const getPosts = async () => {
@@ -36,7 +36,7 @@ const Posts = ({ communityData }: PostsProps) => {
         ...prev,
         posts: posts as Post[],
       }));
-    //   console.log("post123:", posts);
+      //   console.log("post123:", posts);
       setLoading(false);
     } catch (error: any) {
       console.log(error.message);
@@ -50,6 +50,15 @@ const Posts = ({ communityData }: PostsProps) => {
 
   return (
     <>
+      {postStateValue.posts.length === 0 && (
+        <Flex direction="column" justify="center" align="center" border="1px solid" borderColor="gray.600" borderRadius='xl' p={20}>
+            <Icon as={RiGhostFill} fontSize={150} color='gray.500' opacity='0.5'/>
+          <Text fontWeight={700} color='gray.500'>
+            Woo～成為第一個發文的人吧！
+          </Text>
+        </Flex>
+      )}
+
       {loading ? (
         <PostLoader />
       ) : (
@@ -61,7 +70,7 @@ const Posts = ({ communityData }: PostsProps) => {
               post={item}
               userIsCreator={user?.uid === item.creatorId}
               // post the value to the post compoments
-              userVoteValue={postStateValue.postVotes.find((vote)=> vote.postId === item.id)?.voteValue}
+              userVoteValue={postStateValue.postVotes.find((vote) => vote.postId === item.id)?.voteValue}
               onVote={onVote}
               onDeletePost={onDeletePost}
               onSelectPost={onSelectPost}

@@ -46,6 +46,10 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   const [createLoading, setCreateLoading] = useState(false);
   const setPostState = useSetRecoilState(postState);
 
+  
+  
+
+
   const onCreateComment = async () => {
     setCreateLoading(true);
     try {
@@ -138,7 +142,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
 
   return (
     <Box bg="gray.700" borderRadius="0px 0px 4px 4px" p={2}>
-      <Flex direction="column" pl={10} pr={4} mb={6} fontSize="10pt" w="100%">
+      <Flex direction="column" pl={10} pr={4} mb={6} fontSize="10pt" w="100%" bg="white">
         <CommentInput
           commentText={commentText}
           setCommentText={setCommentText}
@@ -147,7 +151,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
           onCreateComment={onCreateComment}
         />
       </Flex>
-      <Stack spacing={6} p={2}>
+      <Stack spacing={6} p={2} >
         {fetchLoading ? (
           <>
             {/* <Center>
@@ -177,15 +181,17 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
               </Flex>
             ) : (
               <>
-                {comments.map((comment: Comment) => (
-                  <CommentsItem
-                    key={comment.id}
-                    comment={comment}
-                    onDeleteComment={onDeleteComment}
-                    loadingDelete={false}
-                    userId={user?.uid}
-                  />
-                ))}
+                <Flex w="100%"  display="inline-block">
+                  {comments.map((comment: Comment) => (
+                    <CommentsItem
+                      key={comment.id}
+                      comment={comment}
+                      onDeleteComment={onDeleteComment}
+                      loadingDelete={false}
+                      userId={user?.uid}
+                    />
+                  ))}
+                </Flex>
               </>
             )}
           </>

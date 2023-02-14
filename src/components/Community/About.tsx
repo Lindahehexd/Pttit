@@ -130,7 +130,7 @@ const About = ({ communityData }: AboutProps) => {
                   {selectedFile ? (
                     <Image src={selectedFile} borderRadius="full" boxSize="40px" alt="" />
                   ) : (
-                    <Icon as={RiEarthFill} fontSize={40} color="brand.100" mr={2} />
+                    <Icon as={RiEarthFill} fontSize={40} color="blue.500" mr={2} />
                   )}
                 </Flex>
                 {/* check if the img is uplaoded or not  */}

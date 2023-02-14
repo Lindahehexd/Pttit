@@ -50,16 +50,26 @@ const Posts = ({ communityData }: PostsProps) => {
 
   return (
     <>
-      {postStateValue.posts.length === 0 && (
-        <Flex direction="column" justify="center" align="center" border="1px solid" borderColor="gray.600" borderRadius='xl' p={20}>
-            <Icon as={RiGhostFill} fontSize={150} color='gray.500' opacity='0.5'/>
-          <Text fontWeight={700} color='gray.500'>
+      {postStateValue.posts.length === 0 && !loading &&(
+        <Flex
+          direction="column"
+          justify="center"
+          align="center"
+          border="1px solid"
+          borderColor="gray.600"
+          borderRadius="xl"
+          p={20}
+        >
+          <Icon as={RiGhostFill} fontSize={150} color="gray.500" opacity="0.5" />
+          <Text fontWeight={700} color="gray.500">
             Woo～成為第一個發文的人吧！
           </Text>
         </Flex>
       )}
 
-      {loading ? (
+      {/* 如果沒文章情況下loading 就不要跑出skeleton > 所以當loading時且有文章時 就跑skeleton出來 > 沒loading後就會跑出文章 */}
+
+      {loading && postStateValue.posts.length > 0 ? (
         <PostLoader />
       ) : (
         <Stack>

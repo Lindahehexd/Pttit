@@ -1,5 +1,5 @@
 import AuthButtons from "@/components/Navbar/RightContent/AuthButtons";
-import { Button, Flex, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import React, { useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
@@ -15,6 +15,9 @@ type CommentInputProps = {
 };
 
 const CommentInput = ({ commentText, setCommentText, createLoading, user, onCreateComment }: CommentInputProps) => {
+  const maxLength = 30;
+  const remainingChars = maxLength - commentText.length;
+
   const [tabIndex, setTabIndex] = useRecoilState<number>(atomindex);
 
   const colors = useColorModeValue(["gray.200", "green.500", "red.800"], ["gray.800", "green.500", "red.600"]);
@@ -39,12 +42,14 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
             </TabList>
             <TabPanels p={1}>
               <Textarea
+                maxLength={45}
                 focusBorderColor="gray.600"
                 _focus={{ bg: "gray.800" }}
                 bg="black"
                 value={commentText}
                 onChange={(event) => setCommentText(event.target.value)}
               ></Textarea>
+              <Box> 還可輸入 {remainingChars} 字 </Box>
             </TabPanels>
           </Tabs>
           {/* 送出 */}

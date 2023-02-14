@@ -46,13 +46,17 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   const [createLoading, setCreateLoading] = useState(false);
   const setPostState = useSetRecoilState(postState);
 
-  
-  
-
-
   const onCreateComment = async () => {
-    setCreateLoading(true);
+    //0215新增 如果用戶發送空白訊息要回傳錯誤
+    if (commentText === "" || commentText.startsWith(" ")) {
+      alert("請勿發送空白訊息");
+      setCommentText("");
+      return;
+    }
+
     try {
+      setCreateLoading(true);
+
       const batch = writeBatch(firestore);
       //create the documents
       const commentDocRef = doc(collection(firestore, "comments"));
@@ -151,7 +155,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
           onCreateComment={onCreateComment}
         />
       </Flex>
-      <Stack spacing={6} p={2} >
+      <Stack spacing={6} p={2}>
         {fetchLoading ? (
           <>
             {/* <Center>
@@ -181,7 +185,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
               </Flex>
             ) : (
               <>
-                <Flex w="100%"  display="inline-block">
+                <Flex w="100%" display="inline-block">
                   {comments.map((comment: Comment) => (
                     <CommentsItem
                       key={comment.id}

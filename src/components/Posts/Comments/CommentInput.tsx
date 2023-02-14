@@ -17,6 +17,8 @@ type CommentInputProps = {
 
 const CommentInput = ({ commentText, setCommentText, createLoading, user, onCreateComment }: CommentInputProps) => {
   const [tabIndex, setTabIndex] = useRecoilState<number>(atomindex);
+  const maxLength = 45;
+  const remainingChars = maxLength - commentText.length;
 
   const colors = useColorModeValue(["gray.200", "green.500", "red.800"], ["gray.800", "green.500", "red.600"]);
   const bg = colors[tabIndex];
@@ -33,17 +35,22 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
           </Text>
           {/* TAB */}
           <Tabs onChange={(tabIndex) => setTabIndex(tabIndex)} bg="gray.800">
-            <Text fontSize='lg' fontWeight={700} p={4}>推文</Text>
+            <Text fontSize="lg" fontWeight={700} pt={3} px={4}>
+              推文
+            </Text>
             <TabList>
               <Tab color="white">
-                <Icon as={AiFillMessage}/>
-                只加註解</Tab>
+                <Icon as={AiFillMessage} />
+                只加註解
+              </Tab>
               <Tab color="white">
-              <Icon as={AiFillLike} color='green.500'/>
-                值得推薦</Tab>
+                <Icon as={AiFillLike} color="green.500" />
+                值得推薦
+              </Tab>
               <Tab color="white">
-              <Icon as={AiFillDislike} color='red.500'/>
-                給他噓聲</Tab>
+                <Icon as={AiFillDislike} color="red.500" />
+                給他噓聲
+              </Tab>
             </TabList>
             <TabPanels p={1}>
               <Textarea
@@ -52,7 +59,9 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
                 bg="black"
                 value={commentText}
                 onChange={(event) => setCommentText(event.target.value)}
+                maxLength={45}
               ></Textarea>
+              <Flex> 還可輸入 {remainingChars} 字 </Flex>
             </TabPanels>
           </Tabs>
           {/* 送出 */}

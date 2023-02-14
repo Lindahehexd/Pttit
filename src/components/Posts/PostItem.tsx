@@ -80,12 +80,14 @@ const PostItem = ({
 
   return (
     //outer
+    // PO文
+
     <Flex
       border="1px solid"
-      bg="gray.700"
+      bg="gray.800"
       borderColor="gray.700"
       borderRadius={4}
-      _hover={{ borderColor: singlePostPage ? "none" : "gray.700" }}
+      _hover={{ borderColor: singlePostPage ? "none" : "gray.600", bg: !singlePostPage && "gray.700" }}
       cursor={singlePostPage ? "unset" : "pointer"}
       // check if truthy
       onClick={() => onSelectPost && onSelectPost(post)}
@@ -180,7 +182,7 @@ const PostItem = ({
           </Text>
           <Text>{post.body}</Text>
           {post.imageURL && (
-            <Flex>
+            <Flex justify='center'>
               {imgloading && <Skeleton h="200px" w="100%" borderRadius={4} />}
               <Image
                 src={post.imageURL}
@@ -191,19 +193,19 @@ const PostItem = ({
               />
             </Flex>
           )}
-          
 
           {/* 留言按鈕區 */}
           <Flex
-            // bg="teal.500"
+          // bg="teal.500"
           >
             {/* bot item 1  */}
-            <Flex p="8px 10px" borderRadius={4} _hover={{ bg: "gray.600" }} cursor="pointer" align="center"  mt={2}>
+            <Flex p="8px 10px" borderRadius={4} _hover={{ bg: "gray.600" }} cursor="pointer" align="center" mt={2}>
               <Icon mr={2} as={BsChat} />
               <Text fontSize="sm">{post.numberOfComment}</Text>
             </Flex>
             {/* bot item 2  */}
-            <Flex mt={2}
+            <Flex
+              mt={2}
               p="8px 10px"
               borderRadius={4}
               _hover={{ bg: "gray.600" }}
@@ -216,7 +218,8 @@ const PostItem = ({
             </Flex>
             {/* bot item 4 when you are post author  */}
             {userIsCreator && (
-              <Flex mt={2}
+              <Flex
+                mt={2}
                 p="8px 10px"
                 borderRadius={4}
                 _hover={{ bg: "gray.600" }}

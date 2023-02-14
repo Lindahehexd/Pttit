@@ -1,10 +1,11 @@
 import AuthButtons from "@/components/Navbar/RightContent/AuthButtons";
-import { Box, Button, Flex, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
+import { Button, Flex, Icon, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import React, { useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 import { atomindex } from "@/atoms/commentAtom";
+import { AiFillDislike, AiFillLike, AiFillMessage } from "react-icons/ai";
 
 type CommentInputProps = {
   commentText: string;
@@ -15,9 +16,6 @@ type CommentInputProps = {
 };
 
 const CommentInput = ({ commentText, setCommentText, createLoading, user, onCreateComment }: CommentInputProps) => {
-  const maxLength = 30;
-  const remainingChars = maxLength - commentText.length;
-
   const [tabIndex, setTabIndex] = useRecoilState<number>(atomindex);
 
   const colors = useColorModeValue(["gray.200", "green.500", "red.800"], ["gray.800", "green.500", "red.600"]);
@@ -35,21 +33,26 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
           </Text>
           {/* TAB */}
           <Tabs onChange={(tabIndex) => setTabIndex(tabIndex)} bg="gray.800">
+            <Text fontSize='lg' fontWeight={700} p={4}>推文</Text>
             <TabList>
-              <Tab color="white">只加註解</Tab>
-              <Tab color="white">值得推薦</Tab>
-              <Tab color="white">給他噓聲</Tab>
+              <Tab color="white">
+                <Icon as={AiFillMessage}/>
+                只加註解</Tab>
+              <Tab color="white">
+              <Icon as={AiFillLike} color='green.500'/>
+                值得推薦</Tab>
+              <Tab color="white">
+              <Icon as={AiFillDislike} color='red.500'/>
+                給他噓聲</Tab>
             </TabList>
             <TabPanels p={1}>
               <Textarea
-                maxLength={45}
                 focusBorderColor="gray.600"
                 _focus={{ bg: "gray.800" }}
                 bg="black"
                 value={commentText}
                 onChange={(event) => setCommentText(event.target.value)}
               ></Textarea>
-              <Box> 還可輸入 {remainingChars} 字 </Box>
             </TabPanels>
           </Tabs>
           {/* 送出 */}

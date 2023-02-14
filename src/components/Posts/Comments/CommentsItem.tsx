@@ -25,36 +25,34 @@ export type CommentsItemProp = {
 
 const CommentsItem = ({ comment, onDeleteComment, loadingDelete, userId }: CommentsItemProp) => {
   return (
-    <Flex bg="gray.400" fontSize={{ base: '9px', md: '10px', lg: '16px' }} my={1}>
+    <Flex bg="gray.400" fontSize={{ base: "9px", md: "10px", lg: "16px" }} my={1}>
       {/* container */}
-        {/* icon */}
 
-        <Flex bg="pink.700">
-          {comment.commentTabIndex === 0 && <Icon ml={2} as={BsArrowRight} fontSize={22} color="gray.300" />}
-          {comment.commentTabIndex === 1 && <Icon ml={2} as={AiFillLike} color="green" fontSize={22} />}
-          {comment.commentTabIndex === 2 && <Icon ml={2} as={AiFillDislike} color="red" fontSize={22} />}
-        </Flex>
-        {/* id */}
-        <Flex bg='teal.500'>
-          <Text ml={2} color="yellow.400" >
-            {comment.creatorDisplayText}:
-          </Text>
-        </Flex>
+      {/* icon */}
+      <Flex bg="pink.700">
+        {comment.commentTabIndex === 0 && <Icon ml={2} as={BsArrowRight} fontSize={22} color="gray.300" />}
+        {comment.commentTabIndex === 1 && <Icon ml={2} as={AiFillLike} color="green" fontSize={22} />}
+        {comment.commentTabIndex === 2 && <Icon ml={2} as={AiFillDislike} color="red" fontSize={22} />}
+      </Flex>
 
-        {/* mesg */}
+      {/* id */}
+      <Flex bg="teal.500">
+        <Text ml={2} color="yellow.400">
+          {comment.creatorDisplayText}:
+        </Text>
+      </Flex>
 
-        <Flex bg='blue.600' flexGrow={1}>
-          <Text ml={2} color="yellow.400">
-            {comment.text}
-            {/* asdasdas dasddddddddddd，ddddddd dddddddd dddddddddddd ddddddd，dddddddddddddddd，dddddddddddddddddddddddd */}
-          </Text>
-        </Flex>
+      {/* mesg */}
+      <Flex bg="blue.600" flexGrow={1}>
+        <Text ml={2} color="yellow.400">
+          {comment.text}
+        </Text>
+      </Flex>
 
-        {/* time  */}
-        <Box bg='yellow.700' minW='75px'>
-          <Text>{moment(new Date(comment.createdAt.seconds * 1000)).format("M/D HH:mm")}</Text>
-        </Box>
-
+      {/* time  */}
+      <Box bg="yellow.700" minW="75px">
+        <Text>{moment(new Date(comment.createdAt.seconds * 1000)).format("M/D HH:mm")}</Text>
+      </Box>
 
       {/* <Stack w="100%" align="center" bg='blue'>
 
@@ -86,7 +84,6 @@ const CommentsItem = ({ comment, onDeleteComment, loadingDelete, userId }: Comme
         )}
       </Stack>
     </Flex>
-    
   );
 };
 export default CommentsItem;

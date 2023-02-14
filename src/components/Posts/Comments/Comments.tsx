@@ -142,7 +142,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
 
   return (
     <Box bg="gray.700" borderRadius="0px 0px 4px 4px" p={2}>
-      <Flex direction="column" pl={10} pr={4} mb={6} fontSize="10pt" w="100%" bg="white">
+      <Flex direction="column" pl={10} pr={4} mb={6} fontSize="10pt" w="100%" bg="blue">
         <CommentInput
           commentText={commentText}
           setCommentText={setCommentText}

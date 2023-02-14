@@ -1,5 +1,7 @@
+import { authModalState } from "@/atoms/authModalAtom";
 import { Community, communityState } from "@/atoms/communitiesAtom";
 import { auth, firestore, storage } from "@/firebase/clientApp";
+import useDirectory from "@/hooks/useDirectory";
 import useSelectFile from "@/hooks/useSelectFile";
 import { Flex, Box, Text, Stack, Divider, Icon, Button, Image, Spinner, Input } from "@chakra-ui/react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -22,7 +24,20 @@ const About = ({ communityData }: AboutProps) => {
   const selectedFileRef = useRef<HTMLInputElement>(null);
   const { selectedFile, setSelectedFile, onSelectFile } = useSelectFile();
   const [uploadingImage, setUploadingImage] = useState(false);
+  const setAuthModalState = useSetRecoilState(authModalState);
   const setCommunityStateValue = useSetRecoilState(communityState);
+
+  const onAbout = () => {
+    const { communityId } = router.query;
+    if (!user) {
+      setAuthModalState({ open: true, view: "login" });
+      return;
+    }
+    // Could check for user to open auth modal before redirecting to submit
+    if (communityId) {
+      router.push(`/r/${router.query.communityId}/submit`);
+    }
+  };
 
   const onUploadImg = async () => {
     if (!selectedFile) return;
@@ -48,7 +63,7 @@ const About = ({ communityData }: AboutProps) => {
     setUploadingImage(false);
   };
 
-//   console.log("communityData", communityData);
+  //   console.log("communityData", communityData);
   return (
     <Box position="sticky" top="14px">
       {/* top */}
@@ -59,10 +74,10 @@ const About = ({ communityData }: AboutProps) => {
       <Flex direction="column" p={3} bg={"whiteAlpha.200"} borderRadius="0px 0px 4px 4px">
         <Stack>
           <Flex w="100%" p={2}>
-            <Flex flexGrow={1} maxWidth='300px'>
+            <Flex flexGrow={1} maxWidth="300px">
               <Text>
-               {` 看板簡介:
-               ${communityData.aboutCommunity} `}  
+                {` 看板簡介:
+               ${communityData.aboutCommunity} `}
               </Text>
             </Flex>
           </Flex>
@@ -87,11 +102,9 @@ const About = ({ communityData }: AboutProps) => {
             </Text>
           </Flex>
           {/* link button */}
-          <Link href={`/r/${router.query.communityId}/submit`}>
-            <Button mt={2} h="38px" w="100%">
+            <Button mt={2} h="38px" w="100%" onClick={onAbout}>
               發帖
             </Button>
-          </Link>
           {/* if you are admin */}
           {user?.uid === communityData.creatorId && (
             <>

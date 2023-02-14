@@ -31,7 +31,7 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
             <span style={{ color: "#3182CE" }}>{user?.email?.split("@")[0]}</span> 發表你的看法
           </Text>
           {/* TAB */}
-          <Tabs onChange={(tabIndex) => setTabIndex(tabIndex)} bg='gray.800'>
+          <Tabs onChange={(tabIndex) => setTabIndex(tabIndex)} bg="gray.800">
             <TabList>
               <Tab color="white">只加註解</Tab>
               <Tab color="white">值得推薦</Tab>
@@ -60,49 +60,13 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
           </Flex>
         </Flex>
       ) : (
-        <Flex align="center" justify="space-between" borderRadius={2} border="1px solid" borderColor="gray.100" p={4}>
+        <Flex align="center" justify="space-between" borderRadius={2} border="1px solid" borderColor="gray.500" p={4}>
           <Text fontWeight={600}>推文前請先登入</Text>
-          <AuthButtons />
+          <Flex>
+            <AuthButtons />
+          </Flex>
         </Flex>
       )}
-      {/* 
-      {user ? (
-        <>
-          <Text mb={1}>
-            <span style={{ color: "#3182CE" }}>{user?.email?.split("@")[0]}</span> 發表你的看法
-          </Text>
-          <Textarea
-            value={commentText}
-            onChange={(event) => setCommentText(event.target.value)}
-            // placeholder=""。
-            fontSize="10pt"
-            borderRadius={4}
-            minHeight="120px"
-            _placeholder={{ color: "gray.500" }}
-            _focus={{
-              outline: "none",
-              //   bg: "white",
-              border: "1px solid black",
-            }}
-          />
-
-          <Flex bottom="1px" justify="flex-end" bg="gray.500" p="6px 8px" borderRadius="0px 0px 4px 4px">
-            <Button
-              height="26px"
-              disabled={!commentText.length}
-              isLoading={createLoading}
-              onClick={() => onCreateComment(commentText)}
-            >
-              送出
-            </Button>
-          </Flex>
-        </>
-      ) : (
-        <Flex align="center" justify="space-between" borderRadius={2} border="1px solid" borderColor="gray.100" p={4}>
-          <Text fontWeight={600}>推文前請先登入</Text>
-          <AuthButtons />
-        </Flex>
-      )} */}
     </Flex>
   );
 };

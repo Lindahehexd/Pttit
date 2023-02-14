@@ -27,7 +27,6 @@ const AuthButtons = () => {
       >
         註冊
       </Button>
-      <SwitchThemeButton />
     </>
   );
 };

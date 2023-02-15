@@ -9,7 +9,6 @@ import {
   ModalCloseButton,
   Box,
   Button,
-  useDisclosure,
   Text,
   Input,
   Stack,
@@ -17,11 +16,10 @@ import {
   Flex,
   Icon,
 } from "@chakra-ui/react";
-import { doc, getDoc, runTransaction, serverTimestamp, setDoc, Transaction } from "firebase/firestore";
+import { doc, runTransaction, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { BsFillEyeFill, BsPersonFill } from "react-icons/bs";
-import { HiLockClosed } from "react-icons/hi";
+import { BsPersonFill } from "react-icons/bs";
 import { useRouter } from "next/router";
 
 type CreateCommunityProps = {
@@ -51,13 +49,11 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
   const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 21) return;
     setCommunitiesInfo(e.target.value);
-    setRemain(21 - e.target.value.length);
   };
 
   const handleChange3 = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 21) return;
     setAboutCommunity(e.target.value);
-    setRemain(21 - e.target.value.length);
   };
 
   const typeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +62,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
 
   const handleCommunity = async () => {
     if (error) setError("");
-    const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    const format = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/;
     if (format.test(communities) || communities.length < 3) {
       setError("看板名稱字數請介於3~21字，不得輸入任何符號，且只允許輸入字母、數字、及下劃線。");
       return;
@@ -112,20 +108,21 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
     <Modal isOpen={open} onClose={handleClose} size="lg">
       {/*  */}
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg='gray.700'>
         <ModalHeader display="flex" flexDirection="column" fontSize="lg" p={3}>
           建立看板
         </ModalHeader>
         <Box px={3}>
           <ModalCloseButton />
-          <ModalBody display="flex" flexDirection="column" p="10px 0px" border="1px solid red">
+          <ModalBody display="flex" flexDirection="column" p="10px 0px">
+            {/* 看板名稱 */}
             <Text fontWeight="bold">看板名稱</Text>
-            <Text fontSize="sm">看板名稱請使用英文大小寫，設定完成後將無法修改</Text>
+            <Text fontSize="sm" color='gray.400'>看板名稱請使用英文大小寫，設定完成後將無法修改</Text>
             <Text position="relative" top="28px" left="10px" w="20px" color="gray.400">
               r/
             </Text>
             <Input position="relative" value={communities} size="sm" pl="22px" onChange={handleChange} />
-            <Text fontSize="sm" color={remain === 0 ? "red" : "gray.500"}>
+            <Text fontSize="sm" color={remain === 0 ? "red" : "gray.400"}>
               剩餘 {remain} 個字符
             </Text>
             <Text color="red.400" p={1} fontSize="sm">
@@ -134,9 +131,15 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
             {/* 社團介紹 */}
             <Text fontWeight="bold">社團介紹</Text>
             <Input position="relative" value={communitiesInfo} size="sm" pl="22px" onChange={handleChange2} />
+            <Text fontSize="sm" color="gray.400">
+              範例: [八卦] 這裡是八卦版，兔年行大運！！
+            </Text>
             {/* 看板簡介 */}
-            <Text fontWeight="bold">看板簡介</Text>
+            <Text fontWeight="bold" mt={2}>看板簡介</Text>
             <Input position="relative" value={aboutCommunity} size="sm" pl="22px" onChange={handleChange3} />
+            <Text fontSize="sm" color="gray.400">
+              看板簡介將會顯示於看板頁面
+            </Text>
           </ModalBody>
 
           {/* 社團類型 */}
@@ -150,7 +153,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
                   <Text fontSize="sm" mr={1}>
                     公開
                   </Text>
-                  <Text fontSize="8px" color="gray.500" pt={1}>
+                  <Text fontSize="8px" color="gray.400" pt={1}>
                     任何人都可以瀏覽此看板。
                   </Text>
                 </Flex>

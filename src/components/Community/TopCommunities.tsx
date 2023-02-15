@@ -73,6 +73,7 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
               const isJoined = !!communityStateValue.mySnippets.find((snippet) => snippet.communityId === item.id);
               return (
                 <Flex
+                  key={item.id}
                   bg="gray.900"
                   position="relative"
                   align="center"
@@ -87,23 +88,17 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
                     <Flex width="15%">
                       <Text mr={2}>{index + 1}</Text>
                     </Flex>
-                      <Flex align="center" width="80%">
-                        {item.imageURL ? (
-                          <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} />
-                        ) : (
-                          <Icon as={RiEarthFill} fontSize={25} color="blue.400" mr={2} />
-                        )}
+                    <Flex align="center" width="80%">
+                      {item.imageURL ? (
+                        <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} />
+                      ) : (
+                        <Icon as={RiEarthFill} fontSize={25} color="blue.400" mr={2} />
+                      )}
 
-                    <Link key={item.id} href={`/r/${item.id}`}>
-
-                        <Text
-                           _hover={{ textDecoration: "underline"}}
-                        >
-                            
-                            {`r/${item.id}`}</Text>
-                    </Link>
-
-                      </Flex>
+                      <Link href={`/r/${item.id}`}>
+                        <Text _hover={{ textDecoration: "underline" }}>{`r/${item.id}`}</Text>
+                      </Link>
+                    </Flex>
 
                     <Box position="absolute" right="10px">
                       <Button

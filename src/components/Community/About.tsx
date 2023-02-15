@@ -1,13 +1,11 @@
 import { authModalState } from "@/atoms/authModalAtom";
 import { Community, communityState } from "@/atoms/communitiesAtom";
 import { auth, firestore, storage } from "@/firebase/clientApp";
-import useDirectory from "@/hooks/useDirectory";
 import useSelectFile from "@/hooks/useSelectFile";
 import { Flex, Box, Text, Stack, Divider, Icon, Button, Image, Spinner, Input } from "@chakra-ui/react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import moment from "moment";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";

@@ -1,10 +1,9 @@
 import { Community, communityState } from "@/atoms/communitiesAtom";
-import useDirectory from "@/hooks/useDirectory";
 import { Flex, Text } from "@chakra-ui/react";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const CurrentLocation = () => {
   const communityStateValue = useRecoilValue(communityState);
@@ -26,8 +25,10 @@ const CurrentLocation = () => {
 
   return (
     <Flex
+    h='100%'
       align="center"
       justify="space-between"
+      _hover={{bg:'gray.500'}}
       //  bg='teal'
     >
       <Flex align="center">
@@ -35,11 +36,11 @@ const CurrentLocation = () => {
           {communityStateValue.currentCommunity?.id === "Home" ? (
             <Flex hidden></Flex>
           ) : (
-            <Flex ml={3} align="center">
-              <Text fontSize="sm">{`看板 > `}</Text>
-              <Text display={{ base: "none", lg: "flex" }} _hover={{ textDecoration: "underline" }}>
-                {communityStateValue.currentCommunity?.id}{" "}
-              </Text>
+            <Flex ml={1} align="center" h='100%'>
+              <Text
+                display={{ base: "none", lg: "flex" }}
+                fontSize="md"
+              >{`看板 > ${communityStateValue.currentCommunity?.id}`}</Text>
             </Flex>
           )}
         </Link>

@@ -14,11 +14,12 @@ const Directory = () => {
   return (
     <Menu>
       <MenuButton
+      h='100%'
         cursor="pointer"
-        padding="0px 6px"
+        padding="0px 2px"
         borderRadius={4}
-        _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
-        mx={2}
+        _hover={{ outline: "1px solid", outlineColor: "gray.500" }}
+        mx={3}
       >
         <Flex align="center">
           <Flex align="center">
@@ -40,7 +41,7 @@ const Directory = () => {
               建立/收藏
             </Text>
           </Flex>
-          <ChevronDownIcon ml={1} />
+          <ChevronDownIcon ml={0} />
         </Flex>
       </MenuButton>
       <MenuList>

@@ -31,11 +31,11 @@ const ImageUpload = ({ selectedFile, onSelectImadge, setSelectedTab, setSelected
           align="center"
           p={20}
           border="1px dashed"
-          borderColor="gray.200"
+          borderColor="gray.500"
           w="100%"
           borderRadius={4}
         >
-          <Button variant="outline" h="28px" onClick={() => selectedFileRef.current?.click()}>
+          <Button h="28px" onClick={() => selectedFileRef.current?.click()}>
             Upload
           </Button>
           <Input type="file" ref={selectedFileRef} hidden onChange={onSelectImadge} />

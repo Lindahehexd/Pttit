@@ -18,26 +18,26 @@ const TextInput = ({ textInput, onChange, handleCreatePost, loading }: TextInput
         name="title"
         onChange={onChange}
         value={textInput.title}
-        fontSize="10px"
+        fontSize="md"
         borderRadius={4}
-        placeholder="Title"
+        placeholder="標題"
         _placeholder={{ color: "gray.500" }}
-        _focus={{ outline: "none", bg: "white", border: "1px solid", borderColor: "black" }}
+        _focus={{ outline: "none", bg: "gray.700", border: "1px solid", borderColor: "black" }}
       />
       <Textarea
         name="body"
         onChange={onChange}
         value={textInput.body}
         h="100%"
-        fontSize="10px"
+        fontSize="md"
         borderRadius={4}
-        placeholder="Text Body"
+        placeholder="內文"
         _placeholder={{ color: "gray.500" }}
-        _focus={{ outline: "none", bg: "white", border: "1px solid", borderColor: "black" }}
+        _focus={{ outline: "none", bg: "gray.700", border: "1px solid", borderColor: "black" }}
       />
       <Flex p={3} justify="flex-end">
         <Button h="34px" px="30px" disabled={!textInput.title} onClick={handleCreatePost} isLoading={loading}>
-          Post
+          發文
         </Button>
       </Flex>
     </Stack>

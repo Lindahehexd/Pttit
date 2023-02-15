@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/clientApp";
 import { useRecoilValue } from "recoil";
 import { communityState } from "@/atoms/communitiesAtom";
+import PostRule from "@/components/Posts/PostRule";
 
 const SubmitPostPage = () => {
   const [user] = useAuthState(auth);
@@ -14,8 +15,8 @@ const SubmitPostPage = () => {
     <PageContentLayout>
       {/* left */}
       <>
-        <Box p="14px 0px" borderBottom="1px solid" borderColor="white">
-          <Text>Create a Post</Text>
+        <Box p="14px 0px" borderBottom="1px solid" borderColor="gray.600">
+          <Text fontSize='4xl' fontWeight={700}>發文</Text>
         </Box>
         {/* form */}
         {user && (
@@ -27,7 +28,9 @@ const SubmitPostPage = () => {
         )}
       </>
       {/* right */}
-      <></>
+      <>
+      <PostRule/>
+      </>
     </PageContentLayout>
   );
 };

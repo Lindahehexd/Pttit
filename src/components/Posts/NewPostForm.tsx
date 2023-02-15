@@ -26,16 +26,12 @@ export type TabItem = {
 
 const formTab = [
   {
-    title: "Post",
+    title: "文章",
     icon: IoDocumentText,
   },
   {
-    title: "Images & Videos",
+    title: "圖片",
     icon: IoImageOutline,
-  },
-  {
-    title: "Link",
-    icon: BsLink45Deg,
   },
 ];
 
@@ -84,7 +80,7 @@ const NewPostForm = ({ user, communityImageURL }: NewPostFormProps) => {
 
       //redireact to the homepage and see the post .  4 21256
 
-      router.back();
+      router.push(`/r/${communityId}`);
     } catch (error: any) {
       console.log("this is error", error.message);
       setError(true);
@@ -118,8 +114,7 @@ const NewPostForm = ({ user, communityImageURL }: NewPostFormProps) => {
 
   return (
     <div>
-      NewPost
-      <Flex direction="column" bg="pink" borderRadius={4} mt={2}>
+      <Flex direction="column" bg="gray.800" borderRadius={4} mt={2}>
         <Flex w="100%">
           {formTab.map((item) => (
             <>
@@ -134,7 +129,7 @@ const NewPostForm = ({ user, communityImageURL }: NewPostFormProps) => {
         </Flex>
         {/* tabinput */}
         <Flex p={4}>
-          {selectedTab === "Post" && (
+          {selectedTab === "文章" && (
             <TextInput
               textInput={textInputs}
               onChange={onTextChange}
@@ -142,7 +137,7 @@ const NewPostForm = ({ user, communityImageURL }: NewPostFormProps) => {
               handleCreatePost={handleCreatePost}
             />
           )}
-          {selectedTab === "Images & Videos" && (
+          {selectedTab === "圖片" && (
             <ImageUpload
               setSelectedFile={setSelectedFile}
               onSelectImadge={onSelectImadge}

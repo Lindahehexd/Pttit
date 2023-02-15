@@ -58,11 +58,13 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
             <TabPanels p={1}>
               <Textarea
                 focusBorderColor="gray.600"
-                _focus={{ bg: "gray.800" }}
+                _focus={{ bg: "gray.900" }}
                 bg="black"
                 value={commentText}
                 onChange={(event) => setCommentText(event.target.value)}
                 maxLength={45}
+                maxH='30px'
+                resize="none"
               ></Textarea>
 
               {/* 字數+送出 */}

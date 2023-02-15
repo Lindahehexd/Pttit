@@ -15,9 +15,9 @@ const TabItems = ({ item, selected, setSelectedTab }: Props) => {
       flexGrow={1}
       py="14px"
       cursor="pointer"
-      _hover={{ bg: "gray.50" }}
+      _hover={{ bg: "gray.700" }}
       fontWeight='bold'
-      color={selected ? "blue.500" : "gray.500"}
+      color={selected ? "blue.300" : "gray.500"}
       borderWidth={selected ? "0px 1px 2px 0px" : "0px 1px 1px 0px"}
       borderBottomColor={selected ? "blue.500" : "gray.500"}
       borderRightColor={selected ? "blue.500" : "gray.500"}

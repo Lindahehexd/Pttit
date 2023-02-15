@@ -1,5 +1,5 @@
 import AuthButtons from "@/components/Navbar/RightContent/AuthButtons";
-import { Button, Flex, Icon, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
+import { Button, Divider, Flex, Icon, Spacer, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import React, { useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
@@ -25,7 +25,7 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
 
   return (
     // container
-    <Flex direction="column">
+    <Flex direction="column" mt={1}>
       {user ? (
         //outer
         <Flex direction="column">
@@ -34,22 +34,25 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
             <span style={{ color: "#3182CE" }}>{user?.email?.split("@")[0]}</span> 發表你的看法
           </Text>
           {/* TAB */}
-          <Tabs onChange={(tabIndex) => setTabIndex(tabIndex)} bg="gray.800">
-            <Text fontSize="lg" fontWeight={700} pt={3} px={4}>
-              推文
-            </Text>
+          <Tabs onChange={(tabIndex) => setTabIndex(tabIndex)} bg="gray.800" borderRadius="4px, 4px, 0px,">
             <TabList>
               <Tab color="white">
-                <Icon as={AiFillMessage} />
-                只加註解
+                <Icon as={AiFillMessage} color='gray.400' />
+                <Text ml={2} fontSize="sm">
+                  只加註解
+                </Text>
               </Tab>
               <Tab color="white">
                 <Icon as={AiFillLike} color="green.500" />
-                值得推薦
+                <Text ml={2} fontSize="sm">
+                  值得推薦
+                </Text>
               </Tab>
               <Tab color="white">
                 <Icon as={AiFillDislike} color="red.500" />
-                給他噓聲
+                <Text ml={2} fontSize="sm">
+                  給他噓聲
+                </Text>
               </Tab>
             </TabList>
             <TabPanels p={1}>
@@ -61,20 +64,23 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
                 onChange={(event) => setCommentText(event.target.value)}
                 maxLength={45}
               ></Textarea>
+
+              {/* 字數+送出 */}
+              <Flex justify='space-between' pt={2}>
               <Flex> 還可輸入 {remainingChars} 字 </Flex>
+              <Button
+              mr={2}
+                  height="26px"
+                  disabled={!commentText.length}
+                  isLoading={createLoading}
+                  onClick={() => onCreateComment(commentText)}
+                >
+                  送出
+                </Button>
+              </Flex>
             </TabPanels>
           </Tabs>
-          {/* 送出 */}
-          <Flex position="relative" justify="flex-end" bg={bg} p="6px 8px" borderRadius="0px 0px 4px 4px">
-            <Button
-              height="26px"
-              disabled={!commentText.length}
-              isLoading={createLoading}
-              onClick={() => onCreateComment(commentText)}
-            >
-              送出
-            </Button>
-          </Flex>
+          <Divider mt={2} />
         </Flex>
       ) : (
         <Flex align="center" justify="space-between" borderRadius={2} border="1px solid" borderColor="gray.500" p={4}>

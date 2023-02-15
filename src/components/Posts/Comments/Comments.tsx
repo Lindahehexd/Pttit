@@ -56,7 +56,6 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
 
     try {
       setCreateLoading(true);
-
       const batch = writeBatch(firestore);
       //create the documents
       const commentDocRef = doc(collection(firestore, "comments"));
@@ -145,8 +144,9 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   }, [selectedPost]);
 
   return (
-    <Box bg="gray.700" borderRadius="0px 0px 4px 4px" p={2}>
-      <Flex direction="column" pl={10} pr={4} mb={6} fontSize="10pt" w="100%" bg="blue">
+    <Box bg="gray.800" borderRadius="0px 0px 4px 4px" p={2}>
+        {/* 整個下半部 */}
+      <Flex direction="column" pl={8} pr={4} mb={2} fontSize="10pt" w="100%" >
         <CommentInput
           commentText={commentText}
           setCommentText={setCommentText}
@@ -158,10 +158,6 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
       <Stack spacing={6} p={2}>
         {fetchLoading ? (
           <>
-            {/* <Center>
-              <Spinner size="xl" />
-            </Center>
-             */}
             {[0, 1, 2].map((item) => (
               <Box key={item} padding="2" bg="gray.800">
                 <SkeletonText mt="4" noOfLines={2} spacing="4" />

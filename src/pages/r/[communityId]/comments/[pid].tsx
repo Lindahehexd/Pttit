@@ -1,26 +1,22 @@
-import { Post } from "@/atoms/postAtom";
 import About from "@/components/Community/About";
-import PageContentLayout from "@/components/Layout/PageContent";
 import Comments from "@/components/Posts/Comments/Comments";
+import PageContentLayout from "@/components/Layout/PageContent";
 import PostItem from "@/components/Posts/PostItem";
-import { auth, firestore } from "@/firebase/clientApp";
 import useCommunityData from "@/hooks/useCommunityData";
 import usePosts from "@/hooks/usePosts";
-import { Center, Spinner } from "@chakra-ui/react";
+import { Post } from "@/atoms/postAtom";
 import { User } from "firebase/auth";
+import { auth, firestore } from "@/firebase/clientApp";
 import { doc, getDoc } from "firebase/firestore";
-import router, { useRouter } from "next/router";
-import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-type Props = {};
-
-const PostPage = (props: Props) => {
-  const [user, loading] = useAuthState(auth);
-  const { postStateValue, setPostStateValue, onVote, onDeletePost } = usePosts();
+const PostPage = () => {
+  const [user] = useAuthState(auth);
   const router = useRouter();
   const { communityStateValue } = useCommunityData();
-  const { communityId, pid } = router.query;
+  const { postStateValue, setPostStateValue, onVote, onDeletePost } = usePosts();
 
   // 避免重新整理後 會沒東西顯示 目前的資料是由主頁面引入來的 如果重新整理資料會變null
   const fetchPost = async (postId: string) => {
@@ -43,33 +39,6 @@ const PostPage = (props: Props) => {
       fetchPost(pid as string);
     }
   }, [router.query, postStateValue.selectedPost, setPostStateValue]);
-
-  //   const fetchComment = async (commentId: string) => {
-  //     try {
-  //       const commentRef = doc(firestore, "comments", commentId);
-  //       const commentDoc = await getDoc(commentRef);
-  //       setPostStateValue((prev) => ({
-  //         ...prev,
-  //         selectedPost: { id: commentDoc.id, ...commentDoc.data() } as Post,
-  //       }));
-  //     } catch (error: any) {
-  //       console.log("fetchPost error", error.message);
-  //     }
-  //   };
-
-  // // Fetch post if not in already in state 如果在一個貼文的網址內 + 當前沒有post的value 則判定 用戶重新整理
-  // useEffect(() => {
-  //   const { pid } = router.query;
-  //   if (pid && !postStateValue.selectedPost) {
-  //     fetchComment(pid as string);
-  //   }
-  // }, [router.query]);
-
-//   if (loading) {
-//     <Center>
-//       <Spinner size="xl" />
-//     </Center>;
-//   }
 
   return (
     <PageContentLayout>
@@ -95,8 +64,7 @@ const PostPage = (props: Props) => {
         />
       </>
       {/* Right Content */}
-      {communityStateValue.currentCommunity && <About communityData={communityStateValue.currentCommunity} />}
-      <></>
+      <>{communityStateValue.currentCommunity && <About communityData={communityStateValue.currentCommunity} />}</>
     </PageContentLayout>
   );
 };

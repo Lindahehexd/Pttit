@@ -20,7 +20,7 @@ const MenuListItem = ({ displayText, link, icon, iconColor, imageURL }: MenuList
       _hover={{ bg: "gray.500" }}
       onClick={() => onSelectMenuItem({ displayText, link, icon, iconColor, imageURL })}
     >
-      <Flex align="center">
+      <Flex align="center" fontSize='md'>
         {imageURL ? (
           <Image src={imageURL} borderRadius="full" boxSize="28px" mr={2} alt="" />
         ) : (

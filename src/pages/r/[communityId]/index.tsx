@@ -8,17 +8,16 @@ import Posts from "@/components/Posts/Posts";
 import { firestore } from "@/firebase/clientApp";
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import safeJsonStringify from "safe-json-stringify";
-import { Center, Spinner } from "@chakra-ui/react";
 
 type CommunityPageProps = {
   communityData: Community;
 };
 
 const CommunityPage = ({ communityData }: CommunityPageProps) => {
-  const [loading, setLoading] = useState(false);
+  console.log("here is commupage data", communityData);
   const setCommunityStateValue = useSetRecoilState(communityState);
   // when render , pass the data to other pages
   useEffect(() => {
@@ -26,28 +25,13 @@ const CommunityPage = ({ communityData }: CommunityPageProps) => {
       ...prev,
       currentCommunity: communityData,
     }));
-  }, [communityData, setCommunityStateValue]);
+  }, [communityData]);
 
   //check the data contents
   console.log(communityData);
   //check if the community data is exist
   if (!communityData) return <CommunityNotFound />;
   // communityData.id refer to the community namne
-
-  useEffect(() => {
-    setLoading(true);
-    setLoading(false);
-  }, [communityData]);
-
-  if (loading) {
-    return (
-      <Center h="100vh" w="100%">
-        <div>
-          <Spinner />
-        </div>
-      </Center>
-    );
-  }
 
   return (
     <>

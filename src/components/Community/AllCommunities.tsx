@@ -94,9 +94,6 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
                       ) : (
                         <Icon as={RiEarthFill} fontSize={30} color="blue.400" mr={2} />
 
-                    //     <Flex boxSize={8} bg="blue.800" mr={2} rounded="full" align='center'>
-                    //     <Image src= 'images/pttiticon.svg'></Image>
-                    //   </Flex>
                       )}
                       <Box w="30%">
                         <Link href={`/r/${item.id}`}>

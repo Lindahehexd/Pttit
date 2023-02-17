@@ -1,14 +1,21 @@
+import { atomindex } from "@/atoms/commentAtom";
 import { Button, Flex, Image, Input, Stack } from "@chakra-ui/react";
 import React, { useRef } from "react";
+import { useRecoilState } from "recoil";
 
 type ImageUplaodProps = {
   selectedFile?: string;
   onSelectImadge: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  setSelectedTab: (value: string) => void;
   setSelectedFile: (value: string) => void;
 };
 
-const ImageUpload = ({ selectedFile, onSelectImadge, setSelectedTab, setSelectedFile }: ImageUplaodProps) => {
+const ImageUpload = ({ selectedFile, onSelectImadge, setSelectedFile }: ImageUplaodProps) => {
+  const [tabIndex, setTabIndex] = useRecoilState(atomindex);
+
+  const handleButtonClick = () => {
+    setTabIndex(0);
+  };
+
   const selectedFileRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -17,11 +24,11 @@ const ImageUpload = ({ selectedFile, onSelectImadge, setSelectedTab, setSelected
         <>
           <Image src={selectedFile} maxW="400px" maxH="400px" alt="" />
           <Stack direction="row" mt={4}>
-            <Button h="28px" onClick={() => setSelectedTab("Post")}>
-              Back to Post
+            <Button h="28px" onClick={handleButtonClick}>
+              返回文章
             </Button>
             <Button variant="outline" h="28px" onClick={() => setSelectedFile("")}>
-              Remove
+              移除
             </Button>
           </Stack>
         </>
@@ -36,7 +43,7 @@ const ImageUpload = ({ selectedFile, onSelectImadge, setSelectedTab, setSelected
           borderRadius={4}
         >
           <Button h="28px" onClick={() => selectedFileRef.current?.click()}>
-            Upload
+            上傳
           </Button>
           <Input type="file" ref={selectedFileRef} hidden onChange={onSelectImadge} />
         </Flex>

@@ -3,18 +3,12 @@ import { Button, Flex, HStack, Icon, Image, Skeleton, Spinner, Stack, Text, useT
 import moment from "moment";
 import { BsChat, BsDot } from "react-icons/bs";
 import {
-  IoArrowDownCircleOutline,
-  IoArrowDownCircleSharp,
   IoArrowRedoOutline,
-  IoArrowUpCircleOutline,
-  IoArrowUpCircleSharp,
-  IoBookmarkOutline,
 } from "react-icons/io5";
 
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { FaReddit } from "react-icons/fa";
 import Link from "next/link";
 import { RiEarthFill } from "react-icons/ri";
 

@@ -21,6 +21,8 @@ const Posts = ({ communityData }: PostsProps) => {
   const { postStateValue, setPostStateValue, onVote, onSelectPost, onDeletePost } = usePosts();
 
   const getPosts = async () => {
+    console.log("Getting Posts");
+
     try {
       setLoading(true);
       const posetQuery = query(
@@ -36,7 +38,7 @@ const Posts = ({ communityData }: PostsProps) => {
         ...prev,
         posts: posts as Post[],
       }));
-      //   console.log("post123:", posts);
+      console.log('this is the post', posts)
       setLoading(false);
     } catch (error: any) {
       console.log(error.message);
@@ -50,7 +52,7 @@ const Posts = ({ communityData }: PostsProps) => {
 
   return (
     <>
-      {postStateValue.posts.length === 0 && !loading &&(
+      {postStateValue.posts.length === 0 && !loading && (
         <Flex
           direction="column"
           justify="center"

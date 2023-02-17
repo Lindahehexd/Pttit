@@ -47,7 +47,6 @@ const About = ({ communityData }: AboutProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(false);
-  const [refresh, setRefresh] = useState(false);
 
   const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAbout(e.target.value);
@@ -116,16 +115,6 @@ const About = ({ communityData }: AboutProps) => {
     setLoading(false);
   };
 
-  if (loading) {
-    return (
-      <Center h="100vh" w="100%">
-        <div>
-          <Spinner />
-        </div>
-      </Center>
-    );
-  }
-
   //   console.log("communityData", communityData);
   return (
     <Box position="sticky" top="14px">
@@ -189,8 +178,7 @@ const About = ({ communityData }: AboutProps) => {
                       </Text>
 
                       {/* update */}
-
-                      <Button onClick={onOpen}>修改文章</Button>
+                      <Button variant='ghost' color='blue.500' onClick={onOpen}>修改看板簡介</Button>
                       <Modal isOpen={isOpen} onClose={onClose}>
                         <ModalOverlay />
                         <ModalContent>

@@ -1,14 +1,22 @@
 import Navbar from "../Navbar/Navbar";
 
+import { Spinner, Center } from "@chakra-ui/react";
+
 interface LayoutProps {
   children: React.ReactElement;
+  isLoading: boolean;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, isLoading }: LayoutProps) => {
   return (
     <>
       <Navbar />
-      <main> {children}</main>
+        {isLoading && (
+          <Center h='100vh' w='100%' bg='black'>
+            <Spinner />
+          </Center>
+        )}
+        {children}
     </>
   );
 };

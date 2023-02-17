@@ -1,17 +1,17 @@
 import { Post } from "@/atoms/postAtom";
 import { firestore, storage } from "@/firebase/clientApp";
-import { Flex, Icon, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
+import { Icon, Alert, AlertIcon, AlertDescription } from "@chakra-ui/react";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 import { User } from "firebase/auth";
 import { addDoc, collection, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import { it } from "node:test";
 import React, { useState } from "react";
-import { BsLink45Deg } from "react-icons/bs";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
 import ImageUpload from "./PostForm/ImageUpload";
 import TextInput from "./PostForm/TextInput";
-import TabItems from "./TabItems";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import { useRecoilState } from "recoil";
+import { atomindex } from "@/atoms/commentAtom";
 
 type NewPostFormProps = {
   user: User;
@@ -19,26 +19,9 @@ type NewPostFormProps = {
   communityImageURL?: string;
 };
 
-export type TabItem = {
-  title: string;
-  icon: typeof Icon.arguments;
-};
-
-const formTab = [
-  {
-    title: "文章",
-    icon: IoDocumentText,
-  },
-  {
-    title: "圖片",
-    icon: IoImageOutline,
-  },
-];
-
 const NewPostForm = ({ user, communityImageURL }: NewPostFormProps) => {
   const router = useRouter();
   const [error, setError] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(formTab[0].title);
   const [textInputs, setTextInput] = useState({
     title: "",
     body: "",
@@ -79,10 +62,9 @@ const NewPostForm = ({ user, communityImageURL }: NewPostFormProps) => {
       }
 
       //redireact to the homepage and see the post .  4 21256
-
       router.push(`/r/${communityId}`);
     } catch (error: any) {
-      console.log("this is error", error.message);
+      console.log("this is posting error", error.message);
       setError(true);
     }
     setLoading(false);
@@ -112,48 +94,47 @@ const NewPostForm = ({ user, communityImageURL }: NewPostFormProps) => {
     }));
   };
 
+  const [tabIndex, setTabIndex] = useRecoilState(atomindex);
+
   return (
     <div>
-      <Flex direction="column" bg="gray.800" borderRadius={4} mt={2}>
-        <Flex w="100%">
-          {formTab.map((item) => (
-            <>
-              <TabItems
-                key={item.title}
-                item={item}
-                selected={item.title === selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
-            </>
-          ))}
-        </Flex>
-        {/* tabinput */}
-        <Flex p={4}>
-          {selectedTab === "文章" && (
+      <Tabs bg="gray.800" borderRadius={4} mt={2} index={tabIndex} onChange={(index) => setTabIndex(index)}>
+        <TabList flexGrow={1}>
+          <Tab w="50%">
+            <Icon as={IoDocumentText} />
+            文章
+          </Tab>
+          <Tab w="50%">
+            <Icon as={IoImageOutline} />
+            圖片
+          </Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
             <TextInput
               textInput={textInputs}
               onChange={onTextChange}
               loading={loading}
               handleCreatePost={handleCreatePost}
             />
-          )}
-          {selectedTab === "圖片" && (
+          </TabPanel>
+          <TabPanel>
             <ImageUpload
               setSelectedFile={setSelectedFile}
               onSelectImadge={onSelectImadge}
-              setSelectedTab={setSelectedTab}
               selectedFile={selectedFile}
             />
-          )}
-        </Flex>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
 
-        {error && (
-          <Alert status="error" bg="red.500">
-            <AlertIcon />
-            <AlertDescription>Post Error</AlertDescription>
-          </Alert>
-        )}
-      </Flex>
+      {error && (
+        <Alert status="error" bg="red.500">
+          <AlertIcon />
+          <AlertDescription>Post Error</AlertDescription>
+        </Alert>
+      )}
     </div>
   );
 };

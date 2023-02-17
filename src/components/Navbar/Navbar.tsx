@@ -15,13 +15,27 @@ const Navbar = () => {
   return (
     <Flex bg="blue.900" height="44px" padding="6px 12px">
       {/* 如果直接跳頁 menu資訊不會改變 */}
-      <Flex onClick={() => onSelectMenuItem(defaultMenuItem)} cursor="pointer" align='center' _hover={{bg:'gray.500'}}>
-        <Text color="yellow.300"  fontWeight="bold" fontSize={{ base: "14px", md:'16px', lg: "20px" }}>
-          Pttit 類批踢踢實業坊
+      <Flex
+        onClick={() => onSelectMenuItem(defaultMenuItem)}
+        cursor="pointer"
+        align="center"
+        _hover={{ bg: "gray.500" }}
+      >
+        <Text color="yellow.300" fontWeight="bold" fontSize={{ base: "20px", md: "16px", lg: "20px" }}>
+          PTTit
+        </Text>
+        <Text
+        ml={2}
+          color="yellow.300"
+          fontWeight="bold"
+          fontSize={{ base: "14px", md: "16px", lg: "20px" }}
+          display={{ base: "none", md:'flex', lg: "flex" }}
+        >
+          類批踢踢實業坊
         </Text>
       </Flex>
       {user && <Directory />}
-      <CurrentLocation/ >
+      <CurrentLocation />
       <SearchInput />
       <RightContent user={user} />
     </Flex>

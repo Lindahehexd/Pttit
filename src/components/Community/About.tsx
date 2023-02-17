@@ -2,12 +2,32 @@ import { authModalState } from "@/atoms/authModalAtom";
 import { Community, communityState } from "@/atoms/communitiesAtom";
 import { auth, firestore, storage } from "@/firebase/clientApp";
 import useSelectFile from "@/hooks/useSelectFile";
-import { Flex, Box, Text, Stack, Divider, Icon, Button, Image, Spinner, Input } from "@chakra-ui/react";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  Flex,
+  Box,
+  Text,
+  Stack,
+  Divider,
+  Icon,
+  Button,
+  Image,
+  Spinner,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+  Center,
+} from "@chakra-ui/react";
+import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import moment from "moment";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { RiCakeLine, RiEarthFill } from "react-icons/ri";
 import { useSetRecoilState } from "recoil";
@@ -24,6 +44,14 @@ const About = ({ communityData }: AboutProps) => {
   const [uploadingImage, setUploadingImage] = useState(false);
   const setAuthModalState = useSetRecoilState(authModalState);
   const setCommunityStateValue = useSetRecoilState(communityState);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [about, setAbout] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+  const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAbout(e.target.value);
+  };
 
   const onAbout = () => {
     const { communityId } = router.query;
@@ -60,6 +88,43 @@ const About = ({ communityData }: AboutProps) => {
     }
     setUploadingImage(false);
   };
+
+  const onUpdateAboutCommunity = async () => {
+    try {
+      setLoading(true);
+      const communityRef = doc(firestore, "communities", communityData.id);
+      await updateDoc(communityRef, {
+        aboutCommunity: about,
+      });
+      console.log("Document updated successfully.");
+
+      // Fetch the updated community data from Firebase
+      const updatedCommunityData = await getDoc(communityRef);
+      setCommunityStateValue((prev) => ({
+        ...prev,
+        currentCommunity: {
+          ...prev.currentCommunity,
+          aboutCommunity: updatedCommunityData?.data()?.aboutCommunity,
+        } as Community,
+      }));
+
+      console.log("cuuretn about", communityData.aboutCommunity);
+    } catch (error: any) {
+      console.log("update error", error);
+    }
+    window.location.reload();
+    setLoading(false);
+  };
+
+  if (loading) {
+    return (
+      <Center h="100vh" w="100%">
+        <div>
+          <Spinner />
+        </div>
+      </Center>
+    );
+  }
 
   //   console.log("communityData", communityData);
   return (
@@ -100,9 +165,9 @@ const About = ({ communityData }: AboutProps) => {
             </Text>
           </Flex>
           {/* link button */}
-            <Button mt={2} h="38px" w="100%" onClick={onAbout}>
-              發帖
-            </Button>
+          <Button mt={2} h="38px" w="100%" onClick={onAbout}>
+            發帖
+          </Button>
           {/* if you are admin */}
           {user?.uid === communityData.creatorId && (
             <>
@@ -113,14 +178,36 @@ const About = ({ communityData }: AboutProps) => {
                   {selectedFile && uploadingImage ? (
                     <Spinner />
                   ) : (
-                    <Text
-                      color="blue.500"
-                      cursor="pointer"
-                      _hover={{ textDecoration: "underline" }}
-                      onClick={() => selectedFileRef.current?.click()}
-                    >
-                      更換圖片
-                    </Text>
+                    <>
+                      <Text
+                        color="blue.500"
+                        cursor="pointer"
+                        _hover={{ textDecoration: "underline" }}
+                        onClick={() => selectedFileRef.current?.click()}
+                      >
+                        更換圖片
+                      </Text>
+
+                      {/* update */}
+
+                      <Button onClick={onOpen}>修改文章</Button>
+                      <Modal isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                          <ModalHeader>Modal Title</ModalHeader>
+                          <ModalCloseButton />
+                          <ModalBody>
+                            <Text fontWeight="bold">修改看板簡介</Text>
+                            <Input position="relative" value={about} size="sm" pl="22px" onChange={handleChange2} />
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button h="30px" onClick={onUpdateAboutCommunity} isLoading={loading}>
+                              修改
+                            </Button>
+                          </ModalFooter>
+                        </ModalContent>
+                      </Modal>
+                    </>
                   )}
 
                   {/* show the image of community */}
@@ -160,3 +247,6 @@ const About = ({ communityData }: AboutProps) => {
 };
 
 export default About;
+function setRefresh(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}

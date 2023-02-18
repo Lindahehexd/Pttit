@@ -38,7 +38,8 @@ const CurrentLocation = () => {
             <Flex ml={1} align="center" h="100%">
               <Text
                 display={{ base: "none", lg: "flex" }}
-                fontSize="md"
+                fontSize="sm"
+                fontWeight={700}
               >{`看板 > ${communityStateValue.currentCommunity?.id}`}</Text>
             </Flex>
           )}

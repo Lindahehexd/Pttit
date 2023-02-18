@@ -49,7 +49,7 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
         bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)),
           url('images/8bitbg2.png')"
       >
-        <Text>所有看板</Text>
+        <Text fontSize=''>所有看板</Text>
       </Flex>
       <Flex direction="column">
         {loading ? (
@@ -92,7 +92,7 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
                       {item.imageURL ? (
                         <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} alt="" />
                       ) : (
-                        <Icon as={RiEarthFill} fontSize={30} color="blue.400" mr={2} />
+                        <Icon as={RiEarthFill} fontSize={30} color="orange.200" mr={2} />
 
                       )}
                       <Box w="30%">

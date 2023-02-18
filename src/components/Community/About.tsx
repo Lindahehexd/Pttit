@@ -30,7 +30,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { RiCakeLine, RiEarthFill } from "react-icons/ri";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 type AboutProps = {
   communityData: Community;
@@ -43,7 +43,8 @@ const About = ({ communityData }: AboutProps) => {
   const { selectedFile, setSelectedFile, onSelectFile } = useSelectFile();
   const [uploadingImage, setUploadingImage] = useState(false);
   const setAuthModalState = useSetRecoilState(authModalState);
-  const setCommunityStateValue = useSetRecoilState(communityState);
+  //   const setCommunityStateValue = useSetRecoilState(communityState);
+  const [communityStateValue, setCommunityStateValue] = useRecoilState(communityState);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(false);
@@ -111,7 +112,7 @@ const About = ({ communityData }: AboutProps) => {
     } catch (error: any) {
       console.log("update error", error);
     }
-    window.location.reload();
+    // window.location.reload();
     setLoading(false);
   };
 
@@ -129,7 +130,7 @@ const About = ({ communityData }: AboutProps) => {
             <Flex flexGrow={1} maxWidth="300px">
               <Text>
                 {` 看板簡介:
-               ${communityData.aboutCommunity} `}
+               ${communityStateValue.currentCommunity?.aboutCommunity} `}
               </Text>
             </Flex>
           </Flex>
@@ -178,7 +179,9 @@ const About = ({ communityData }: AboutProps) => {
                       </Text>
 
                       {/* update */}
-                      <Button variant='ghost' color='blue.500' onClick={onOpen}>修改看板簡介</Button>
+                      <Button variant="ghost" color="blue.500" onClick={onOpen}>
+                        修改看板簡介
+                      </Button>
                       <Modal isOpen={isOpen} onClose={onClose}>
                         <ModalOverlay />
                         <ModalContent>

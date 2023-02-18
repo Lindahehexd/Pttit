@@ -13,7 +13,7 @@ const Navbar = () => {
   const { onSelectMenuItem } = useDirectory();
 
   return (
-    <Flex bg="blue.900" height="44px" padding="6px 12px">
+    <Flex bg="#0C0A66" height="44px" padding="6px 12px">
       {/* 如果直接跳頁 menu資訊不會改變 */}
       <Flex
         onClick={() => onSelectMenuItem(defaultMenuItem)}

@@ -28,7 +28,7 @@ interface CommunityState {
 }
 
 export const defaultCommunityState: CommunityState = {
-  mySnippets: [],
+    mySnippets: [],
 };
 
 export const communityState = atom<CommunityState>({

@@ -5,9 +5,9 @@ import Link from "next/link";
 const CommunityNotFound: React.FC = () => {
   return (
     <Flex direction="column" justifyContent="center" alignItems="center" minHeight="60vh">
-      Sorry, that community does not exist or has been banned
+     抱歉，找不到此看板
       <Link href="/">
-        <Button mt={4}>GO HOME</Button>
+        <Button mt={4}>回到首頁</Button>
       </Link>
     </Flex>
   );

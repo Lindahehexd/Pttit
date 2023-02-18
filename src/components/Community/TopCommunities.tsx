@@ -92,7 +92,7 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
                       {item.imageURL ? (
                         <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} />
                       ) : (
-                        <Icon as={RiEarthFill} fontSize={25} color="blue.400" mr={2} />
+                        <Icon as={RiEarthFill} fontSize={25} color="orange.200" mr={2} />
                       )}
 
                       <Link href={`/r/${item.id}`}>

@@ -31,7 +31,7 @@ const CommentsItem = ({ comment, onDeleteComment, loadingDelete, userId }: Comme
 
       {/* icon */}
       <Flex  align='self-start'>
-        {comment.commentTabIndex === 0 && <Icon ml={2} as={BsArrowRight} fontSize={22} color="gray.300" />}
+        {comment.commentTabIndex === 0 && <Icon ml={2} as={BsArrowRight} fontSize={22} color="red.400" />}
         {comment.commentTabIndex === 1 && <Icon ml={2} as={AiFillLike} color="green" fontSize={22} /> }
         {comment.commentTabIndex === 2 && <Icon ml={2} as={AiFillDislike} color="red.500" fontSize={22} />}
       </Flex>

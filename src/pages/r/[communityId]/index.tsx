@@ -39,7 +39,7 @@ const CommunityPage = ({ communityData }: CommunityPageProps) => {
       <PageContent>
         {/* child 1  ps . left */}
         <>
-          <CreatePostLink />
+          {/* <CreatePostLink /> */}
           <Posts communityData={communityData} />
         </>
         {/* child 2  ps . right */}

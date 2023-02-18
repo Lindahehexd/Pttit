@@ -5,9 +5,11 @@ import { Community, communityState } from "../../atoms/communitiesAtom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import useCommunityData from "@/hooks/useCommunityData";
 import { RiEarthFill } from "react-icons/ri";
-import { firestore } from "@/firebase/clientApp";
+import { auth, firestore } from "@/firebase/clientApp";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { useState } from "react";
+import PenModal from "./PenModal";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 type HeaderProps = {
   communityData: Community;
@@ -16,6 +18,8 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ communityData }) => {
   const { communityStateValue, onJoinLeaveCommunity, loading } = useCommunityData();
   const [about, setAbout] = useState("");
+
+  
   /**
    * !!!Don't pass communityData boolean until the end
    * It's a small optimization!!!
@@ -23,19 +27,19 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
   //   const { communityStateValue, loading, error, onJoinLeaveCommunity } = useCommunityData(!!communityData);
   //   const isJoined = !!communityStateValue.mySnippets.find((item) => item.communityId === communityData.id);
   //  snippet is array , find if theres the id
+
+
+  const [user] = useAuthState(auth);
   const isJoined = !!communityStateValue.mySnippets.find((item) => item.communityId === communityData.id);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isloading, setisLoading] = useState(false);
-  const [communityStateValue2, setCommunityStateValue2] = useRecoilState(communityState);
-
+  const [communityIntro, setCommunityIntro] = useRecoilState(communityState);
 
   const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAbout(e.target.value);
   };
 
-
-
-  const onUpdateAboutCommunity = async () => {
+  const onUpdateCommunityIntro = async () => {
     try {
       setisLoading(true);
       const communityRef = doc(firestore, "communities", communityData.id);
@@ -46,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
 
       // Fetch the updated community data from Firebase
       const updatedCommunityData = await getDoc(communityRef);
-      setCommunityStateValue2((prev) => ({
+      setCommunityIntro((prev) => ({
         ...prev,
         currentCommunity: {
           ...prev.currentCommunity,
@@ -60,32 +64,21 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
     }
     // window.location.reload();
     setisLoading(false);
+    onClose();
   };
 
-
-
-
-
-
   return (
-    <Flex direction="column" width="100%" height="146px"  >
-      <Box height="50%" bg="black"/>
-      <Flex justifyContent="center" bg="gray.900" height="50%" >
+    <Flex direction="column" width="100%" height="146px">
+      <Box height="50%" bg="black" />
+      <Flex justifyContent="center" bg="gray.900" height="50%">
         {/* maxW important  */}
-        <Flex width="95%" maxW="860px" 
-        // border="1px solid red"
+        <Flex
+          width="95%"
+          maxW="860px"
+          // border="1px solid red"
         >
           {communityStateValue.currentCommunity?.imageURL ? (
-            <Image
-              borderRadius="full"
-              boxSize="66px"
-              src={communityStateValue.currentCommunity.imageURL}
-              alt="Dan Abramov"
-              position="relative"
-              top={-3}
-              color="blue.500"
-              border="4px solid white"
-            />
+            <Image borderRadius="full" boxSize="66px" src={communityStateValue.currentCommunity.imageURL} alt="Dan Abramov" position="relative" top={-3} color="blue.500" border="4px solid white" />
           ) : (
             <Icon
               as={RiEarthFill}
@@ -103,64 +96,19 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
           <Flex padding="10px 16px">
             <Flex direction="column" mr={6}>
               <Text fontWeight={800} fontSize="16pt" color="gray.400">
-                {communityData.id} 
+                {communityData.id}
               </Text>
-              <Text fontWeight={600} fontSize="10pt" color="gray.400">
-                {communityData.communityInfo}
-              </Text>
+              <Flex align=" center">
+                <Text fontWeight={600} fontSize="10pt" color="gray.400">
+                  {communityIntro.currentCommunity?.communityInfo}
+                </Text>
 
+                {user?.uid === communityData.creatorId && (
+                  <PenModal onUpdateCommunityIntro={onUpdateCommunityIntro} about={about} handleChange2={handleChange2} isOpen={isOpen} onClose={onClose} onOpen={onOpen} isloading={isloading} />
+                )}
+              </Flex>
 
-              <Text>
-                {` 看板簡介:
-               ${communityStateValue2.currentCommunity?.communityInfo} `}
-              </Text>
-
-
-
-
-
-
-
-
-             {/* update */}
-             <Button variant="ghost" color="blue.500" onClick={onOpen}>
-                        修改看板簡介
-                      </Button>
-                      <Modal isOpen={isOpen} onClose={onClose}>
-                        <ModalOverlay />
-                        <ModalContent>
-                          <ModalHeader>修改看板簡介</ModalHeader>
-                          <ModalCloseButton />
-                          <ModalBody>
-                            <Text fontWeight="bold">修改看板簡介</Text>
-                            <Input position="relative" value={about} size="sm" pl="22px" onChange={handleChange2} />
-                          </ModalBody>
-                          <ModalFooter>
-                            <Button
-                              h="30px"
-                              onClick={() => {
-                                onUpdateAboutCommunity();
-                                onClose();
-                              }}
-                              isLoading={loading}
-                            >
-                              修改
-                            </Button>
-                          </ModalFooter>
-                        </ModalContent>
-                      </Modal>
-
-
-
-
-
-
-
-
-
-
-
-
+              {/* update */}
             </Flex>
             <Flex>
               <Button

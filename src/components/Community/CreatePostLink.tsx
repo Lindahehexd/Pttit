@@ -6,8 +6,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { BsLink45Deg } from "react-icons/bs";
-import { IoImageOutline } from "react-icons/io5";
 import { RiGhostSmileFill } from "react-icons/ri";
 import { useSetRecoilState } from "recoil";
 

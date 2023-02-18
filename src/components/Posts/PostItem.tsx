@@ -63,9 +63,9 @@ const PostItem = ({
     const currentUrl = window.location.href;
     navigator.clipboard.writeText(currentUrl);
     toast({
-      title: "URL Copied!",
+      title: "網址已儲存",
       position: "top",
-      description: "The URL has been successfully copied to your clipboard.",
+      description: "已成功複製網址",
       status: "success",
       duration: 9000,
       isClosable: true,
@@ -78,7 +78,7 @@ const PostItem = ({
 
     <Flex
       border="1px solid"
-      bg="gray.800"
+      bg="gray.900"
       borderColor="gray.700"
       borderRadius={4}
       _hover={{ borderColor: singlePostPage ? "none" : "gray.600", bg: !singlePostPage && "gray.700" }}
@@ -87,7 +87,7 @@ const PostItem = ({
       onClick={() => onSelectPost && onSelectPost(post)}
     >
       {/* left */}
-      <Flex direction="column" align="center" bg={singlePostPage ? "none" : "blue.900"} p={2} borderRadius={4} w="40px">
+      <Flex direction="column" align="center" bg={singlePostPage ? "none" : ""} p={2} borderRadius={4} w="40px">
         {/* <Icon
           as={userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline}
           color={userVoteValue === 1 ? "green.500" : "gray.400"}

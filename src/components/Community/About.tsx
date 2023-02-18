@@ -31,6 +31,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { RiCakeLine, RiEarthFill } from "react-icons/ri";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import ModifyModal from "./ModifyModal";
 
 type AboutProps = {
   communityData: Community;
@@ -112,6 +113,7 @@ const About = ({ communityData }: AboutProps) => {
     } catch (error: any) {
       console.log("update error", error);
     }
+    onClose();
     // window.location.reload();
     setLoading(false);
   };
@@ -120,18 +122,29 @@ const About = ({ communityData }: AboutProps) => {
   return (
     <Box position="sticky" top="14px">
       {/* top */}
-      <Flex bg="blue.900" color="white" p={3} borderRadius="4px 4px 0px 0px">
+      <Flex bg="#0C0A66" color="white" p={3} borderRadius="4px 4px 0px 0px">
         <Text> 關於看板 </Text>
       </Flex>
       {/* remain */}
       <Flex direction="column" p={3} bg={"whiteAlpha.200"} borderRadius="0px 0px 4px 4px">
         <Stack>
           <Flex w="100%" p={2}>
-            <Flex flexGrow={1} maxWidth="300px">
+            <Flex flexGrow={1} maxWidth="300px" align="center">
               <Text>
                 {` 看板簡介:
                ${communityStateValue.currentCommunity?.aboutCommunity} `}
               </Text>
+
+
+
+
+              {/* update */}
+              {user?.uid === communityData.creatorId && (
+                <ModifyModal onUpdateAboutCommunity={onUpdateAboutCommunity} about={about} handleChange2={handleChange2} isOpen={isOpen} onClose={onClose} onOpen={onOpen} loading={loading} />
+              )}
+
+
+
             </Flex>
           </Flex>
           <Divider />
@@ -152,8 +165,8 @@ const About = ({ communityData }: AboutProps) => {
             </Text>
           </Flex>
           {/* link button */}
-          <Button mt={2} h="38px" w="100%" onClick={onAbout}>
-            發帖
+          <Button mt={2} h="38px" w="100%" onClick={onAbout} bg='purple.700'>
+            發表文章
           </Button>
           {/* if you are admin */}
           {user?.uid === communityData.creatorId && (
@@ -170,33 +183,6 @@ const About = ({ communityData }: AboutProps) => {
                         更換圖片
                       </Text>
 
-                      {/* update */}
-                      <Button variant="ghost" color="blue.500" onClick={onOpen}>
-                        修改看板簡介
-                      </Button>
-                      <Modal isOpen={isOpen} onClose={onClose}>
-                        <ModalOverlay />
-                        <ModalContent>
-                          <ModalHeader>修改看板簡介</ModalHeader>
-                          <ModalCloseButton />
-                          <ModalBody>
-                            <Text fontWeight="bold">修改看板簡介</Text>
-                            <Input position="relative" value={about} size="sm" pl="22px" onChange={handleChange2} />
-                          </ModalBody>
-                          <ModalFooter>
-                            <Button
-                              h="30px"
-                              onClick={() => {
-                                onUpdateAboutCommunity();
-                                onClose();
-                              }}
-                              isLoading={loading}
-                            >
-                              修改
-                            </Button>
-                          </ModalFooter>
-                        </ModalContent>
-                      </Modal>
                     </>
                   )}
 

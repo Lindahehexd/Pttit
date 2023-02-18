@@ -19,7 +19,9 @@ export default function Home() {
   }, []);
 
   return (
-    <Flex align='center' justify='center' bgImage="url(/images/8bitbg1.jpg)" backgroundSize='cover' >
+    <Flex align='center' justify='center' 
+    // bgImage="url(/images/8bitbg1.jpg)" 
+    backgroundSize='cover' >
       <HomeLayout>
         {/* left */}
         <>

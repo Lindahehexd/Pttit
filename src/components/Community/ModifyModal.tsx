@@ -1,46 +1,36 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
-  Text,
-  Input,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Text, Input, Icon } from "@chakra-ui/react";
 import { useState } from "react";
+import { HiPencilAlt } from "react-icons/hi";
 
 // to Communities
 
-const Testt = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [about, setAbout] = useState("");
-  const [loading, setLoading] = useState(false);
+type odifyModalProps = {
+  onUpdateAboutCommunity: () => void;
+  about: string;
+  handleChange2: any;
+  onClose: any
+  isOpen:any
+  onOpen:any
+  loading:any
+};
 
-  const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAbout(e.target.value);
-  };
+const ModifyModal = ({ onUpdateAboutCommunity, about, handleChange2, isOpen, onClose, onOpen , loading  }: odifyModalProps) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      < Icon ml={2} as={HiPencilAlt} onClick={onOpen} cursor='pointer' fontSize={22}>
+      </Icon>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>修改看板簡介</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Text fontWeight="bold">修改看板簡介</Text>
             <Input position="relative" value={about} size="sm" pl="22px" onChange={handleChange2} />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button h="30px" onClick={() => {}} isLoading={loading}>
+            <Button h="30px" onClick={onUpdateAboutCommunity} isLoading={loading}>
               修改
             </Button>
           </ModalFooter>
@@ -50,4 +40,4 @@ const Testt = () => {
   );
 };
 
-export default Testt;
+export default ModifyModal;

@@ -20,7 +20,7 @@ const SearchInput: React.FC<Props> = () => {
     <Flex flexGrow={1} mx={7} align="center">
       <InputGroup>
         <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" mb={1} />} />
-        <Input type="tel" placeholder="前往看板" h="34px" onKeyDown={handleKeyDown} />
+        <Input type="tel" placeholder="前往看板" h="34px" onKeyDown={handleKeyDown} _placeholder={{color: 'gray.400'}} />
       </InputGroup>
     </Flex>
   );

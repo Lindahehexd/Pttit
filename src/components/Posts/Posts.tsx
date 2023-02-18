@@ -2,7 +2,7 @@ import { Community } from "@/atoms/communitiesAtom";
 import { Post } from "@/atoms/postAtom";
 import { auth, firestore } from "@/firebase/clientApp";
 import usePosts from "@/hooks/usePosts";
-import { Flex, Icon, Stack, Text } from "@chakra-ui/react";
+import { Flex, Icon, Input, Stack, Text } from "@chakra-ui/react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -20,16 +20,18 @@ const Posts = ({ communityData }: PostsProps) => {
   const [loading, setLoading] = useState(false);
   const { postStateValue, setPostStateValue, onVote, onSelectPost, onDeletePost } = usePosts();
 
+  const [searchInput, setSearchInput] = useState("");
+
+  const filteredPosts = postStateValue.posts.filter((post) => {
+    return post.title.toLowerCase().includes(searchInput.toLowerCase());
+  });
+
   const getPosts = async () => {
     console.log("Getting Posts");
 
     try {
       setLoading(true);
-      const posetQuery = query(
-        collection(firestore, "posts"),
-        where("communityId", "==", communityData.id),
-        orderBy("createdAt", "desc")
-      );
+      const posetQuery = query(collection(firestore, "posts"), where("communityId", "==", communityData.id), orderBy("createdAt", "desc"));
       const postDocs = await getDocs(posetQuery);
       //postdocs.docs = array of the doc info , return with each one's id and spread all of the data
       const posts = postDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -38,7 +40,7 @@ const Posts = ({ communityData }: PostsProps) => {
         ...prev,
         posts: posts as Post[],
       }));
-      console.log('this is the post', posts)
+      console.log("this is the post", posts);
       setLoading(false);
     } catch (error: any) {
       console.log(error.message);
@@ -52,16 +54,9 @@ const Posts = ({ communityData }: PostsProps) => {
 
   return (
     <>
+      <Input bg="gray" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
       {postStateValue.posts.length === 0 && !loading && (
-        <Flex
-          direction="column"
-          justify="center"
-          align="center"
-          border="1px solid"
-          borderColor="gray.600"
-          borderRadius="xl"
-          p={20}
-        >
+        <Flex direction="column" justify="center" align="center" border="1px solid" borderColor="gray.600" borderRadius="xl" p={20}>
           <Icon as={RiGhostFill} fontSize={150} color="gray.500" opacity="0.5" />
           <Text fontWeight={700} color="gray.500">
             Woo～成為第一個發文的人吧！
@@ -76,7 +71,7 @@ const Posts = ({ communityData }: PostsProps) => {
       ) : (
         <Stack>
           Posts
-          {postStateValue.posts.map((item) => (
+          {filteredPosts.map((item) => (
             <PostItem
               key={item.id}
               post={item}

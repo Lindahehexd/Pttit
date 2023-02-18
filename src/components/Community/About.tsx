@@ -104,7 +104,7 @@ const About = ({ communityData }: AboutProps) => {
         ...prev,
         currentCommunity: {
           ...prev.currentCommunity,
-          aboutCommunity: updatedCommunityData?.data()?.aboutCommunity,
+          aboutCommunity: about,
         } as Community,
       }));
 
@@ -148,10 +148,7 @@ const About = ({ communityData }: AboutProps) => {
             <Icon as={RiCakeLine} mr={2} />
             <Text>
               於 {""}
-              {communityData.createdAt
-                ? moment(new Date(communityData.createdAt.seconds * 1000)).format("YYYY/MM/DD")
-                : ""}{" "}
-              建立
+              {communityData.createdAt ? moment(new Date(communityData.createdAt.seconds * 1000)).format("YYYY/MM/DD") : ""} 建立
             </Text>
           </Flex>
           {/* link button */}
@@ -169,12 +166,7 @@ const About = ({ communityData }: AboutProps) => {
                     <Spinner />
                   ) : (
                     <>
-                      <Text
-                        color="blue.500"
-                        cursor="pointer"
-                        _hover={{ textDecoration: "underline" }}
-                        onClick={() => selectedFileRef.current?.click()}
-                      >
+                      <Text color="blue.500" cursor="pointer" _hover={{ textDecoration: "underline" }} onClick={() => selectedFileRef.current?.click()}>
                         更換圖片
                       </Text>
 
@@ -185,14 +177,21 @@ const About = ({ communityData }: AboutProps) => {
                       <Modal isOpen={isOpen} onClose={onClose}>
                         <ModalOverlay />
                         <ModalContent>
-                          <ModalHeader>Modal Title</ModalHeader>
+                          <ModalHeader>修改看板簡介</ModalHeader>
                           <ModalCloseButton />
                           <ModalBody>
                             <Text fontWeight="bold">修改看板簡介</Text>
                             <Input position="relative" value={about} size="sm" pl="22px" onChange={handleChange2} />
                           </ModalBody>
                           <ModalFooter>
-                            <Button h="30px" onClick={onUpdateAboutCommunity} isLoading={loading}>
+                            <Button
+                              h="30px"
+                              onClick={() => {
+                                onUpdateAboutCommunity();
+                                onClose();
+                              }}
+                              isLoading={loading}
+                            >
                               修改
                             </Button>
                           </ModalFooter>
@@ -203,31 +202,15 @@ const About = ({ communityData }: AboutProps) => {
 
                   {/* show the image of community */}
 
-                  {selectedFile ? (
-                    <Image src={selectedFile} borderRadius="full" boxSize="40px" alt="" />
-                  ) : (
-                    <Icon as={RiEarthFill} fontSize={40} color="blue.500" mr={2} />
-                  )}
+                  {selectedFile ? <Image src={selectedFile} borderRadius="full" boxSize="40px" alt="" /> : <Icon as={RiEarthFill} fontSize={40} color="blue.500" mr={2} />}
                 </Flex>
                 {/* check if the img is uplaoded or not  */}
                 {selectedFile && (
-                  <Text
-                    color="blue.500"
-                    cursor="pointer"
-                    onClick={onUploadImg}
-                    _hover={{ textDecoration: "underline" }}
-                  >
+                  <Text color="blue.500" cursor="pointer" onClick={onUploadImg} _hover={{ textDecoration: "underline" }}>
                     儲存變更
                   </Text>
                 )}
-                <Input
-                  id="file-upload"
-                  type="file"
-                  accept="image/x-png,image/gif,image/jpeg"
-                  hidden
-                  ref={selectedFileRef}
-                  onChange={onSelectFile}
-                />
+                <Input id="file-upload" type="file" accept="image/x-png,image/gif,image/jpeg" hidden ref={selectedFileRef} onChange={onSelectFile} />
               </Stack>
             </>
           )}
@@ -238,6 +221,3 @@ const About = ({ communityData }: AboutProps) => {
 };
 
 export default About;
-function setRefresh(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}

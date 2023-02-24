@@ -54,7 +54,7 @@ const Posts = ({ communityData }: PostsProps) => {
 
   return (
     <>
-      <Input _hover={{bg:'gray.800'}}  _focus={{bg:'gray.700', }} focusBorderColor='gray.600' bg="gray.900" mb={4}  placeholder='搜尋文章 ‧ ‧ ‧' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+      <Input _hover={{bg:'gray.700'}}  _focus={{bg:'gray.700', }} focusBorderColor='gray.600' bg="gray.800" mb={4}  placeholder='搜尋文章 ‧ ‧ ‧' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
 
       
       {postStateValue.posts.length === 0 && !loading && (

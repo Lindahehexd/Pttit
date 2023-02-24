@@ -118,9 +118,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
             {/* 看板名稱 */}
             <Text fontWeight="bold">看板名稱</Text>
             <Text fontSize="sm" color='gray.400'>看板名稱請使用英文大小寫，設定完成後將無法修改</Text>
-            <Text position="relative" top="28px" left="10px" w="20px" color="gray.400">
-              r/
-            </Text>
+
             <Input position="relative" value={communities} size="sm" pl="22px" onChange={handleChange} />
             <Text fontSize="sm" color={remain === 0 ? "red" : "gray.400"}>
               剩餘 {remain} 個字符

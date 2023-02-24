@@ -1,9 +1,8 @@
-import { Box, Flex, HStack, Icon, Spinner, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
-import { Wrap, WrapItem } from "@chakra-ui/react";
 
 export type Comment = {
   id: string;
@@ -24,15 +23,15 @@ export type CommentsItemProp = {
   userId: string;
 };
 
-const CommentsItem = ({ comment, onDeleteComment, loadingDelete, userId }: CommentsItemProp) => {
+const CommentsItem = ({ comment, userId }: CommentsItemProp) => {
   return (
     <Flex fontSize={{ base: "9px", md: "10px", lg: "16px" }} my={1}>
       {/* container */}
 
       {/* icon */}
-      <Flex  align='self-start'>
+      <Flex align="self-start">
         {comment.commentTabIndex === 0 && <Icon ml={2} as={BsArrowRight} fontSize={22} color="red.400" />}
-        {comment.commentTabIndex === 1 && <Icon ml={2} as={AiFillLike} color="green" fontSize={22} /> }
+        {comment.commentTabIndex === 1 && <Icon ml={2} as={AiFillLike} color="green" fontSize={22} />}
         {comment.commentTabIndex === 2 && <Icon ml={2} as={AiFillDislike} color="red.500" fontSize={22} />}
       </Flex>
 
@@ -45,7 +44,7 @@ const CommentsItem = ({ comment, onDeleteComment, loadingDelete, userId }: Comme
 
       {/* mesg */}
 
-      <Flex  flexGrow={1}>
+      <Flex flexGrow={1}>
         <Text ml={2} color="yellow.400" wordBreak="break-word">
           {comment.text}
         </Text>
@@ -55,7 +54,6 @@ const CommentsItem = ({ comment, onDeleteComment, loadingDelete, userId }: Comme
       <Box minW="75px" ml={2}>
         <Text>{moment(new Date(comment.createdAt.seconds * 1000)).format("M/D HH:mm")}</Text>
       </Box>
-
 
       <Stack direction="row" align="center" cursor="pointer" fontWeight={600} color="gray.500">
         {userId === comment.creatorId && (

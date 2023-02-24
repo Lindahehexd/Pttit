@@ -42,9 +42,9 @@ const Communities = () => {
             <MenuListItem
               key={snippet.communityId}
               icon={RiEarthFill}
-              displayText={`r/${snippet.communityId}`}
+              displayText={`${snippet.communityId}`}
               link={`/r/${snippet.communityId}`}
-              iconColor={"blue.500"}
+              iconColor={"orange.300"}
               imageURL={snippet.imageURL!}
             />
           ))}

@@ -7,9 +7,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  Text,
   Input,
-  useDisclosure,
   Icon,
 } from "@chakra-ui/react";
 import { HiPencilAlt } from "react-icons/hi";
@@ -19,21 +17,29 @@ import { HiPencilAlt } from "react-icons/hi";
 type ModifyModalProps = {
   onUpdateCommunityIntro: () => void;
   about: string;
-  onModalChange: (e: React.ChangeEvent<HTMLInputElement>) => void ;
+  onModalChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClose: () => void;
   isOpen: boolean;
   onOpen: () => void;
   isLoading: boolean;
 };
 
-const ModifyCommunityInfo = ({ onUpdateCommunityIntro, about, onModalChange, isOpen, onClose, onOpen, isLoading }: ModifyModalProps) => {
+const ModifyCommunityInfo = ({
+  onUpdateCommunityIntro,
+  about,
+  onModalChange,
+  isOpen,
+  onClose,
+  onOpen,
+  isLoading,
+}: ModifyModalProps) => {
   return (
     <>
       <Icon ml={2} as={HiPencilAlt} onClick={onOpen} cursor="pointer"></Icon>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-        <ModalHeader>修改【看板簡介】</ModalHeader>
+          <ModalHeader>修改【看板簡介】</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Input
@@ -42,7 +48,7 @@ const ModifyCommunityInfo = ({ onUpdateCommunityIntro, about, onModalChange, isO
               size="sm"
               pl="22px"
               onChange={onModalChange}
-              placeholder="看板簡介"
+              placeholder="輸入內容..."
               _hover={{
                 // bg: "gray.400",
                 border: "1px solid",

@@ -12,7 +12,6 @@ import useDirectory from "@/hooks/useDirectory";
 
 export default function Home() {
   const { onSelectMenuItem } = useDirectory();
-  const [user, loadingUser] = useAuthState(auth);
 
   useEffect(() => {
     onSelectMenuItem(defaultMenuItem);
@@ -20,8 +19,8 @@ export default function Home() {
 
   return (
     <Flex align='center' justify='center' 
-    // bgImage="url(/images/8bitbg1.jpg)" 
-    backgroundSize='cover' >
+    bgImage="url(/images/8bitbg1.jpg)" 
+    backgroundSize='fit' >
       <HomeLayout>
         {/* left */}
         <>

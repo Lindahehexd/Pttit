@@ -144,7 +144,7 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
   }, [selectedPost]);
 
   return (
-    <Box bg="gray.800" borderRadius="0px 0px 4px 4px" p={2}>
+    <Box bg="gray.700" borderRadius="0px 0px 4px 4px" p={2}>
         {/* 整個下半部 */}
       <Flex direction="column" pl={8} pr={4} mb={2} fontSize="10pt" w="100%" >
         <CommentInput

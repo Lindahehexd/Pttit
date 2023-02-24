@@ -7,6 +7,7 @@ import SearchInput from "./SearchInput";
 import Directory from "./Directory/Directory";
 import useDirectory from "@/hooks/useDirectory";
 import CurrentLocation from "./Directory/CurrentLocation";
+import SwitchThemeButton from "./RightContent/SwitchThemeButton";
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -38,6 +39,7 @@ const Navbar = () => {
       <CurrentLocation />
       <SearchInput />
       <RightContent user={user} />
+      {/* <SwitchThemeButton/> */}
     </Flex>
   );
 };

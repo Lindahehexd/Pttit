@@ -76,10 +76,10 @@ const PostItem = ({
 
     <Flex
       border="1px solid"
-      bg="gray.900"
+      bg="gray.700"
       borderColor="gray.700"
       borderRadius={4}
-      _hover={{ borderColor: singlePostPage ? "none" : "gray.600", bg: !singlePostPage && "gray.700" }}
+      _hover={{ borderColor: singlePostPage ? "none" : "gray.600", bg: !singlePostPage && "gray.600" }}
       cursor={singlePostPage ? "unset" : "pointer"}
       // check if truthy
       onClick={() => onSelectPost && onSelectPost(post)}

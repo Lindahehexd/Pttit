@@ -100,13 +100,13 @@ const About = ({ communityData }: AboutProps) => {
 
   //   console.log("communityData", communityData);
   return (
-    <Box position="sticky" top="14px">
+    <Box position="sticky" top="14px" >
       {/* top */}
-      <Flex bg="#0C0A66" color="white" p={3} borderRadius="4px 4px 0px 0px">
+      <Flex bg="#000088" color="white" p={3} borderRadius="4px 4px 0px 0px">
         <Text> 關於看板 </Text>
       </Flex>
       {/* remain */}
-      <Flex direction="column" p={3} bg={"whiteAlpha.200"} borderRadius="0px 0px 4px 4px">
+      <Flex direction="column" p={3} bg={"whiteAlpha.300"} borderRadius="0px 0px 4px 4px">
         <Stack>
           <Flex w="100%" p={2}>
             <Flex flexGrow={1} maxWidth="300px" align="center">
@@ -150,7 +150,7 @@ const About = ({ communityData }: AboutProps) => {
             </Text>
           </Flex>
           {/* link button */}
-          <Button mt={2} h="38px" w="100%" onClick={onAbout} bg="purple.700">
+          <Button mt={2} h="38px" w="100%" onClick={onAbout} >
             發表文章
           </Button>
           {/* if you are admin */}

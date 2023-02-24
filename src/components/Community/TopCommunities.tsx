@@ -96,7 +96,7 @@ const TopCommunities: React.FC<RecommendationsProps> = () => {
                       )}
 
                       <Link href={`/r/${item.id}`}>
-                        <Text _hover={{ textDecoration: "underline" }}>{`r/${item.id}`}</Text>
+                        <Text _hover={{ textDecoration: "underline" }}>{`${item.id}`}</Text>
                       </Link>
                     </Flex>
 

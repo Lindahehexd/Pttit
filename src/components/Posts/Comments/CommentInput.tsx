@@ -30,11 +30,22 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
         //outer
         <Flex direction="column">
           {/* 發表看法 */}
-          <Text mb={1}>
-            <span style={{ color: "#3182CE" }}>{user?.email?.split("@")[0]}</span> 發表你的看法
+          
+          <Flex gap={2}>
+
+
+          <Text mb={1} color='blue.200'>
+           {user?.email?.split("@")[0]}
           </Text>
+          <Text mb={1} color='gray.400'>
+           發表你的看法
+          </Text>
+
+          </Flex>
+
+   
           {/* TAB */}
-          <Tabs onChange={(tabIndex) => setTabIndex(tabIndex)} bg="gray.800" borderRadius="4px, 4px, 0px,">
+          <Tabs onChange={(tabIndex) => setTabIndex(tabIndex)} bg="gray.700" borderRadius="4px, 4px, 0px,">
             <TabList>
               <Tab color="white">
                 <Icon as={AiFillMessage} color='gray.400' />
@@ -58,8 +69,8 @@ const CommentInput = ({ commentText, setCommentText, createLoading, user, onCrea
             <TabPanels p={1}>
               <Textarea
                 focusBorderColor="gray.600"
-                _focus={{ bg: "gray.900" }}
-                bg="black"
+                _focus={{ bg: "gray.800" }}
+                bg="gray.800"
                 value={commentText}
                 onChange={(event) => setCommentText(event.target.value)}
                 maxLength={45}

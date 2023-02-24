@@ -22,7 +22,7 @@ export const theme = extendTheme({
   styles: {
     global: () => ({
       body: {
-        bg: useColorModeValue("#E4D8B4", "black")
+        bg: 'black'
       },
     }),
   },

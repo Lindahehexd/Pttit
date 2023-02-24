@@ -39,7 +39,7 @@ const Navbar = () => {
       <CurrentLocation />
       <SearchInput />
       <RightContent user={user} />
-      {/* <SwitchThemeButton/> */}
+      <SwitchThemeButton/>
     </Flex>
   );
 };

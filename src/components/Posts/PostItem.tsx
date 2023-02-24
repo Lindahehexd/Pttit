@@ -2,9 +2,7 @@ import { Post } from "@/atoms/postAtom";
 import { Button, Flex, HStack, Icon, Image, Skeleton, Spinner, Stack, Text, useToast } from "@chakra-ui/react";
 import moment from "moment";
 import { BsChat, BsDot } from "react-icons/bs";
-import {
-  IoArrowRedoOutline,
-} from "react-icons/io5";
+import { IoArrowRedoOutline } from "react-icons/io5";
 
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState } from "react";
@@ -176,7 +174,7 @@ const PostItem = ({
           </Text>
           <Text>{post.body}</Text>
           {post.imageURL && (
-            <Flex justify='center'>
+            <Flex justify="center">
               {imgloading && <Skeleton h="200px" w="100%" borderRadius={4} />}
               <Image
                 src={post.imageURL}
@@ -198,18 +196,21 @@ const PostItem = ({
               <Text fontSize="sm">{post.numberOfComment}</Text>
             </Flex>
             {/* bot item 2  */}
-            <Flex
-              mt={2}
-              p="8px 10px"
-              borderRadius={4}
-              _hover={{ bg: "gray.600" }}
-              cursor="pointer"
-              align="center"
-              onClick={handleCopy}
-            >
-              <Icon mr={2} as={IoArrowRedoOutline} />
-              <Text fontSize="sm">分享</Text>
-            </Flex>
+            {singlePostPage && (
+              <Flex
+                mt={2}
+                p="8px 10px"
+                borderRadius={4}
+                _hover={{ bg: "gray.600" }}
+                cursor="pointer"
+                align="center"
+                onClick={handleCopy}
+              >
+                <Icon mr={2} as={IoArrowRedoOutline} />
+                <Text fontSize="sm">分享</Text>
+              </Flex>
+            )}
+
             {/* bot item 4 when you are post author  */}
             {userIsCreator && (
               <Flex

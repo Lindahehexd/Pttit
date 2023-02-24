@@ -1,37 +1,17 @@
 import { authModalState } from "@/atoms/authModalAtom";
 import { Community, communityState } from "@/atoms/communitiesAtom";
 import { auth, firestore, storage } from "@/firebase/clientApp";
-import useSelectFile from "@/hooks/useSelectFile";
-import {
-  Flex,
-  Box,
-  Text,
-  Stack,
-  Divider,
-  Icon,
-  Button,
-  Image,
-  Spinner,
-  Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-  Center,
-} from "@chakra-ui/react";
-import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
+import { Flex, Box, Text, Stack, Divider, Icon, Button, Image, Spinner, Input, useDisclosure } from "@chakra-ui/react";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import moment from "moment";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { RiCakeLine, RiEarthFill } from "react-icons/ri";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import ModifyModal from "./ModifyModal";
+import useSelectFile from "@/hooks/useSelectFile";
+import moment from "moment";
+import ModifyAboutCommunity from "./ModifyAboutCommunity";
 
 type AboutProps = {
   communityData: Community;
@@ -50,7 +30,7 @@ const About = ({ communityData }: AboutProps) => {
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onModalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAbout(e.target.value);
   };
 
@@ -135,16 +115,18 @@ const About = ({ communityData }: AboutProps) => {
                ${communityStateValue.currentCommunity?.aboutCommunity} `}
               </Text>
 
-
-
-
               {/* update */}
               {user?.uid === communityData.creatorId && (
-                <ModifyModal onUpdateAboutCommunity={onUpdateAboutCommunity} about={about} handleChange2={handleChange2} isOpen={isOpen} onClose={onClose} onOpen={onOpen} loading={loading} />
+                <ModifyAboutCommunity
+                  onUpdateAboutCommunity={onUpdateAboutCommunity}
+                  about={about}
+                  onModalChange={onModalChange}
+                  isOpen={isOpen}
+                  onClose={onClose}
+                  onOpen={onOpen}
+                  loading={loading}
+                />
               )}
-
-
-
             </Flex>
           </Flex>
           <Divider />
@@ -161,11 +143,14 @@ const About = ({ communityData }: AboutProps) => {
             <Icon as={RiCakeLine} mr={2} />
             <Text>
               於 {""}
-              {communityData.createdAt ? moment(new Date(communityData.createdAt.seconds * 1000)).format("YYYY/MM/DD") : ""} 建立
+              {communityData.createdAt
+                ? moment(new Date(communityData.createdAt.seconds * 1000)).format("YYYY/MM/DD")
+                : ""}{" "}
+              建立
             </Text>
           </Flex>
           {/* link button */}
-          <Button mt={2} h="38px" w="100%" onClick={onAbout} bg='purple.700'>
+          <Button mt={2} h="38px" w="100%" onClick={onAbout} bg="purple.700">
             發表文章
           </Button>
           {/* if you are admin */}
@@ -179,24 +164,44 @@ const About = ({ communityData }: AboutProps) => {
                     <Spinner />
                   ) : (
                     <>
-                      <Text color="blue.500" cursor="pointer" _hover={{ textDecoration: "underline" }} onClick={() => selectedFileRef.current?.click()}>
+                      <Text
+                        color="blue.500"
+                        cursor="pointer"
+                        _hover={{ textDecoration: "underline" }}
+                        onClick={() => selectedFileRef.current?.click()}
+                      >
                         更換圖片
                       </Text>
-
                     </>
                   )}
 
                   {/* show the image of community */}
 
-                  {selectedFile ? <Image src={selectedFile} borderRadius="full" boxSize="40px" alt="" /> : <Icon as={RiEarthFill} fontSize={40} color="blue.500" mr={2} />}
+                  {selectedFile ? (
+                    <Image src={selectedFile} borderRadius="full" boxSize="40px" alt="" />
+                  ) : (
+                    <Icon as={RiEarthFill} fontSize={40} color="blue.500" mr={2} />
+                  )}
                 </Flex>
                 {/* check if the img is uplaoded or not  */}
                 {selectedFile && (
-                  <Text color="blue.500" cursor="pointer" onClick={onUploadImg} _hover={{ textDecoration: "underline" }}>
+                  <Text
+                    color="blue.500"
+                    cursor="pointer"
+                    onClick={onUploadImg}
+                    _hover={{ textDecoration: "underline" }}
+                  >
                     儲存變更
                   </Text>
                 )}
-                <Input id="file-upload" type="file" accept="image/x-png,image/gif,image/jpeg" hidden ref={selectedFileRef} onChange={onSelectFile} />
+                <Input
+                  id="file-upload"
+                  type="file"
+                  accept="image/x-png,image/gif,image/jpeg"
+                  hidden
+                  ref={selectedFileRef}
+                  onChange={onSelectFile}
+                />
               </Stack>
             </>
           )}

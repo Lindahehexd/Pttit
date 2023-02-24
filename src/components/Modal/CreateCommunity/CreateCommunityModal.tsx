@@ -108,7 +108,7 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
     <Modal isOpen={open} onClose={handleClose} size="lg">
       {/*  */}
       <ModalOverlay />
-      <ModalContent bg='gray.700'>
+      <ModalContent bg="gray.700">
         <ModalHeader display="flex" flexDirection="column" fontSize="lg" p={3}>
           建立看板
         </ModalHeader>
@@ -117,7 +117,9 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
           <ModalBody display="flex" flexDirection="column" p="10px 0px">
             {/* 看板名稱 */}
             <Text fontWeight="bold">看板名稱</Text>
-            <Text fontSize="sm" color='gray.400'>看板名稱請使用英文大小寫，設定完成後將無法修改</Text>
+            <Text fontSize="sm" color="gray.400">
+              看板名稱只允許英文大小寫及下劃線，設定完成後將無法修改
+            </Text>
 
             <Input position="relative" value={communities} size="sm" pl="22px" onChange={handleChange} />
             <Text fontSize="sm" color={remain === 0 ? "red" : "gray.400"}>
@@ -127,16 +129,18 @@ const CreateCommunityModal = ({ open, handleClose }: CreateCommunityProps) => {
               {error}
             </Text>
             {/* 社團介紹 */}
-            <Text fontWeight="bold">社團介紹</Text>
+            <Text fontWeight="bold">看板簡介</Text>
             <Input position="relative" value={communitiesInfo} size="sm" pl="22px" onChange={handleChange2} />
             <Text fontSize="sm" color="gray.400">
               範例: [八卦] 這裡是八卦版，兔年行大運！！
             </Text>
             {/* 看板簡介 */}
-            <Text fontWeight="bold" mt={2}>看板簡介</Text>
+            <Text fontWeight="bold" mt={2}>
+              關於看板
+            </Text>
             <Input position="relative" value={aboutCommunity} size="sm" pl="22px" onChange={handleChange3} />
             <Text fontSize="sm" color="gray.400">
-              看板簡介將會顯示於看板頁面
+              【關於看板】將會顯示於看板頁面
             </Text>
           </ModalBody>
 

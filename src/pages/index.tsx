@@ -6,21 +6,22 @@ import { useEffect } from "react";
 import AllCommunities from "@/components/Community/AllCommunities";
 import HomeLayout from "@/components/Layout/HomeLayout";
 import PersonalHome from "@/components/Community/PersonalHome";
-import Premium from "@/components/Community/Premium";
 import TopCommunities from "@/components/Community/TopCommunities";
 import useDirectory from "@/hooks/useDirectory";
+import Kanban from "@/components/Community/Kanban";
 
 export default function Home() {
-  const { onSelectMenuItem } = useDirectory();
+    
+//   const { onSelectMenuItem } = useDirectory();
 
-  useEffect(() => {
-    onSelectMenuItem(defaultMenuItem);
-  }, []);
+//   useEffect(() => {
+//     onSelectMenuItem(defaultMenuItem);
+//   }, []);
 
   return (
     <Flex align='center' justify='center' 
     bgImage="url(/images/8bitbg1.jpg)" 
-    backgroundSize='fit' >
+    backgroundSize='cover' >
       <HomeLayout>
         {/* left */}
         <>
@@ -30,7 +31,7 @@ export default function Home() {
         <>
           <Stack spacing={7}>
             <TopCommunities />
-            <Premium />
+            <Kanban />
             <PersonalHome />
           </Stack>
         </>

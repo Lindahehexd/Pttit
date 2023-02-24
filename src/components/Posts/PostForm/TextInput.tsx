@@ -38,7 +38,7 @@ const TextInput = ({ textInput, onChange, handleCreatePost, loading }: TextInput
         _focus={{ outline: "none", bg: "gray.700", border: "1px solid", borderColor: "black" }}
       />
       <Flex p={3} justify="flex-end">
-        <Button h="34px" px="30px" disabled={!textInput.title} onClick={handleCreatePost} isLoading={loading}>
+        <Button h="34px" px="30px"  disabled={!textInput.title} onClick={handleCreatePost} isLoading={loading}>
           發文
         </Button>
       </Flex>

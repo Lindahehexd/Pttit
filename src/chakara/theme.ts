@@ -1,11 +1,5 @@
-// 1. Import `extendTheme`
-import "@fontsource/open-sans/300.css";
-import "@fontsource/open-sans/400.css";
-import "@fontsource/open-sans/700.css";
-
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, useColorModeValue } from "@chakra-ui/react";
 import {Button } from './button'
-import { useColorModeValue } from "@chakra-ui/react";
 
 
 
@@ -22,7 +16,8 @@ export const theme = extendTheme({
   styles: {
     global: () => ({
       body: {
-        bg: 'black'
+        bg: 'black',
+        color: useColorModeValue('white', 'white')
       },
     }),
   },

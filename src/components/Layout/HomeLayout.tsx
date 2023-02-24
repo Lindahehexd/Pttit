@@ -26,6 +26,8 @@ const HomeLayout: React.FC<PageContentLayoutProps> = ({ children }) => {
         p="2"
         // bg='teal'
         opacity='0.9'
+        h='90vh'
+
       >
         {/* L */}
         <Flex

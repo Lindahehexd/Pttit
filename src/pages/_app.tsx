@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode="light" />
+      <ColorModeScript initialColorMode="dark" />
         <Layout isLoading={isLoading}>
           <Component {...pageProps} />
         </Layout>

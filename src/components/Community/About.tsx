@@ -150,7 +150,7 @@ const About = ({ communityData }: AboutProps) => {
             </Text>
           </Flex>
           {/* link button */}
-          <Button mt={2} h="38px" w="100%" onClick={onAbout} >
+          <Button mt={2} h="38px" w="100%"  bg='orange.400' _hover={{bg:'orange.300'}} onClick={onAbout} >
             發表文章
           </Button>
           {/* if you are admin */}

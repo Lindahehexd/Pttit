@@ -4,7 +4,7 @@ const PostRule = () => {
   return (
     <Box position="sticky" top="14px" mt={20}>
       {/* top */}
-      <Flex bg="blue.900" color="white" p={3} borderRadius="4px 4px 0px 0px">
+      <Flex bg="#000088" color="white" p={3} borderRadius="4px 4px 0px 0px">
         <Text> 貼心提醒 </Text>
       </Flex>
       {/* remain */}

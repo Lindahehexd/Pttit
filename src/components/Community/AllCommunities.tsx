@@ -38,14 +38,13 @@ const AllCommunities = () => {
         align="flex-end"
         color="white"
         p="6px 10px"
-        bg="blue.500"
+        // bg="blue.500"
         height="70px"
         borderRadius="4px 4px 0px 0px"
         fontWeight={600}
-        bgImage="url(/images/8bithome.webp)"
+        bgImage="url(/images/8bitbg2.png)"
         backgroundSize="contain"
-        bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)),
-          url('images/8bitbg2.png')"
+        bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)), url('images/8bitbg2.png')"
       >
         <Text fontSize="">所有看板</Text>
       </Flex>

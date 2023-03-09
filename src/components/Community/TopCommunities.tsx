@@ -40,7 +40,7 @@ const TopCommunities= () => {
         align="flex-end"
         color="white"
         p="6px 10px"
-        bg="blue.500"
+        // bg="blue.500"
         height="70px"
         borderRadius="4px 4px 0px 0px"
         fontWeight={600}

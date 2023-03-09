@@ -11,6 +11,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const PostPage = () => {
   const [user] = useAuthState(auth);
@@ -41,31 +42,42 @@ const PostPage = () => {
   }, [router.query, postStateValue.selectedPost, setPostStateValue]);
 
   return (
-    <PageContentLayout>
-      <>
-        {postStateValue.selectedPost && (
-          <PostItem
-            post={postStateValue.selectedPost}
-            // postIdx={postStateValue.selectedPost.postIdx}
-            onVote={onVote}
-            onDeletePost={onDeletePost}
-            //推文的value要符合對應的文章的id
-            userVoteValue={
-              postStateValue.postVotes.find((item) => item.postId === postStateValue.selectedPost!.id)?.voteValue
-            }
-            //檢查文章是不是發文的人
-            userIsCreator={user?.uid === postStateValue.selectedPost?.creatorId}
-          />
-        )}
-        <Comments
-          user={user as User}
-          selectedPost={postStateValue.selectedPost}
-          communityId={postStateValue.selectedPost?.communityId as string}
+    <>
+      <Head>
+        <title>Post – PTTit</title>
+        <meta
+          name="description"
+          content="PTTit結合PTT與Reddit，可以讓你建立看板，也能搜尋文章、查詢看板，甚至讓你推噓文，現在就成為PTTit的鄉民吧!"
         />
-      </>
-      {/* Right Content */}
-      <>{communityStateValue.currentCommunity && <About communityData={communityStateValue.currentCommunity} />}</>
-    </PageContentLayout>
+        <meta property="og:image" content="/images/pview.jpg" />
+      </Head>
+
+      <PageContentLayout>
+        <>
+          {postStateValue.selectedPost && (
+            <PostItem
+              post={postStateValue.selectedPost}
+              // postIdx={postStateValue.selectedPost.postIdx}
+              onVote={onVote}
+              onDeletePost={onDeletePost}
+              //推文的value要符合對應的文章的id
+              userVoteValue={
+                postStateValue.postVotes.find((item) => item.postId === postStateValue.selectedPost!.id)?.voteValue
+              }
+              //檢查文章是不是發文的人
+              userIsCreator={user?.uid === postStateValue.selectedPost?.creatorId}
+            />
+          )}
+          <Comments
+            user={user as User}
+            selectedPost={postStateValue.selectedPost}
+            communityId={postStateValue.selectedPost?.communityId as string}
+          />
+        </>
+        {/* Right Content */}
+        <>{communityStateValue.currentCommunity && <About communityData={communityStateValue.currentCommunity} />}</>
+      </PageContentLayout>
+    </>
   );
 };
 

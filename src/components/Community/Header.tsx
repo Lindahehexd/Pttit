@@ -15,7 +15,7 @@ type HeaderProps = {
 
 const Header = ({ communityData }: HeaderProps) => {
   const { communityStateValue, onJoinLeaveCommunity, loading } = useCommunityData();
-  const [about, setAbout] = useState("");
+  const [about, setAbout] = useState(communityData.communityInfo);
 
   //   const { communityStateValue, loading, error, onJoinLeaveCommunity } = useCommunityData(!!communityData);
   //   const isJoined = !!communityStateValue.mySnippets.find((item) => item.communityId === communityData.id);

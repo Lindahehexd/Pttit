@@ -27,7 +27,7 @@ const About = ({ communityData }: AboutProps) => {
   //   const setCommunityStateValue = useSetRecoilState(communityState);
   const [communityStateValue, setCommunityStateValue] = useRecoilState(communityState);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [about, setAbout] = useState("");
+  const [about, setAbout] = useState(communityData.aboutCommunity);
   const [loading, setLoading] = useState(false);
 
   const onModalChange = (e: React.ChangeEvent<HTMLInputElement>) => {

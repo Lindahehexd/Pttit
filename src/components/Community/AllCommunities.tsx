@@ -7,9 +7,7 @@ import { firestore } from "../../firebase/clientApp";
 import Link from "next/link";
 import useCommunityData from "../../hooks/useCommunityData";
 
-type RecommendationsProps = {};
-
-const AllCommunities= ():RecommendationsProps => {
+const AllCommunities = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
   const [loading, setLoading] = useState(false);
   const { communityStateValue, onJoinLeaveCommunity } = useCommunityData();
@@ -72,54 +70,56 @@ const AllCommunities= ():RecommendationsProps => {
             {communities.map((item, index) => {
               const isJoined = !!communityStateValue.mySnippets.find((snippet) => snippet.communityId === item.id);
               return (
-                <Flex
-                  key={item.id}
-                  align="center"
-                  fontSize="10pt"
-                  borderBottom="1px solid"
-                  borderColor="gray.600"
-                  p={3}
-                  fontWeight={400}
-                  justifyContent="space-between"
-                  _hover={{ bg: "gray.600" }}
-                >
-                  <Flex width="85%" align="center">
-                    <Flex mr={3} w="20px">
-                      <Text mr={2}>{index + 1}</Text>
-                    </Flex>
-                    <Flex align="center" width="80%">
-                      {item.imageURL ? (
-                        <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} alt="" />
-                      ) : (
-                        <Icon as={RiEarthFill} fontSize={30} color="orange.200" mr={2} />
-                      )}
-                      <Box w="30%">
-                        <Link href={`/r/${item.id}`}>
+                <Link href={`/r/${item.id}`}>
+                  <Flex
+                    key={item.id}
+                    align="center"
+                    fontSize="10pt"
+                    borderBottom="1px solid"
+                    borderColor="gray.600"
+                    p={3}
+                    fontWeight={400}
+                    justifyContent="space-between"
+                    _hover={{ bg: "gray.600" }}
+                  >
+                    <Flex width="85%" align="center">
+                      <Flex mr={3} w="20px">
+                        <Text mr={2}>{index + 1}</Text>
+                      </Flex>
+                      <Flex align="center" width="80%">
+                        {item.imageURL ? (
+                          <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} alt="" />
+                        ) : (
+                          <Icon as={RiEarthFill} fontSize={30} color="orange.200" mr={2} />
+                        )}
+                        <Box w="30%">
                           <Box
                             _hover={{ textDecoration: "underline" }}
                             fontSize={{ base: "14px", md: "16px", lg: "20px" }}
                           >{`${item.id}`}</Box>
-                        </Link>
-                      </Box>
+                        </Box>
 
-                      <Text ml={7} fontSize={{ base: "14px", md: "14px" }}>
-                        @ {item.communityInfo}
-                      </Text>
+                        <Text ml={7} fontSize={{ base: "14px", md: "14px" }} _hover={{ textDecoration: "underline" }}>
+                          @ {item.communityInfo}
+                        </Text>
+                      </Flex>
+                    </Flex>
+
+                    <Flex right="10px">
+                      <Button
+                        height="22px"
+                        fontSize="8pt"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          onJoinLeaveCommunity(item, isJoined);
+                        }}
+                        variant={isJoined ? "outline" : "solid"}
+                      >
+                        {isJoined ? "已加入" : "加入"}
+                      </Button>
                     </Flex>
                   </Flex>
-                  <Flex right="10px">
-                    <Button
-                      height="22px"
-                      fontSize="8pt"
-                      onClick={() => {
-                        onJoinLeaveCommunity(item, isJoined);
-                      }}
-                      variant={isJoined ? "outline" : "solid"}
-                    >
-                      {isJoined ? "已加入" : "加入"}
-                    </Button>
-                  </Flex>
-                </Flex>
+                </Link>
               );
             })}
           </>

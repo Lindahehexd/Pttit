@@ -59,10 +59,11 @@ const Posts = ({ communityData }: PostsProps) => {
   return (
     <>
       <Input
-        _hover={{ bg: "gray.700" }}
-        _focus={{ bg: "gray.700" }}
+        _hover={{ bg: "gray.600" }}
+        _focus={{ bg: "gray.600" }}
         focusBorderColor="gray.600"
-        bg="gray.800"
+        _placeholder={{ color: 'gray.400' }}
+        bg="gray.700"
         mb={4}
         placeholder="搜尋文章 ‧ ‧ ‧"
         value={searchInput}

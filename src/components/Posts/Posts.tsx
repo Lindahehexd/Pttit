@@ -1,12 +1,12 @@
 import { Community } from "@/atoms/communitiesAtom";
 import { Post } from "@/atoms/postAtom";
 import { auth, firestore } from "@/firebase/clientApp";
-import usePosts from "@/hooks/usePosts";
 import { Flex, Icon, Input, Stack, Text } from "@chakra-ui/react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { RiGhostFill } from "react-icons/ri";
+import usePosts from "@/hooks/usePosts";
 import PostItem from "./PostItem";
 import PostLoader from "./PostLoader";
 
@@ -31,7 +31,11 @@ const Posts = ({ communityData }: PostsProps) => {
 
     try {
       setLoading(true);
-      const posetQuery = query(collection(firestore, "posts"), where("communityId", "==", communityData.id), orderBy("createdAt", "desc"));
+      const posetQuery = query(
+        collection(firestore, "posts"),
+        where("communityId", "==", communityData.id),
+        orderBy("createdAt", "desc")
+      );
       const postDocs = await getDocs(posetQuery);
       //postdocs.docs = array of the doc info , return with each one's id and spread all of the data
       const posts = postDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -54,11 +58,27 @@ const Posts = ({ communityData }: PostsProps) => {
 
   return (
     <>
-      <Input _hover={{bg:'gray.700'}}  _focus={{bg:'gray.700', }} focusBorderColor='gray.600' bg="gray.800" mb={4}  placeholder='搜尋文章 ‧ ‧ ‧' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+      <Input
+        _hover={{ bg: "gray.700" }}
+        _focus={{ bg: "gray.700" }}
+        focusBorderColor="gray.600"
+        bg="gray.800"
+        mb={4}
+        placeholder="搜尋文章 ‧ ‧ ‧"
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+      />
 
-      
       {postStateValue.posts.length === 0 && !loading && (
-        <Flex direction="column" justify="center" align="center" border="1px solid" borderColor="gray.600" borderRadius="xl" p={20}>
+        <Flex
+          direction="column"
+          justify="center"
+          align="center"
+          border="1px solid"
+          borderColor="gray.600"
+          borderRadius="xl"
+          p={20}
+        >
           <Icon as={RiGhostFill} fontSize={150} color="gray.500" opacity="0.5" />
           <Text fontWeight={700} color="gray.500">
             Woo～成為第一個發文的人吧！

@@ -1,8 +1,8 @@
 import { Box, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { Timestamp } from "firebase/firestore";
-import moment from "moment";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
+import moment from "moment";
 
 export type Comment = {
   id: string;

@@ -1,11 +1,10 @@
-import AuthButtons from "@/components/Navbar/RightContent/AuthButtons";
-import { Button, Divider, Flex, Icon, Spacer, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
+import { Button, Divider, Flex, Icon, Text, Textarea, useColorModeValue } from "@chakra-ui/react";
 import { User } from "firebase/auth";
-import React, { useState } from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 import { atomindex } from "@/atoms/commentAtom";
 import { AiFillDislike, AiFillLike, AiFillMessage } from "react-icons/ai";
+import AuthButtons from "@/components/Navbar/RightContent/AuthButtons";
 
 type CommentInputProps = {
   commentText: string;

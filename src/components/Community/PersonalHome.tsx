@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Button, Center, Flex, Icon, Stack, Text } from "@chakra-ui/react";
-import { RiGhostSmileFill } from "react-icons/ri";
+import { useEffect, useState } from "react";
+import { Center, Flex, Text } from "@chakra-ui/react";
 
-const PersonalHome: React.FC = () => {
+const PersonalHome = () => {
   const [ip, setIp] = useState("");
   const [countryName, setCountryName] = useState("");
 
@@ -26,13 +25,13 @@ const PersonalHome: React.FC = () => {
 
   return (
     <Flex direction="column" borderRadius={4} border="1px solid" borderColor="gray.600" position="sticky">
-      <Flex bgImage="url(/images/pttlogin1.png)" backgroundSize="cover" borderRadius="4px 4px 0px 0px" h='100px'></Flex>
+      <Flex bgImage="url(/images/pttlogin1.png)" backgroundSize="cover" borderRadius="4px 4px 0px 0px" h="100px"></Flex>
       <Flex direction="column" p="12px" bg="gray.900">
-          <Center>
-            <Text fontSize="sm">
-              當前IP : {ip} ({countryName})
-            </Text>
-          </Center>
+        <Center>
+          <Text fontSize="sm">
+            當前IP : {ip} ({countryName})
+          </Text>
+        </Center>
       </Flex>
     </Flex>
   );

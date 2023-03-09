@@ -1,14 +1,10 @@
 import { signOut, User } from "firebase/auth";
 import { auth } from "@/firebase/clientApp";
-import { Menu, MenuButton, MenuList, MenuItem, Button, Box, Flex, Icon, Text, MenuDivider } from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem, Flex, Icon, Text } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { FaRedditSquare, FaSnowman } from "react-icons/fa";
+import { FaSnowman } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
-import { IoSparkles } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
-import { useResetRecoilState } from "recoil";
-import { communityState } from "@/atoms/communitiesAtom";
 
 type MenuProps = {
   user: User | null | undefined;

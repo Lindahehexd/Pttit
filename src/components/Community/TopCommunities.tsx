@@ -1,15 +1,15 @@
 import { Box, Button, Flex, Icon, Image, Skeleton, SkeletonCircle, Stack, Text } from "@chakra-ui/react";
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { RiEarthFill, RiEmotionFill } from "react-icons/ri";
+import { useEffect, useState } from "react";
+import { RiEarthFill } from "react-icons/ri";
 import { Community } from "../../atoms/communitiesAtom";
 import { firestore } from "../../firebase/clientApp";
+import Link from "next/link";
 import useCommunityData from "../../hooks/useCommunityData";
 
-type RecommendationsProps = {};
+// type RecommendationsProps = {};
 
-const TopCommunities: React.FC<RecommendationsProps> = () => {
+const TopCommunities= () => {
   const [communities, setCommunities] = useState<Community[]>([]);
   const [loading, setLoading] = useState(false);
   const { communityStateValue, onJoinLeaveCommunity } = useCommunityData();

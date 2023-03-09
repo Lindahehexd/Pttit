@@ -1,13 +1,10 @@
 /* eslint-disable react/no-children-prop */
-import { Flex, Input, InputGroup, InputLeftElement, Stack } from "@chakra-ui/react";
 import { useState } from "react";
-
+import { Flex, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 
-type Props = {};
-
-const SearchInput: React.FC<Props> = () => {
+const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");
 
   const router = useRouter();

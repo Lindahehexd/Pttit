@@ -13,7 +13,7 @@ type HeaderProps = {
   communityData: Community;
 };
 
-const Header: React.FC<HeaderProps> = ({ communityData }) => {
+const Header = ({ communityData }: HeaderProps) => {
   const { communityStateValue, onJoinLeaveCommunity, loading } = useCommunityData();
   const [about, setAbout] = useState("");
 

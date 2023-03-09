@@ -19,7 +19,7 @@ const OAuthButton = () => {
 
   return (
     <Flex direction="column" w="100%" mb={2}>
-      <Button bg='black' mb={2} isLoading={loading} onClick={() => signInWithGoogle()} fontWeight="sm">
+      <Button bg="black" mb={2} isLoading={loading} onClick={() => signInWithGoogle()} fontWeight="sm">
         <Image h="20px" mr={4} src="/images/googlelogo.png" alt="" />
         使用google帳號登入
       </Button>

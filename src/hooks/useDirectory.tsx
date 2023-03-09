@@ -2,7 +2,6 @@ import { communityState } from "@/atoms/communitiesAtom";
 import { defaultMenuItem, DirectoryMenuItem, directoryMenuState } from "@/atoms/directoryMenuAtom";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { FaReddit } from "react-icons/fa";
 import { RiEarthFill } from "react-icons/ri";
 import { useRecoilState, useRecoilValue } from "recoil";
 

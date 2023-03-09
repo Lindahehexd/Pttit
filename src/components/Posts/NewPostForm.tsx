@@ -1,17 +1,17 @@
+import { useState } from "react";
 import { Post } from "@/atoms/postAtom";
 import { firestore, storage } from "@/firebase/clientApp";
 import { Icon, Alert, AlertIcon, AlertDescription } from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 import { User } from "firebase/auth";
 import { addDoc, collection, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
-import ImageUpload from "./PostForm/ImageUpload";
-import TextInput from "./PostForm/TextInput";
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 import { atomindex } from "@/atoms/commentAtom";
+import ImageUpload from "./PostForm/ImageUpload";
+import TextInput from "./PostForm/TextInput";
 
 type NewPostFormProps = {
   user: User;

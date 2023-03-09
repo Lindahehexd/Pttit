@@ -1,14 +1,13 @@
 import { Post } from "@/atoms/postAtom";
 import { Button, Flex, HStack, Icon, Image, Skeleton, Spinner, Stack, Text, useToast } from "@chakra-ui/react";
-import moment from "moment";
 import { BsChat, BsDot } from "react-icons/bs";
 import { IoArrowRedoOutline } from "react-icons/io5";
-
 import { AiOutlineDelete } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { RiEarthFill } from "react-icons/ri";
+import moment from "moment";
+import Link from "next/link";
 
 export type PostItemContentProps = {
   post: Post;

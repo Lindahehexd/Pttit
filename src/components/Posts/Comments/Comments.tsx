@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Post, postState } from "@/atoms/postAtom";
 import { User } from "firebase/auth";
-import { Box, Center, Flex, SkeletonCircle, SkeletonText, Spinner, Stack, Text } from "@chakra-ui/react";
-import CommentInput from "./CommentInput";
+import { Box, Flex, SkeletonText, Stack, Text } from "@chakra-ui/react";
 import {
   collection,
   doc,
@@ -17,8 +16,9 @@ import {
 } from "firebase/firestore";
 import { firestore } from "@/firebase/clientApp";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import CommentsItem from "./CommentsItem";
 import { atomindex } from "@/atoms/commentAtom";
+import CommentInput from "./CommentInput";
+import CommentsItem from "./CommentsItem";
 
 type CommnetsProps = {
   user: User;
@@ -145,8 +145,8 @@ const Comments = ({ user, selectedPost, communityId }: CommnetsProps) => {
 
   return (
     <Box bg="gray.700" borderRadius="0px 0px 4px 4px" p={2}>
-        {/* 整個下半部 */}
-      <Flex direction="column" pl={8} pr={4} mb={2} fontSize="10pt" w="100%" >
+      {/* 整個下半部 */}
+      <Flex direction="column" pl={8} pr={4} mb={2} fontSize="10pt" w="100%">
         <CommentInput
           commentText={commentText}
           setCommentText={setCommentText}

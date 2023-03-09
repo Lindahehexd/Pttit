@@ -7,11 +7,9 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  Text,
   Input,
   Icon,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { HiPencilAlt } from "react-icons/hi";
 
 // to Communities

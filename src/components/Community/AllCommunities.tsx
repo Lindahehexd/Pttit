@@ -1,15 +1,15 @@
+import { useEffect, useState } from "react";
 import { Box, Button, Flex, Icon, Image, Skeleton, SkeletonCircle, Stack, Text } from "@chakra-ui/react";
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { RiEarthFill } from "react-icons/ri";
 import { Community } from "../../atoms/communitiesAtom";
 import { firestore } from "../../firebase/clientApp";
+import Link from "next/link";
 import useCommunityData from "../../hooks/useCommunityData";
 
 type RecommendationsProps = {};
 
-const AllCommunities: React.FC<RecommendationsProps> = () => {
+const AllCommunities= ():RecommendationsProps => {
   const [communities, setCommunities] = useState<Community[]>([]);
   const [loading, setLoading] = useState(false);
   const { communityStateValue, onJoinLeaveCommunity } = useCommunityData();
@@ -49,7 +49,7 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
         bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)),
           url('images/8bitbg2.png')"
       >
-        <Text fontSize=''>所有看板</Text>
+        <Text fontSize="">所有看板</Text>
       </Flex>
       <Flex direction="column">
         {loading ? (
@@ -81,9 +81,8 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
                   p={3}
                   fontWeight={400}
                   justifyContent="space-between"
-                  _hover={{bg:'gray.600'}}
+                  _hover={{ bg: "gray.600" }}
                 >
-                
                   <Flex width="85%" align="center">
                     <Flex mr={3} w="20px">
                       <Text mr={2}>{index + 1}</Text>
@@ -93,12 +92,11 @@ const AllCommunities: React.FC<RecommendationsProps> = () => {
                         <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} alt="" />
                       ) : (
                         <Icon as={RiEarthFill} fontSize={30} color="orange.200" mr={2} />
-
                       )}
                       <Box w="30%">
                         <Link href={`/r/${item.id}`}>
                           <Box
-                            _hover={{ textDecoration: "underline"}}
+                            _hover={{ textDecoration: "underline" }}
                             fontSize={{ base: "14px", md: "16px", lg: "20px" }}
                           >{`${item.id}`}</Box>
                         </Link>

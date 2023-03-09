@@ -1,15 +1,10 @@
-import useDirectory from "@/hooks/useDirectory";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Flex, Icon, Image, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Flex, Icon, Menu, MenuButton, MenuDivider, MenuList, Text } from "@chakra-ui/react";
 import { AiFillHeart } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { MdOutlineLogout } from "react-icons/md";
-import { TiHome } from "react-icons/ti";
+import useDirectory from "@/hooks/useDirectory";
 import Communities from "./Communities";
 
 const Directory = () => {
-  const { directoryState, toggleMenuOpen } = useDirectory();
 
   return (
     <Menu>

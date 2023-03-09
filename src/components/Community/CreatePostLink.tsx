@@ -1,15 +1,13 @@
 import { authModalState } from "@/atoms/authModalAtom";
 import { auth } from "@/firebase/clientApp";
-import useDirectory from "@/hooks/useDirectory";
-import { Flex, Icon, Input, Text } from "@chakra-ui/react";
-import Link from "next/link";
+import { Flex, Icon, Input } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { RiGhostSmileFill } from "react-icons/ri";
 import { useSetRecoilState } from "recoil";
+import useDirectory from "@/hooks/useDirectory";
 
-const CreatePostLink: React.FC = () => {
+const CreatePostLink = () => {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const setAuthModalState = useSetRecoilState(authModalState);
@@ -18,9 +16,9 @@ const CreatePostLink: React.FC = () => {
   const onClick = () => {
     const { communityId } = router.query;
     if (!user) {
-        setAuthModalState({ open: true, view: "login" });
-        return
-      }
+      setAuthModalState({ open: true, view: "login" });
+      return;
+    }
     // Could check for user to open auth modal before redirecting to submit
     if (communityId) {
       router.push(`/r/${router.query.communityId}/submit`);
@@ -29,7 +27,7 @@ const CreatePostLink: React.FC = () => {
     // Open directory menu to select community to post to
     toggleMenuOpen();
   };
-  
+
   return (
     <Flex
       justify="space-evenly"
@@ -42,33 +40,31 @@ const CreatePostLink: React.FC = () => {
       p={2}
       mb={4}
     >
-
-          <Icon as={RiGhostSmileFill} fontSize={36} color="yellow.300" mr={4} />
-          <Input
-            placeholder="發表文章"
-            fontSize="sm"
-            _placeholder={{ color: "gray.500" }}
-            _hover={{
-              bg: "gray.400",
-              border: "1px solid",
-              borderColor: "blue.500",
-            }}
-            _focus={{
-              outline: "none",
-              bg: "white",
-              border: "1px solid",
-              borderColor: "blue.500",
-            }}
-            bg="gray.300"
-            // borderColor="gray.200"
-            height="36px"
-            borderRadius={4}
-            mr={4}
-            onClick={onClick}
-          />
-          {/* <Icon as={IoImageOutline} fontSize={24} mr={4} color="gray.400" cursor="pointer" />
+      <Icon as={RiGhostSmileFill} fontSize={36} color="yellow.300" mr={4} />
+      <Input
+        placeholder="發表文章"
+        fontSize="sm"
+        _placeholder={{ color: "gray.500" }}
+        _hover={{
+          bg: "gray.400",
+          border: "1px solid",
+          borderColor: "blue.500",
+        }}
+        _focus={{
+          outline: "none",
+          bg: "white",
+          border: "1px solid",
+          borderColor: "blue.500",
+        }}
+        bg="gray.300"
+        // borderColor="gray.200"
+        height="36px"
+        borderRadius={4}
+        mr={4}
+        onClick={onClick}
+      />
+      {/* <Icon as={IoImageOutline} fontSize={24} mr={4} color="gray.400" cursor="pointer" />
           <Icon as={BsLink45Deg} fontSize={24} color="gray.400" cursor="pointer" />{" "} */}
-
     </Flex>
   );
 };

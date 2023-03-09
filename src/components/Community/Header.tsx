@@ -50,7 +50,7 @@ const Header = ({ communityData }: HeaderProps) => {
         } as Community,
       }));
 
-      console.log("cuuretn about", communityData.aboutCommunity);
+    //   console.log("cuuretn about", communityData.aboutCommunity);
     } catch (error: any) {
       console.log("update error", error);
     }

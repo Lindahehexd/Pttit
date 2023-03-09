@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Flex, Icon, Input, Text } from "@chakra-ui/react";
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
-import { BsDot, BsReddit } from "react-icons/bs";
+import { BsDot } from "react-icons/bs";
+import { RiEarthFill } from "react-icons/ri";
 import { authModalState } from "../../../atoms/authModalAtom";
 import { auth } from "../../../firebase/clientApp";
 import { useSetRecoilState } from "recoil";
@@ -20,7 +21,7 @@ const ResetPassword = () => {
   };
   return (
     <Flex direction="column" alignItems="center" width="100%">
-      <Icon as={BsReddit} color="brand.100" fontSize={40} mb={2} />
+      <Icon as={RiEarthFill} color="brand.100" fontSize={40} mb={2} />
       <Text fontWeight={700} mb={2}>
         重設你的密碼
       </Text>

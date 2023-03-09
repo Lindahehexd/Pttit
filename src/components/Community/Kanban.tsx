@@ -29,6 +29,8 @@ const Kanban = () => {
             justifyContent="center"
             height="30px"
             mb={2}
+            bg='orange.400'
+            _hover={{bg:'orange.300'}}
             onClick={() => setOpen(true)}
           >
             建立看板

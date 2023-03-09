@@ -11,13 +11,14 @@ import Header from "@/components/Community/Header";
 import PageContent from "@/components/Layout/PageContent";
 import Posts from "@/components/Posts/Posts";
 import safeJsonStringify from "safe-json-stringify";
+import Head from "next/head";
 
 type CommunityPageProps = {
   communityData: Community;
 };
 
 const CommunityPage = ({ communityData }: CommunityPageProps) => {
-//   console.log("here is commupage data", communityData);
+  //   console.log("here is commupage data", communityData);
   const setCommunityStateValue = useSetRecoilState(communityState);
   // when render , pass the data to other pages
   useEffect(() => {
@@ -28,13 +29,21 @@ const CommunityPage = ({ communityData }: CommunityPageProps) => {
   }, [communityData]);
 
   //check the data contents
-  console.log(communityData);
+  //   console.log(communityData);
   //check if the community data is exist
   if (!communityData) return <CommunityNotFound />;
   // communityData.id refer to the community namne
 
   return (
     <>
+      <Head>
+        <title>{communityData.id} – PTTit</title>
+        <meta
+          name="description"
+          content="PTTit結合PTT與Reddit，可以讓你建立看板，也能搜尋文章、查詢看板，甚至讓你推噓文，現在就成為PTTit的鄉民吧!"
+        />
+      </Head>
+
       <Header communityData={communityData} />
       <PageContent>
         {/* child 1  ps . left */}

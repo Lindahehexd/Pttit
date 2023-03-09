@@ -27,7 +27,7 @@ const Posts = ({ communityData }: PostsProps) => {
   });
 
   const getPosts = async () => {
-    console.log("Getting Posts");
+    // console.log("Getting Posts");
 
     try {
       setLoading(true);
@@ -44,7 +44,7 @@ const Posts = ({ communityData }: PostsProps) => {
         ...prev,
         posts: posts as Post[],
       }));
-      console.log("this is the post", posts);
+    //   console.log("this is the post", posts);
       setLoading(false);
     } catch (error: any) {
       console.log(error.message);

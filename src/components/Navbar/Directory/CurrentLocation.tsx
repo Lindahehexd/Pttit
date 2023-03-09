@@ -10,7 +10,7 @@ const CurrentLocation = () => {
   const communityStateValue = useRecoilValue(communityState);
   const [currentState, setCurrentState] = useRecoilState(communityState);
   const router = useRouter();
-  console.log("com", communityStateValue);
+//   console.log("com", communityStateValue);
 
   useEffect(() => {
     if (router.pathname === "/") {

@@ -40,7 +40,7 @@ const AuthModal = () => {
         open: false,
       }));
     }
-    console.log(user);
+    // console.log(user);
   }, [user, setModalState]);
 
   return (

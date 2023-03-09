@@ -74,9 +74,9 @@ const AllCommunities = () => {
             {communities.map((item, index) => {
               const isJoined = !!communityStateValue.mySnippets.find((snippet) => snippet.communityId === item.id);
               return (
-                <Link href={`/r/${item.id}`}>
+                <Link href={`/r/${item.id}`}  key={item.id}>
                 <Flex
-                  key={item.id}
+                //   key={item.id}
                   align="center"
                   fontSize="10pt"
                   borderBottom="1px solid"

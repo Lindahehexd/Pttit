@@ -51,18 +51,22 @@ const AllCommunities = () => {
       </Flex>
       <Flex direction="column">
         {loading ? (
-          <Stack mt={2} p={3}>
-            <Flex justify="space-between" align="center">
+          <Stack mt={2} p={3} spacing={3}>
+            <Flex align="center">
               <SkeletonCircle size="10" />
-              <Skeleton height="10px" width="70%" />
+              <Skeleton ml={8} height="10px" width="80%" />
             </Flex>
-            <Flex justify="space-between" align="center">
+            <Flex align="center">
               <SkeletonCircle size="10" />
-              <Skeleton height="10px" width="70%" />
+              <Skeleton ml={8} height="10px" width="80%" />
             </Flex>
-            <Flex justify="space-between" align="center">
+            <Flex align="center">
               <SkeletonCircle size="10" />
-              <Skeleton height="10px" width="70%" />
+              <Skeleton ml={8} height="10px" width="80%" />
+            </Flex>
+            <Flex align="center">
+              <SkeletonCircle size="10" />
+              <Skeleton ml={8} height="10px" width="80%" />
             </Flex>
           </Stack>
         ) : (
@@ -71,55 +75,55 @@ const AllCommunities = () => {
               const isJoined = !!communityStateValue.mySnippets.find((snippet) => snippet.communityId === item.id);
               return (
                 <Link href={`/r/${item.id}`}>
-                  <Flex
-                    key={item.id}
-                    align="center"
-                    fontSize="10pt"
-                    borderBottom="1px solid"
-                    borderColor="gray.600"
-                    p={3}
-                    fontWeight={400}
-                    justifyContent="space-between"
-                    _hover={{ bg: "gray.600" }}
-                  >
-                    <Flex width="85%" align="center">
-                      <Flex mr={3} w="20px">
-                        <Text mr={2}>{index + 1}</Text>
-                      </Flex>
-                      <Flex align="center" width="80%">
-                        {item.imageURL ? (
-                          <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} alt="" />
-                        ) : (
-                          <Icon as={RiEarthFill} fontSize={30} color="orange.200" mr={2} />
-                        )}
-                        <Box w="30%">
-                          <Box
-                            _hover={{ textDecoration: "underline" }}
-                            fontSize={{ base: "14px", md: "16px", lg: "20px" }}
-                          >{`${item.id}`}</Box>
-                        </Box>
-
-                        <Text ml={7} fontSize={{ base: "14px", md: "14px" }} _hover={{ textDecoration: "underline" }}>
-                          @ {item.communityInfo}
-                        </Text>
-                      </Flex>
+                <Flex
+                  key={item.id}
+                  align="center"
+                  fontSize="10pt"
+                  borderBottom="1px solid"
+                  borderColor="gray.600"
+                  p={3}
+                  fontWeight={400}
+                  justifyContent="space-between"
+                  _hover={{ bg: "gray.600" }}
+                >
+                  <Flex width="85%" align="center">
+                    <Flex mr={3} w="20px">
+                      <Text mr={2}>{index + 1}</Text>
                     </Flex>
+                    <Flex align="center" width="80%">
+                      {item.imageURL ? (
+                        <Image borderRadius="full" boxSize="28px" src={item.imageURL} mr={2} alt="" />
+                      ) : (
+                        <Icon as={RiEarthFill} fontSize={30} color="orange.200" mr={2} />
+                      )}
+                      <Box w="30%">
+                        <Box
+                          _hover={{ textDecoration: "underline" }}
+                          fontSize={{ base: "14px", md: "16px", lg: "20px" }}
+                        >{`${item.id}`}</Box>
+                      </Box>
 
-                    <Flex right="10px">
-                      <Button
-                        height="22px"
-                        fontSize="8pt"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          onJoinLeaveCommunity(item, isJoined);
-                        }}
-                        variant={isJoined ? "outline" : "solid"}
-                      >
-                        {isJoined ? "已加入" : "加入"}
-                      </Button>
+                      <Text ml={7} fontSize={{ base: "14px", md: "14px" }} _hover={{ textDecoration: "underline" }}>
+                        @ {item.communityInfo}
+                      </Text>
                     </Flex>
                   </Flex>
-                </Link>
+
+                  <Flex right="10px">
+                    <Button
+                      height="22px"
+                      fontSize="8pt"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        onJoinLeaveCommunity(item, isJoined);
+                      }}
+                      variant={isJoined ? "outline" : "solid"}
+                    >
+                      {isJoined ? "已加入" : "加入"}
+                    </Button>
+                  </Flex>
+                </Flex>
+               </Link>
               );
             })}
           </>

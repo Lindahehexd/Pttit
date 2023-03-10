@@ -11,7 +11,7 @@ const AuthButtons = () => {
       <Button
         variant="outline"
         h="28px"
-        display={{ base: "none", sm: "flex" }}
+        display={{ base: "flex", sm: "flex" }}
         w={{ base: "70px", md: "110px" }}
         mr={2}
         onClick={() => setAuthModalState({ open: true, view: "login" })}

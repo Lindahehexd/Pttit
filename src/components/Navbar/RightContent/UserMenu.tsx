@@ -23,9 +23,11 @@ const UserMenu = ({ user }: MenuProps) => {
     <Menu>
       <MenuButton
         cursor="pointer"
+        ml={1}
         padding="0px 6px"
         borderRadius={4}
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
+        fontSize={{base:'sm', md:'md'}}
       >
         <Flex align="center">
           <Flex align="center">

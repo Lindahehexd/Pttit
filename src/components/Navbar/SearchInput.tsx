@@ -22,13 +22,18 @@ const SearchInput = () => {
   };
 
   return (
-    <Flex flexGrow={1} mx={7} align="center">
+    <Flex
+      flexGrow={1}
+      mx={{ base: 2.5, sm: 2, md: 4, lg: 7 }}
+      align="center"
+      display={{ base: "flex", sm: "flex", md: "flex", lg: "flex" }}
+    >
       <InputGroup>
-        <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" mb={1} />} />
+        <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" fontSize={[13,15]} mb={1} />} />
         <Input
           type="tel"
           placeholder="前往看板"
-          _placeholder={{ color: "gray.400", fontSize: { base: "0", md: "sm", lg: "md" } }}
+          _placeholder={{ color: "gray.400", fontSize: { base: "sm", md: "sm", lg: "md" } }}
           h="34px"
           onKeyDown={handleKeyDown}
           onChange={handleChange}

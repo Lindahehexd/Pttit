@@ -94,7 +94,7 @@ const Header = ({ communityData }: HeaderProps) => {
           )}
 
           <Flex padding="10px 16px">
-            <Flex direction="column" mr={6}>
+            <Flex direction="column" mr={{base:2, md:6}} >
               <Text fontWeight={800} fontSize="16pt" color="gray.400">
                 {communityData.id}
               </Text>

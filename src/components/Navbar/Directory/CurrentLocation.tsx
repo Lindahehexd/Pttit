@@ -29,15 +29,16 @@ const CurrentLocation = () => {
       h="100%"
       align="center"
       _hover={{ bg: "gray.500" }}
+      display={{base:'none', sm:'flex', md:'flex'}}
     >
       <Flex align="center">
         <Link href={`/r/${communityStateValue.currentCommunity?.id}/`}>
           {communityStateValue.currentCommunity?.id === "Home" ? (
             <Flex hidden></Flex>
           ) : (
-            <Flex ml={1} align="center" h="100%">
+            <Flex  align="center" h="100%">
               <Text
-                display={{ base: "none", lg: "flex" }}
+                display={{ base: "flex", lg: "flex" }}
                 fontSize="sm"
                 fontWeight={700}
               >{`看板 > ${communityStateValue.currentCommunity?.id}`}</Text>

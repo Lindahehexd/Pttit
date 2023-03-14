@@ -98,11 +98,11 @@ const AllCommunities = () => {
                         <Box w={{base:'23%', md:'30%'}} >
                           <Box
                             _hover={{ textDecoration: "underline" }}
-                            fontSize={{ base: "9px", md: "16px", lg: "20px" }}
+                            fontSize={{ base: "14px", md: "16px", lg: "20px" }}
                           >{`${item.id}`}</Box>
                         </Box>
 
-                        <Text ml={{base:2, md:7}} fontSize={{ base: "9px", md: "14px" }} _hover={{ textDecoration: "underline" }}>
+                        <Text ml={{base:2, md:7}} fontSize={{ base: "14px", md: "14px" }} _hover={{ textDecoration: "underline" }}>
                           @ {item.communityInfo}
                         </Text>
                       </Flex>

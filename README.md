@@ -1,38 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PTTit
 
-## Getting Started
+一個結合 PTT 與 Reddit 的論壇。使用者可以瀏覽看板、建立、加入、搜尋看板。並且可以發文、推文、噓文...等等。如果您是板主，甚至能客製化您的看板，包含圖片、看板簡介、看板標題。用戶也可對貼文點選喜歡或不喜歡，票數會即時顯示。此作品主要練習 SSR、Type 型別熟悉、使用狀態管理工具 Recoil、擴展運算子、SEO 優化、使用 Firebase 達成 CRUD...等等，快點來成為鄉民吧。
 
-First, run the development server:
+連結: https://pttit.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+![Imgur ](https://i.imgur.com/bjNtOZT.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- ABOUT THE PROJECT -->
+# 功能
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+未登入用戶可以:
+- 查看當前 IP
+- 搜尋看板
+- 瀏覽文章 
+- 搜尋文章 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+登入用戶可以:
+ - 加入看板/退訂看板 
+ - 建立看板
+ - 修改看板內的關於看板
+ - 修改看板圖片
+ - 收藏看板，並即時顯示於下拉選單
+ - 搜尋看板
+ - 建立文章+圖片
+ - 按讚/倒讚(會計數)
+ - 可以發送推文、噓文、一般註記
+ - 登入後會記住按讚/倒讚內容
+ - 查看當前IP
+ - 搜尋文章
+ - 修改看板簡介
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# 使用技術
 
-## Learn More
+Client: Next.js, React, TypeScript, Recoil.js, Chakra UI
 
-To learn more about Next.js, take a look at the following resources:
+Database: Firebase
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 作品截圖
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+首頁(顯示所有看板資訊):
 
-## Deploy on Vercel
+![Imgur](https://i.imgur.com/birRjaG.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+建立與收藏選單(點選可連結看板):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Imgur](https://i.imgur.com/AVXxOWu.png)
+
+版主可修改看板簡介、修改關於看板:
+
+![Imgur](https://i.imgur.com/07Z1nHy.png)
+
+看板頁面 (顯示位置及文章、可按讚、倒讚、搜尋文章、加入或退出看板):
+
+![Imgur](https://i.imgur.com/IKgAU6A.png)
+
+文章頁面 (可推文、噓文、註解):
+
+![Imgur](https://i.imgur.com/nvkcTUE.png)
+
